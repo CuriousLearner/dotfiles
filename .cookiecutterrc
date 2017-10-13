@@ -1,0 +1,6 @@
+default_context:
+    full_name: "Sanyam Khurana"
+    email: "Sanyam@SanyamKhurana.com"
+    github_username: "CuriousLearner"
+cookiecutters_dir: "~/.cookiecutters/"
+

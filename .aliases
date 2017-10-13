@@ -1,0 +1,58 @@
+# Youtube downloader
+alias youtube-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
+
+# Django Stuff
+alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;'
+
+# ------------------------------------------------------------------------------
+# | Git Commands                                                               |
+# ------------------------------------------------------------------------------
+# Undo a `git push`
+alias undopush="git push -f origin HEAD^:master"
+
+alias gp='git push'
+alias gd='git diff'
+# Go back to the last branch
+alias gc = 'git checkout -'
+alias gcl = 'git clone'
+alias gcm='git commit -m'
+alias gaa='git add :/; git status -sb'
+
+# ------------------------------------------------------------------------------
+# | Network                                                                    |
+# ------------------------------------------------------------------------------
+
+# Enhanced WHOIS lookups
+alias whois="whois -h whois-servers.net"
+
+# IP addresses
+alias ip="curl ipinfo.io/ip"
+alias localip='python -c "import socket; print(socket.gethostbyname(socket.gethostname()));"'
+
+# Copy my public key to my clipboard
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en0' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en0 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# Gzip-enabled `curl`
+alias gurl="curl --compressed"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+alias pycclean='find . -name \*.pyc -type f -ls -delete'
+
+alias df='df -h'
+alias du='du -hs'
+
+alias halt='sudo shutdown -h now'
+alias reboot='sudo reboot'
+
+# ------------------------------------------------------------------------------
+# | Other                                                                      |
+# ------------------------------------------------------------------------------
+
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias week='date +%V'

@@ -1,0 +1,228 @@
+# list/describe ec2 instances in all the regions
+function ec2-list-all(){
+  for region in `aws ec2 describe-regions --output text | cut -f3`
+  do
+	   echo -e "\nListing Instances in region:'$region'..."
+	   echo -e "https://console.aws.amazon.com/ec2/v2/home?region=$region"
+	   aws ec2 describe-instances --region $region | jq '.Reservations[] | ( .Instances[] | {state: .State.Name, name: .KeyName, type: .InstanceType, key: .KeyName})'
+  done
+}
+
+function svg-to-base64() {
+  echo "background: transparent url('data:image/svg+xml;base64,"$(openssl base64 < $@)"') no-repeat center center;"
+}
+
+function dj() {
+	# finds manage.py in sub-directories and passes the arguments to it for running via it.
+	# e.g. dj migrate
+	#      dj runserver
+	#      dj collectstatic --noinput
+	find . -maxdepth 2 -name 'manage.py' -exec python "{}" "$@" \;
+}
+
+function chpwd() {
+	emulate -L zsh
+	if [[ -e venv/bin/activate ]]; then
+	  sv
+	fi
+}
+
+# ------------------------------------------------------------------------------
+# | Openssl                                                                     |
+# ------------------------------------------------------------------------------
+
+openssl-to-pem () {
+	openssl pkcs12 -in $1 -out $1.pem -nodes -clcerts
+}
+
+# ------------------------------------------------------------------------------
+# | File System                                                                |
+# ------------------------------------------------------------------------------
+
+# Create a data URI from a file
+datauri() {
+
+	local mimeType=""
+
+	if [ -f "$1" ]; then
+		mimeType=$(file -b --mime-type "$1")
+		#                └─ do not prepend the filename to the output
+
+		if [[ $mimeType == text/* ]]; then
+			mimeType="$mimeType;charset=utf-8"
+		fi
+
+		printf "data:%s;base64,%s" \
+					"$mimeType" \
+					"$(openssl base64 -in "$1" | tr -d "\n")"
+	else
+		print_error "'$1' is not a file."
+	fi
+}
+
+# Monitor IO in real-time (open files etc).
+function openfiles() {
+  sudo dtrace -n 'syscall::open*:entry { printf("%s %s",execname,copyinstr(arg0)); }'
+}
+
+# copy the work directory to clipboard
+function pwdc() {
+  pwd | tr -d "\r\n" | pbcopy
+}
+
+# touch a file while creating directories
+supertouch() {
+	if [ $# -lt 1 ]; then
+		echo "Missing argument";
+		return 1;
+	fi
+
+	for f in "$@"; do
+		mkdir -p -- "$(dirname -- "$f")"
+		touch -- "$f"
+	done
+}
+
+# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
+function targz() {
+  local tmpFile="${@%/}.tar"
+  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+
+  size=$(
+	stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
+	stat -c"%s" "${tmpFile}" 2> /dev/null # GNU `stat`
+  )
+
+  local cmd=""
+  if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
+	# the .tar file is smaller than 50 MB and Zopfli is available; use it
+	cmd="zopfli"
+  else
+	if hash pigz 2> /dev/null; then
+	  cmd="pigz"
+	else
+	  cmd="gzip"
+	fi
+  fi
+
+  echo "Compressing .tar using \`${cmd}\`…"
+  "${cmd}" -v "${tmpFile}" || return 1
+  [ -f "${tmpFile}" ] && rm "${tmpFile}"
+  echo "${tmpFile}.gz created successfully."
+}
+
+
+# Helper for extracting archives
+function x () {
+  case "$1" in
+  *.tar*)
+	tar xvf "$1"
+	;;
+  *.zip)
+	unzip "$1"
+	;;
+  esac
+}
+
+# tiny helpers
+function l () {
+  case "$1" in
+  recent)
+	shift
+	ls -vtl "$@" | head -n 10
+	;;
+  size)
+	shift
+	ls -vSl "$@"
+	;;
+  *) ls -vl "$@"
+	;;
+  esac
+}
+
+# Syntax-highlight JSON strings or files
+# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+function json() {
+	if [ -t 0 ]; then # argument
+		python -mjson.tool <<< "$*" | pygmentize -l javascript
+	else # pipe
+		python -mjson.tool | pygmentize -l javascript
+	fi
+}
+
+
+# Recursively convert CRLF to LF in non-binary files under the current directory
+# Assumes perl installed
+function fixcrlf(){
+	find . -type f -exec grep -qIP '\r\n' {} ';' -exec perl -pi -e 's/\r\n/\n/g' {} '+'
+}
+
+# Create new directories and enter the first one
+function md() {
+  mkdir -pv "$@" && cd "$1"
+}
+
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
+# ------------------------------------------------------------------------------
+# | Network                                                                    |
+# ------------------------------------------------------------------------------
+
+# Display http headers of a request
+function headers(){
+  curl -sI "$@"
+}
+
+
+# Test if HTTP compression (RFC 2616 + SDCH) is enabled for a given URL.
+# Send a fake UA string for sites that sniff it instead of using the Accept-Encoding header. (Looking at you, ajax.googleapis.com!)
+function httpcompression() {
+  encoding="$(curl -LIs -H 'User-Agent: Mozilla/5 Gecko' -H 'Accept-Encoding: gzip,deflate,compress,sdch' "$1" | grep '^Content-Encoding:')" && echo "$1 is encoded using ${encoding#* }" || echo "$1 is not using any encoding"
+}
+
+# Start an HTTP server from a directory, optionally specifying the port
+function server() {
+  local port="${1:-8000}"
+  sleep 1 && open "http://localhost:${port}/" &
+  # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
+  # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
+  python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
+}
+
+
+# Start a PHP server from a directory, optionally specifying the port
+# (Requires PHP 5.4.0+.)
+function phpserver() {
+  local port="${1:-4000}"
+  sleep 1 && open "http://localhost:${port}/" &
+  php -S "localhost:${port}"
+}
+
+# ------------------------------------------------------------------------------
+# | Git                                                                        |
+# ------------------------------------------------------------------------------
+
+# function to normalize a crupt git repo
+function git_normalize_eol(){
+  echo "* text=auto" >>.gitattributes
+  rm .git/index     # Remove the index to force git to
+  git reset         # re-scan the working directory
+  git status        # Show files that will be normalized
+  git add -u
+  git add .gitattributes
+  git commit -m "fix(git): introduce end-of-line normalization"
+}
+
+function gitignore() {
+	curl -s https://www.gitignore.io/api/$@;
+}
+
+
+# take this repo and copy it to somewhere else minus the .git stuff.
+function gitexport(){
+  mkdir -p "$1"
+  git archive master | tar -x -C "$1"
+}
