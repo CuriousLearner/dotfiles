@@ -13,8 +13,8 @@ alias undopush="git push -f origin HEAD^:master"
 alias gp='git push'
 alias gd='git diff'
 # Go back to the last branch
-alias gc = 'git checkout -'
-alias gcl = 'git clone'
+alias gc='git checkout -'
+alias gcl='git clone'
 alias gcm='git commit -m'
 alias gaa='git add :/; git status -sb'
 
