@@ -66,6 +66,39 @@ function createSymlinks() {
 # Run
 createSymlinks
 
+
+## Install custom binary utilities
+
+mkdir $HOME/.bin
+# Symlink binaries
+ln -s $PWD/bin/* $HOME/.bin/
+
+declare -a BINARIES=(
+    'batcharge.py'
+    'crlf'
+    'eachdir'
+    'fix-newline-eof'
+    'git-archive-all'
+    'git-flake8'
+    'git-icdiff'
+    'git-open'
+    'gitio'
+    'gravatar'
+    'hr'
+    'icdiff'
+    'push'
+    'splash'
+    'tags'
+    'tweet'
+)
+
+for i in ${BINARIES[@]}; do
+    echo "Changing access permissions for binary script :: ${i##*/}"
+    chmod +rwx $HOME/.bin/${i##*/}
+done
+
+echo "Binaries installed"
+
 echo
 echoB "--> [DONE]"
 echo
@@ -75,5 +108,6 @@ unset echoR
 unset echoB
 unset getFilesInDir
 unset createSymlinks
+unset BINARIES
 
 source ~/.zshrc
