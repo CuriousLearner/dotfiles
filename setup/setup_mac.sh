@@ -154,10 +154,29 @@ brew cask install font-source-code-pro
 sudo easy_install pip
 sudo pip install -r requirements.pip
 
-# Install custom stuff
+################################################################################
+#                       Data Stores                                            #
+################################################################################
+
+brew install mysql
+brew install mongo
+brew install redis
+brew install elasticsearch
+
+################################################################################
+#                           Dev tools                                          #
+################################################################################
+
 brew install diff-so-fancy
 brew link xz && brew install weechat
 brew cask install sublime-text
+brew install tmux
+
+# Install custom stuff
+# Telegram
+brew cask install telegram
+# Slack
+brew cask install slack
 
 # Remove outdated versions from the cellar
 brew cleanup && brew cask cleanup
