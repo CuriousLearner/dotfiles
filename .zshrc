@@ -1,5 +1,8 @@
-ZSH=~/.zsh
+ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="curiouslearner"
+source $ZSH/oh-my-zsh.sh
 
+# Customizations goes below
 source ~/.profile
 
 # Uncomment following line if you want to disable colors in ls

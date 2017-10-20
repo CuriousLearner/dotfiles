@@ -6,6 +6,8 @@
 # This installs some of the common dependencies needed (or at least desired)
 # using Homebrew.
 
+echo "Running Mac setup. This would take a while. Please sit back and relax."
+
 # Check for Homebrew
 if test ! $(which brew)
 then
@@ -112,8 +114,9 @@ install_oh_my_zsh
 # Zsh                                                                         #
 ###############################################################################
 
+set -P
 # Install Zsh settings
-ln -s $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
+ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
 
 ###############################################################################
 # Install utilities                                                           #
