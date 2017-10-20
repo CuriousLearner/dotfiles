@@ -69,13 +69,16 @@ createSymlinks
 
 ## Install custom binary utilities
 
-mkdir $HOME/.bin
+if [ ! -d "$HOME/.bin" ]; then
+  mkdir $HOME/.bin
+fi
+
 # Symlink binaries
-ln -s $PWD/bin/* $HOME/.bin/
+ln -sf $PWD/bin/* $HOME/.bin/
 
 declare -a BINARIES=(
     'batcharge.py'
-    'crlf'
+    'crlf.sh'
     'eachdir'
     'fix-newline-eof'
     'git-archive-all'
