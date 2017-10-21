@@ -1,7 +1,7 @@
 # Load ~/.extra, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{exports,aliases,functions,extra}; do
-	[ -r "$file" ] && source "$file"
+    [ -r "$file" ] && source "$file"
 done
 unset file
 
@@ -18,5 +18,5 @@ fi
 
 # Check for startup SPLASH script
 if hash splash 2>/dev/null; then
-	splash
+    splash
 fi

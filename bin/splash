@@ -14,13 +14,13 @@ fi
 
 # check for cowsay command.
 if hash cowsay 2>/dev/null; then
-	if hash cowsay -f starwar 2>/dev/null; then
-		cowsay -f starwar $text
-	else
-		cowsay $text
-	fi
+    if hash cowsay -f starwar 2>/dev/null; then
+        cowsay -f starwar $text
+    else
+        cowsay $text
+    fi
 else
-	echo "Install fortune and coway to turn me into speak wizard. (!)"
+    echo "Install fortune and coway to turn me into speak wizard. (!)"
 fi
 }
 
