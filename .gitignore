@@ -1,0 +1,30 @@
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashesvenv
+
+
+# Packages ignore
+node_modules
+.tmp
+.sass-cache
+app/bower_components
+
+.netwhist
+
+.design/
+
+# Local Virtualenv
+venv/
+
+# Editor's Ignore
+*.ropeproject
+*.glue
+.vim/.netrwhist
