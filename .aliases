@@ -4,6 +4,11 @@ alias youtube-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
 # Django Stuff
 alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;'
 
+# Virtualenv
+alias sv='if [[ ! -d "venv" && ! -L "venv" ]] ; then; virtualenv -p $(which python3) venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
+alias sv2='if [[ ! -d "venv" && ! -L "venv" ]] ; then; virtualenv -p $(which python2) venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
+alias sv3=sv
+
 # ------------------------------------------------------------------------------
 # | Git Commands                                                               |
 # ------------------------------------------------------------------------------
