@@ -134,6 +134,7 @@ installcask numi  # http://numi.io/
 installcask skitch  # https://evernote.com/skitch/
 installcask vlc
 installcask nvalt  # for notes
+installcask dash  # awesome offline docs
 installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 
 # Postgres 9 Database
@@ -170,10 +171,21 @@ brew install elasticsearch
 #                           Dev tools                                          #
 ################################################################################
 
+brew cask install virtualbox
+brew cask install vagrant
+
+# New Docker for Mac. For older version run `brew install docker`
+brew cask install docker
+
 brew install diff-so-fancy
 brew link xz && brew install weechat
 brew cask install sublime-text
 brew install tmux
+
+# Some frontend stuff
+brew install node
+npm i -g postcss-cli
+npm i -g autoprefixer
 
 # Install custom stuff
 # Telegram
