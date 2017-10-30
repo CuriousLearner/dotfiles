@@ -1,3 +1,8 @@
+# Make sure to export the appropriate environment variable
+# _before_ loading this theme in your ~/.zshrc which makes sure that terminal
+# supports more than 256 colors
+export TERM="xterm-256color"
+
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 source $ZSH/oh-my-zsh.sh
