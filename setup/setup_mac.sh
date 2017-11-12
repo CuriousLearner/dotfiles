@@ -63,6 +63,7 @@ brew install python3
 brew install editorconfig
 brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
 brew install elixir
+brew install gpg
 
 # Native apps
 brew tap phinze/homebrew-cask
@@ -122,6 +123,7 @@ ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
 # Install utilities                                                           #
 ###############################################################################
 
+installcask keybase
 installcask android-file-transfer
 installcask google-chrome
 installcask utorrent
