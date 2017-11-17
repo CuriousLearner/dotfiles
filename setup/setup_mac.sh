@@ -183,6 +183,7 @@ brew install diff-so-fancy
 brew link xz && brew install weechat
 brew cask install sublime-text
 brew install tmux
+brew install cookiecutter
 
 # Some frontend stuff
 brew install node
