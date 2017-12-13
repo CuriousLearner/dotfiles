@@ -11,8 +11,8 @@ echo "Running Mac setup. This would take a while. Please sit back and relax."
 # Check for Homebrew
 if test ! $(which brew)
 then
-  echo "  Installing Homebrew for you."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
+  echo "Installing Homebrew for you."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 # Make sure we’re using the latest Homebrew
@@ -53,7 +53,7 @@ brew install Zopfli     # https://code.google.com/p/zopfli/
 brew install fortune cowsay
 brew install heroku-toolbelt
 brew install node
-brew install ngrok      # https://ngrok.com/
+installcask ngrok       # https://ngrok.com/  2.x available from Cask now
 brew install sshrc      # https://github.com/Russell91/sshrc
 brew install storm      # https://github.com/emre/storm
 brew install pup        # https://github.com/EricChiang/pup
@@ -75,49 +75,6 @@ function installcask() {
         echo "${@} is already installed."
     fi
 }
-
-install_oh_my_zsh () {
-    # Test to see if zshell is installed.  If it is:
-    if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
-        # Install Oh My Zsh if it isn't already present
-        if [[ ! -d $dir/oh-my-zsh/ ]]; then
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        fi
-        # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
-            chsh -s $(which zsh)
-        fi
-    else
-        # If zsh isn't installed, get the platform of the current machine
-        platform=$(uname);
-        # If the platform is Linux, try an apt-get to install zsh and then recurse
-        if [[ $platform == 'Linux' ]]; then
-            if [[ -f /etc/redhat-release ]]; then
-                sudo yum install zsh
-                install_zsh
-            fi
-            if [[ -f /etc/debian_version ]]; then
-                sudo apt-get install zsh
-                install_zsh
-            fi
-        # If the platform is OS X, tell the user to install zsh :)
-        elif [[ $platform == 'Darwin' ]]; then
-            echo "We'll install zsh, then re-run this script!"
-            brew install zsh
-            exit
-        fi
-    fi
-}
-
-install_oh_my_zsh
-
-###############################################################################
-# Zsh                                                                         #
-###############################################################################
-
-set -P
-# Install Zsh settings
-ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
 
 ###############################################################################
 # Install utilities                                                           #
@@ -155,7 +112,7 @@ brew install postgis
 # Fonts
 brew tap caskroom/fonts
 
-brew cask install font-source-code-pro
+installcask font-source-code-pro
 
 sudo easy_install pip
 sudo pip install -r requirements.pip
@@ -173,15 +130,15 @@ brew install elasticsearch
 #                           Dev tools                                          #
 ################################################################################
 
-brew cask install virtualbox
-brew cask install vagrant
+installcask install virtualbox
+installcask install vagrant
 
 # New Docker for Mac. For older version run `brew install docker`
-brew cask install docker
+installcask install docker
 
 brew install diff-so-fancy
 brew link xz && brew install weechat
-brew cask install sublime-text
+installcask install sublime-text
 brew install tmux
 brew install cookiecutter
 
@@ -192,9 +149,54 @@ npm i -g autoprefixer
 
 # Install custom stuff
 # Telegram
-brew cask install telegram
+installcask install telegram
 # Slack
-brew cask install slack
+installcask install slack
+
+################################################################################
+#                           Customize Shell                                    #
+################################################################################
+
+install_oh_my_zsh () {
+    # Test to see if zshell is installed.  If it is:
+    if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
+        # Install Oh My Zsh if it isn't already present
+        if [[ ! -d $dir/oh-my-zsh/ ]]; then
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+        fi
+        # Set the default shell to zsh if it isn't currently set to zsh
+        if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
+            chsh -s $(which zsh)
+        fi
+    else
+        # If zsh isn't installed, get the platform of the current machine
+        platform=$(uname);
+        # If the platform is Linux, try an apt-get to install zsh and then recurse
+        if [[ $platform == 'Linux' ]]; then
+            if [[ -f /etc/redhat-release ]]; then
+                sudo yum install zsh
+            fi
+            if [[ -f /etc/debian_version ]]; then
+                sudo apt-get install zsh
+            fi
+        # If the platform is OS X, tell the user to install zsh :)
+        elif [[ $platform == 'Darwin' ]]; then
+            echo "We'll install zsh, then re-run this script!"
+            brew install zsh
+            exit
+        fi
+    fi
+}
+
+install_oh_my_zsh
+
+###############################################################################
+# Zsh                                                                         #
+###############################################################################
+
+set -P
+# Install Zsh settings
+ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
 
 # Remove outdated versions from the cellar
 brew cleanup && brew cask cleanup
