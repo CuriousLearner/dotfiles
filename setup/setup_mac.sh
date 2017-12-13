@@ -152,6 +152,8 @@ npm i -g autoprefixer
 installcask install telegram
 # Slack
 installcask install slack
+# LastPass CLI
+brew install lastpass-cli --with-pinentry
 
 ################################################################################
 #                           Customize Shell                                    #
