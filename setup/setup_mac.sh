@@ -200,6 +200,9 @@ set -P
 # Install Zsh settings
 ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
 
+# Install Powerlevel9k theme
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
 # Remove outdated versions from the cellar
 brew cleanup && brew cask cleanup
 
