@@ -9,5 +9,4 @@ ghp-import
 piprot
 html2text
 requests[security]
-ansible
-howdoi
+ansible==2.2.0.0

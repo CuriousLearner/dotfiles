@@ -24,6 +24,19 @@ brew upgrade
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+
+brew tap caskroom/cask
+
+# Utility function to install cask formulas
+function installcask() {
+    if brew cask info "${@}" | grep "Not installed" > /dev/null; then
+        brew cask install "${@}"
+    else
+        echo "${@} is already installed."
+    fi
+}
+
+
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
 
@@ -68,13 +81,6 @@ brew install gpg
 # Native apps
 brew tap phinze/homebrew-cask
 brew install brew-cask
-function installcask() {
-    if brew cask info "${@}" | grep "Not installed" > /dev/null; then
-        brew cask install "${@}"
-    else
-        echo "${@} is already installed."
-    fi
-}
 
 ###############################################################################
 # Install utilities                                                           #
@@ -154,6 +160,8 @@ installcask install telegram
 installcask install slack
 # LastPass CLI
 brew install lastpass-cli --with-pinentry
+# Install howdoi CLI tool
+brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb
 
 ################################################################################
 #                           Customize Shell                                    #
