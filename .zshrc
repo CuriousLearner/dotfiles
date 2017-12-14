@@ -35,4 +35,4 @@ HISTSIZE=5000
 SAVEHIST=5000
 
 # ZSH Syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting

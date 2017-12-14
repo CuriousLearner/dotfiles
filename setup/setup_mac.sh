@@ -86,6 +86,7 @@ brew install brew-cask
 # Install utilities                                                           #
 ###############################################################################
 
+installcask firefox
 installcask keybase
 installcask android-file-transfer
 installcask google-chrome
@@ -207,6 +208,8 @@ install_oh_my_zsh
 set -P
 # Install Zsh settings
 ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
+# Zsh Syntax highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Install Powerlevel9k theme
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
