@@ -9,7 +9,7 @@ source $ZSH/oh-my-zsh.sh
 
 POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv os_icon dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status nvm node_version)
 
 POWERLEVEL9K_OS_ICON_BACKGROUND="white"
@@ -33,6 +33,3 @@ source ~/.profile
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
-
-# ZSH Syntax highlighting
-source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
