@@ -139,6 +139,7 @@ brew install elasticsearch
 
 installcask install virtualbox
 installcask install vagrant
+installcask install postman
 
 # New Docker for Mac. For older version run `brew install docker`
 installcask install docker
