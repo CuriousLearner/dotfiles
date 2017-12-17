@@ -87,6 +87,7 @@ brew install brew-cask
 ###############################################################################
 
 installcask firefox
+installcask evernote
 installcask keybase
 installcask android-file-transfer
 installcask google-chrome
