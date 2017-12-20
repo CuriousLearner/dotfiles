@@ -20,6 +20,7 @@ sudo dnf -y install cowsay
 # ngrok ,pup, editorconfig
 sudo dnf -y install sshrc
 pip install stormssh
+pip install --user howdoi
 sudo dnf -y install httpie
 sudo dnf -y install jq
 sudo dnf -y install elixir
