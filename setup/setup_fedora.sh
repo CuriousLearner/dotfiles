@@ -66,7 +66,7 @@ sudo dnf -y install elasticsearch
 #                           Dev tools
 
 ################################################################################
-sudo dnf -y install virtualbox
+sudo dnf -y install VirtualBox
 sudo dnf -y install vagrant
 sudo dnf -y install python-postman
 
