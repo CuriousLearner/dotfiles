@@ -87,6 +87,42 @@ sudo dnf copr disable rommon/telegram
 #Slack needs to be unpacked manually
 
 ################################################################################
+
+# Installing some binaries
+
+################################################################################
+
+# Heroku standalone installer
+wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x86.tar.gz -O heroku.tar.gz
+tar -xvzf heroku.tar.gz
+mkdir -p /usr/local/lib /usr/local/bin
+mv heroku-cli-v6.*.* /usr/local/lib/heroku
+ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+rm heroku.tar.gz
+
+# C analogue of flux
+# sudo dnf -y install redshift
+
+# diff-so-fancy
+mkdir -p ~/bin/
+curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > ~/bin/diff-so-fancy
+
+# LastPass
+curl -O https://lastpass.com/lplinux.tar.bz2
+tar xjvf lplinux.tar.bz2 -C lplinux
+./lplinux/install_lastpass.sh
+rm lplinux.tar.bz2
+
+# Sublime Text 3
+curl -LO https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
+tar xvjf sublime_text_3_build_3143_x64.tar.bz2
+sudo cp -rf sublime_text_3/subime_text.desktop /usr/share/applications/sublime_text.desktop
+echo "You might need to change the icon by pasting Icon=/opt/sublime_text/Icon/128x128/sublime-text.png"
+sudo mv sublime_text_3 /opt/sublime_text
+sudo ln -s /opt/sublime_text/sublime_text /usr/bin/subl
+
+
+################################################################################
 #                           Customize Shell                                    #
 ################################################################################
 
