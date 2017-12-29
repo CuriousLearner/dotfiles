@@ -43,6 +43,7 @@ brew install findutils
 # Install Bash 4
 brew install bash
 brew install zsh zsh-completions
+brew install shellcheck
 
 # Install wget with IRI support
 brew install wget --with-iri
@@ -159,6 +160,8 @@ npm i -g autoprefixer
 # Install custom stuff
 # Telegram
 installcask install telegram
+# TeamViewer
+installcask teamviewer
 # Slack
 installcask install slack
 # LastPass CLI
