@@ -21,14 +21,12 @@ sudo dnf -y install cowsay
 sudo dnf -y install sshrc    # https://github.com/Russell91/sshrc
 pip install stormssh         # Linux alternative for storm https://github.com/emre/storm
 pip install --user howdoi
-sudo dnf -y install httpie
-sudo dnf -y install jq
+sudo dnf -y install httpie   # https://github.com/jakubroztocil/httpie
+sudo dnf -y install jq       # https://stedolan.github.io/jq/
 sudo dnf -y install elixir
 
 ###############################################################################
- 
-#Install utilities
-
+#                        Install utilities                                    #
 ###############################################################################
 
 sudo dnf -y install firefox
@@ -53,8 +51,7 @@ sudo gem install pg
 sudo dnf -y install postgis
 
 ################################################################################
-
-#                           Datat Stores
+#                           Datat Stores                                       #
 ################################################################################
 
 sudo dnf -y install mysql
@@ -86,9 +83,7 @@ sudo dnf copr disable rommon/telegram
 # Slack needs to be unpacked manually due to version name in download url
 
 ################################################################################
-
-# Installing some binaries
-
+#                          Installing some binaries                            #
 ################################################################################
 
 # Heroku standalone installer
