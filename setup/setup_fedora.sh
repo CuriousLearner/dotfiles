@@ -12,14 +12,14 @@ sudo dnf -y install zsh
 sudo dnf -y install ack
 sudo dnf -y install git git-extras hub 
 sudo dnf -y install htop ngrep nmap
-sudo dnf -y install autojump
-pip install legit
-legit install		 # Enables the extra git commands
-sudo dnf -y install zopfli
+sudo dnf -y install autojump # A smart command to change directory (https://github.com/wting/autojump)
+pip install legit            # http://www.git-legit.org/
+legit install		     # Enables the extra git commands
+sudo dnf -y install zopfli   # Data compression software (https://github.com/google/zopfli)
 sudo dnf -y install cowsay
-# ngrok ,pup, editorconfig
-sudo dnf -y install sshrc
-pip install stormssh
+# pup not available for Linux (Fedora)
+sudo dnf -y install sshrc    # https://github.com/Russell91/sshrc
+pip install stormssh         # Linux alternative for storm https://github.com/emre/storm
 pip install --user howdoi
 sudo dnf -y install httpie
 sudo dnf -y install jq
@@ -35,8 +35,8 @@ sudo dnf -y install firefox
 #Evernote,skitch,dash not available
 sudo dnf -y install https://prerelease.keybase.io/keybase_amd64.rpm
 #android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
-#sudo dnf -y install chromium
-#sudo dnf -y install hexchat
+#sudo dnf -y install chromium # open source alternative of Google Chrome
+#sudo dnf -y install hexchat  # open source alternative of limechat
 sudo dnf -y install dropbox
 sudo dnf -y install vlc
 # nvalt alternative nvpy for notes https://github.com/cpbotha/nvpy
@@ -63,13 +63,11 @@ sudo dnf -y install redis
 sudo dnf -y install elasticsearch
 
 ################################################################################
-#                           Dev tools
-
+#                           Dev tools                                          #
 ################################################################################
 sudo dnf -y install VirtualBox
 sudo dnf -y install vagrant
 sudo dnf -y install python-postman
-
 sudo dnf -y install weechat
 sudo dnf -y install tmux
 pip install --user cookiecutter
@@ -84,7 +82,8 @@ npm i -g autoprefixer
 sudo dnf -y copr enable rommon/telegram
 sudo dnf -y install telegram-desktop
 sudo dnf copr disable rommon/telegram
-#Slack needs to be unpacked manually
+
+# Slack needs to be unpacked manually due to version name in download url
 
 ################################################################################
 
@@ -121,6 +120,17 @@ echo "You might need to change the icon by pasting Icon=/opt/sublime_text/Icon/1
 sudo mv sublime_text_3 /opt/sublime_text
 sudo ln -s /opt/sublime_text/sublime_text /usr/bin/subl
 
+# ngrok https://ngrok.com/
+curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+unzip ngrok-stable-linux-amd64.zip
+rm ngrok-stable-linux-amd64.zip
+mv ngrok /bin 
+
+# editorconfig for vim
+curl -LO https://github.com/editorconfig/editorconfig-vim/archive/master.zip
+unzip master.zip
+rm master.zip
+mv editorconfig-vim-master ~/.vim
 
 ################################################################################
 #                           Customize Shell                                    #
