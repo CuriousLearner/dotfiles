@@ -24,6 +24,8 @@ pip install --user howdoi
 sudo dnf -y install httpie   # https://github.com/jakubroztocil/httpie
 sudo dnf -y install jq       # https://stedolan.github.io/jq/
 sudo dnf -y install elixir
+sudo dnf -y install ShellCheck
+sudo dnf -y install teamviewer
 
 ###############################################################################
 #                        Install utilities                                    #
