@@ -40,17 +40,17 @@ if [ "$1" == "--force" ]; then
 fi
 
 function createSymlinks() {
-    for F in ${FILES[@]}; do
+    for F in "${FILES[@]}"; do
         # Delete files if --force was used
         if [ $FORCE == true ]; then
-            TIME= `date +%s`
+            TIME=$(date +%s)
             echoR "--> [BACKUP]: $HOME/${F}"
-            mv $HOME/$F $HOME/$F.$TIME.bak
+            mv "$HOME"/"$F" "$HOME"/"$F"."$TIME".bak
         fi
 
         # Make symlink
         echoY "--> [LINK]: ${HOME}/${F} -> ${CURRENTPATH}/${F}"
-        ln -s $CURRENTPATH/$F $HOME/$F
+        ln -s "$CURRENTPATH"/"$F" "$HOME"/"$F"
 
         if [ $? -eq 1 ]; then
             echo
@@ -70,11 +70,11 @@ createSymlinks
 ## Install custom binary utilities
 
 if [ ! -d "$HOME/.bin" ]; then
-  mkdir $HOME/.bin
+  mkdir "$HOME"/.bin
 fi
 
 # Symlink binaries
-ln -sf $PWD/bin/* $HOME/.bin/
+ln -sf "$PWD"/bin/* "$HOME"/.bin/
 
 declare -a BINARIES=(
     'batcharge.py'
@@ -95,9 +95,9 @@ declare -a BINARIES=(
     'tweet'
 )
 
-for i in ${BINARIES[@]}; do
+for i in "${BINARIES[@]}"; do
     echo "Changing access permissions for binary script :: ${i##*/}"
-    chmod +rwx $HOME/.bin/${i##*/}
+    chmod +rwx "$HOME"/.bin/"${i##*/}"
 done
 
 echo "Binaries installed"

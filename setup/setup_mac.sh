@@ -9,7 +9,7 @@
 echo "Running Mac setup. This would take a while. Please sit back and relax."
 
 # Check for Homebrew
-if test ! $(which brew)
+if test ! "$(which brew)"
 then
   echo "Installing Homebrew for you."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -32,7 +32,7 @@ function installcask() {
     if brew cask info "${@}" | grep "Not installed" > /dev/null; then
         brew cask install "${@}"
     else
-        echo "${@} is already installed."
+        echo "$* is already installed."
     fi
 }
 
@@ -181,8 +181,8 @@ install_oh_my_zsh () {
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         fi
         # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
-            chsh -s $(which zsh)
+        if [[ ! "$SHELL" == $(which zsh) ]]; then
+            chsh -s "$(which zsh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine
@@ -212,9 +212,9 @@ install_oh_my_zsh
 
 set -P
 # Install Zsh settings
-ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
+ln -sf "$PWD"/zsh/themes/curiouslearner.zsh-theme "$HOME"/.oh-my-zsh/themes
 # Zsh Syntax highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 
 # Install Powerlevel9k theme
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
