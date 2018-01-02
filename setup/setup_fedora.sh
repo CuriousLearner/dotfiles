@@ -135,14 +135,14 @@ mv editorconfig-vim-master ~/.vim
 
 install_oh_my_zsh () {
     # Test to see if zshell is installed.  If it is:
-    if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
+    if [ -f /bin/zsh ] || [ -f /usr/bin/zsh ]; then
         # Install Oh My Zsh if it isn't already present
-        if [[ ! -d $dir/oh-my-zsh/ ]]; then
+        if [[ ! -d "$dir/oh-my-zsh/" ]]; then
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         fi
         # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! $(echo $SHELL) == $(which zsh) ]]; then
-            chsh -s $(which zsh)
+        if [[ ! $SHELL == $(which zsh) ]]; then
+            chsh -s "$(which zsh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine
@@ -172,9 +172,9 @@ install_oh_my_zsh
 
 set -P
 # Install Zsh settings
-ln -sf $PWD/zsh/themes/curiouslearner.zsh-theme $HOME/.oh-my-zsh/themes
+ln -sf "$PWD/zsh/themes/curiouslearner.zsh-theme" "$HOME/.oh-my-zsh/themes"
 # Zsh Syntax highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
 # Install Powerlevel9k theme
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
