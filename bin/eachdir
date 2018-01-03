@@ -69,6 +69,7 @@ for d in "${dirs[@]}"; do
   # If the dir isn't /, strip the trailing /.
   [[ "$d" != "/" ]] && d="${d%/}"
   # Execute the command, grabbing all stdout and stderr.
+  # shellcheck disable=SC2164
   output="$( (cd "$d"; eval "$@") 2>&1 )"
   if [[ "$output" ]]; then
     # If the command had output, display a header and that output.
