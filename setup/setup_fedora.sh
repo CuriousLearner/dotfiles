@@ -32,11 +32,11 @@ sudo dnf -y install teamviewer
 ###############################################################################
 
 sudo dnf -y install firefox
-#Evernote,skitch,dash not available
+# Evernote,skitch,dash not available
 sudo dnf -y install https://prerelease.keybase.io/keybase_amd64.rpm
-#android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
-#sudo dnf -y install chromium # open source alternative of Google Chrome
-#sudo dnf -y install hexchat  # open source alternative of limechat
+# android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
+# sudo dnf -y install chromium # open source alternative of Google Chrome
+# sudo dnf -y install hexchat  # open source alternative of limechat
 sudo dnf -y install dropbox
 sudo dnf -y install vlc
 # nvalt alternative nvpy for notes https://github.com/cpbotha/nvpy
@@ -128,6 +128,11 @@ curl -LO https://github.com/editorconfig/editorconfig-vim/archive/master.zip
 unzip master.zip
 rm master.zip
 mv editorconfig-vim-master ~/.vim
+
+# slack for fedora v3.0.2
+curl -LO https://downloads.slack-edge.com/linux_releases/slack-3.0.2-0.1.fc21.x86_64.rpm
+rpm --install slack-3.0.2-0.1.fc21.x86_64.rpm
+rm slack-3.0.2-0.1.fc21.x86_64.rpm
 
 ################################################################################
 #                           Customize Shell                                    #
