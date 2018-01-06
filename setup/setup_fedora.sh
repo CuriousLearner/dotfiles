@@ -32,19 +32,11 @@ sudo dnf -y install teamviewer
 ###############################################################################
 
 sudo dnf -y install firefox
-<<<<<<< HEAD
-#Evernote,skitch,dash not available
-sudo dnf -y install https://prerelease.keybase.io/keybase_amd64.rpm
-#android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
-#sudo dnf -y install chromium # open source alternative of Google Chrome
-#sudo dnf -y install hexchat  # open source alternative of limechat
-=======
 # Evernote,skitch,dash not available
 sudo dnf -y install https://prerelease.keybase.io/keybase_amd64.rpm
 # android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
 # sudo dnf -y install chromium # open source alternative of Google Chrome
 # sudo dnf -y install hexchat  # open source alternative of limechat
->>>>>>> ae97bd93fa811d5df096d89c3abc704579e779a7
 sudo dnf -y install dropbox
 sudo dnf -y install vlc
 # nvalt alternative nvpy for notes https://github.com/cpbotha/nvpy
