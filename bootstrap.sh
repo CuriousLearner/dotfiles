@@ -4,19 +4,19 @@
 # Colors
 function echoY() {
     prompt="$1"
-    echo -e -n "\033[32m$prompt"
+    echo -e -n "\\033[32m$prompt"
     echo -e -n '\033[0m'
     echo ''
 }
 function echoR() {
     prompt="$1"
-    echo -e -n "\033[31m$prompt"
+    echo -e -n "\\033[31m$prompt"
     echo -e -n '\033[0m'
     echo ''
 }
 function echoB() {
     prompt="$1"
-    echo -e -n "\033[34m$prompt"
+    echo -e -n "\\033[34m$prompt"
     echo -e -n '\033[0m'
     echo ''
 }
