@@ -3,6 +3,7 @@ alias youtube-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
 
 # Django Stuff
 alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;'
+alias djsu='find . -maxdepth 2 -name 'manage.py' -exec python "{}" createsuperuser --email="admin@localhost.com" \;'
 
 # Virtualenv
 alias sv='if [[ ! -d "venv" && ! -L "venv" ]] ; then; virtualenv -p $(which python3) venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
@@ -15,13 +16,15 @@ alias sv3=sv
 # Undo a `git push`
 alias undopush="git push -f origin HEAD^:master"
 
-alias gp='git push'
+alias gp='git push origin HEAD'
 alias gd='git diff'
 # Go back to the last branch
 alias gc='git checkout -'
+alias gs='git status'
 alias gcl='git clone'
 alias gcm='git commit -m'
 alias gaa='git add :/; git status -sb'
+alias gsync='git checkout master;git pull upstream master;git push origin master'
 
 # ------------------------------------------------------------------------------
 # | Network                                                                    |
