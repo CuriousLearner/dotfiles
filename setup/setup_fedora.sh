@@ -32,11 +32,19 @@ sudo dnf -y install teamviewer
 ###############################################################################
 
 sudo dnf -y install firefox
+<<<<<<< HEAD
 #Evernote,skitch,dash not available
 sudo dnf -y install https://prerelease.keybase.io/keybase_amd64.rpm
 #android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
 #sudo dnf -y install chromium # open source alternative of Google Chrome
 #sudo dnf -y install hexchat  # open source alternative of limechat
+=======
+# Evernote,skitch,dash not available
+sudo dnf -y install https://prerelease.keybase.io/keybase_amd64.rpm
+# android-file-transfer-linux http://whoozle.github.io/android-file-transfer-linux/
+# sudo dnf -y install chromium # open source alternative of Google Chrome
+# sudo dnf -y install hexchat  # open source alternative of limechat
+>>>>>>> ae97bd93fa811d5df096d89c3abc704579e779a7
 sudo dnf -y install dropbox
 sudo dnf -y install vlc
 # nvalt alternative nvpy for notes https://github.com/cpbotha/nvpy
@@ -129,6 +137,11 @@ unzip master.zip
 rm master.zip
 mv editorconfig-vim-master ~/.vim
 
+# slack for fedora v3.0.2
+curl -LO https://downloads.slack-edge.com/linux_releases/slack-3.0.2-0.1.fc21.x86_64.rpm
+rpm --install slack-3.0.2-0.1.fc21.x86_64.rpm
+rm slack-3.0.2-0.1.fc21.x86_64.rpm
+
 ################################################################################
 #                           Customize Shell                                    #
 ################################################################################
@@ -137,7 +150,7 @@ install_oh_my_zsh () {
     # Test to see if zshell is installed.  If it is:
     if [ -f /bin/zsh ] || [ -f /usr/bin/zsh ]; then
         # Install Oh My Zsh if it isn't already present
-        if [[ ! -d "$dir/oh-my-zsh/" ]]; then
+        if [[ ! -d "$HOME/oh-my-zsh/" ]]; then
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         fi
         # Set the default shell to zsh if it isn't currently set to zsh

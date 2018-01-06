@@ -2,15 +2,15 @@
 
 # fix "No newline at end of file" errors
 
-SELF_NAME="`basename "$0"`"
+SELF_NAME="$(basename "$0")"
 
 if getopt --version | grep -q '^getopt'
 then
 	OPTS=$(getopt --options 'hnv' --long 'help,dry-run,verbose' -n "$SELF_NAME" -- "$@")
 else
-	OPTS=$(getopt 'hnv' $*)
+	OPTS=$(getopt 'hnv' "$*")
 fi
-eval set -- $OPTS
+eval set -- "$OPTS"
 
 VERBOSE=0
 DRY=0
@@ -69,7 +69,7 @@ else
 			continue
 		fi
 		
-		if [ `tail -1 "$FILE" | wc -l` -ne 1 ]
+		if [ "$(tail -1 "$FILE" | wc -l)" -ne 1 ]
 		then
 			
 			[ "$VERBOSE" -eq 0 ] || echo "$FILE"
