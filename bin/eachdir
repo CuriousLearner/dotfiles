@@ -73,7 +73,7 @@ for d in "${dirs[@]}"; do
   output="$( (cd "$d"; eval "$@") 2>&1 )"
   if [[ "$output" ]]; then
     # If the command had output, display a header and that output.
-    echo -e "${h1}${d}${h2}\n$output\n"
+    echo -e "${h1}${d}${h2}\\n$output\\n"
   else
     # Otherwise push it onto an array for later display.
     nops=("${nops[@]}" "$d")
