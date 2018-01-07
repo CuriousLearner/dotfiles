@@ -34,15 +34,16 @@ else
   t=$(curl -s -i http://git.io/ -F "url=${1}" -F "code=${2}" 2> /dev/null)
 fi
 
-echo $t | grep 'Status'
-local status_code=$(echo $t | grep 'Status' | cut -d' ' -f 2)
+echo "$t" | grep 'Status'
+status_code=$(echo "$t" | grep 'Status' | cut -d' ' -f 2)
+local status_code
 if [ "$status_code" = "201" ] ; then
-  short_url=$(echo $t | grep 'Location' | cut -d' ' -f 2)
-  echo $short_url
+  short_url=$(echo "$t" | grep 'Location' | cut -d' ' -f 2)
+  echo "$short_url"
 
   copied="Short URL copied to clipboard!"
-  which pbcopy >& /dev/null && echo $short_url | pbcopy && echo $copied
-  which xclip >& /dev/null && echo $short_url | xclip -selection clipboard && echo $copied
+  which pbcopy >& /dev/null && echo "$short_url" | pbcopy && echo "$copied"
+  which xclip >& /dev/null && echo "$short_url" | xclip -selection clipboard && echo "$copied"
 fi
 }
 

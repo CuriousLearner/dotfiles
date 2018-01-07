@@ -41,8 +41,10 @@ if [ ! "$1" ]; then
 fi
 
 # For underlining headers.
-local h1="$(tput smul)"
-local h2="$(tput rmul)"
+h1="$(tput smul)"
+local h1
+h2="$(tput rmul)"
+local h2
 
 # Store any dirs passed before -- in an array.
 local dashes d
@@ -67,10 +69,11 @@ for d in "${dirs[@]}"; do
   # If the dir isn't /, strip the trailing /.
   [[ "$d" != "/" ]] && d="${d%/}"
   # Execute the command, grabbing all stdout and stderr.
+  # shellcheck disable=SC2164
   output="$( (cd "$d"; eval "$@") 2>&1 )"
   if [[ "$output" ]]; then
     # If the command had output, display a header and that output.
-    echo -e "${h1}${d}${h2}\n$output\n"
+    echo -e "${h1}${d}${h2}\\n$output\\n"
   else
     # Otherwise push it onto an array for later display.
     nops=("${nops[@]}" "$d")
@@ -78,7 +81,7 @@ for d in "${dirs[@]}"; do
 done
 
 # List any dirs that had no output.
-if [[ ${#nops[@]} > 0 ]]; then
+if [[ ${#nops[@]} -gt 0 ]]; then
   echo "${h1}no output from${h2}"
   for d in "${nops[@]}"; do echo "$d"; done
 fi
