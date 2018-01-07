@@ -1,6 +1,6 @@
 # CuriousLearner's Dotfiles
 
-[![Build Status](https://travis-ci.org/GeekyShacklebolt/dotfiles.svg?branch=some-more-tests)](https://travis-ci.org/GeekyShacklebolt/dotfiles)
+[![Build Status](https://travis-ci.org/CuriousLearner/dotfiles.svg?branch=master)](https://travis-ci.org/CuriousLearner/dotfiles)
 
 This is a collection of dotfiles and scripts I use for customizing my dev-setup. It contains all my configuration files. See http://dotfiles.github.io/ for more details.
 
