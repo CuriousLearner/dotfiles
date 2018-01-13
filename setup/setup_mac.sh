@@ -168,6 +168,7 @@ installcask install slack
 brew install lastpass-cli --with-pinentry
 # Install howdoi CLI tool
 brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb
+brew install tor
 
 ################################################################################
 #                           Customize Shell                                    #
