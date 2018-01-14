@@ -103,6 +103,7 @@ installcask skitch  # https://evernote.com/skitch/
 installcask vlc
 installcask nvalt  # for notes
 installcask dash  # awesome offline docs
+installcask boostnote # https://boostnote.io/#download
 installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 
 # Postgres 9 Database
