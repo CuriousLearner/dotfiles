@@ -48,4 +48,4 @@ hrs() {
     done
 }
 
-[ "$0" == "$BASH_SOURCE" ] && hrs "$@"
+[ "$0" == "${BASH_SOURCE[0]}" ] && hrs "$@"
