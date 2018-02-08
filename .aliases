@@ -19,7 +19,9 @@ alias sv3=sv
 alias undopush="git push -f origin HEAD^:master"
 
 alias gp='git push origin HEAD'
+alias gpf='git push origin HEAD -f'
 alias gd='git diff'
+alias gds='git diff --staged'
 # Go back to the last branch
 alias gc='git checkout -'
 alias gs='git status'
