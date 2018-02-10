@@ -78,6 +78,7 @@ brew install editorconfig
 brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
 brew install elixir
 brew install gpg
+brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
 
 # Native apps
 brew tap phinze/homebrew-cask
@@ -104,6 +105,7 @@ installcask vlc
 installcask nvalt  # for notes
 installcask dash  # awesome offline docs
 installcask boostnote # https://boostnote.io/#download
+installcask calibre # converting ebooks in different formats
 installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 
 # Postgres 9 Database
