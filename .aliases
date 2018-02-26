@@ -6,6 +6,7 @@ alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;
 alias djsu='find . -maxdepth 2 -name 'manage.py' -exec python "{}" createsuperuser --email="admin@localhost.com" \;'
 alias djmm='find . -maxdepth 2 -name 'manage.py' -exec python "{}" makemigrations \;'
 alias djmig='find . -maxdepth 2 -name 'manage.py' -exec python "{}" migrate \;'
+alias pepfix='autopep8 --max-line-length=120 -i'
 
 # Virtualenv
 alias sv='if [[ ! -d "venv" && ! -L "venv" ]] ; then; virtualenv -p $(which python3) venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
