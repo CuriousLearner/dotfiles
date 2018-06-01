@@ -84,6 +84,9 @@ brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
 brew tap phinze/homebrew-cask
 brew install brew-cask
 
+# For translation stuff
+brew install gettext
+
 ###############################################################################
 # Install utilities                                                           #
 ###############################################################################

@@ -33,3 +33,5 @@ source ~/.profile
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
+export PATH="/usr/local/opt/node@8/bin:$PATH"
+export PATH="/usr/local/opt/gettext/bin:$PATH"
