@@ -23,6 +23,7 @@ alias gp='git push origin HEAD'
 alias gpf='git push origin HEAD -f'
 alias gd='git diff'
 alias gds='git diff --staged'
+alias gl='git log'
 # Go back to the last branch
 alias gc='git checkout -'
 alias gs='git status'
