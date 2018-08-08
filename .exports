@@ -43,7 +43,7 @@ export PYTHONHASHSEED=random
 export PATH=~/bin:~/dotfiles/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/usr/local/mysql/bin/:$PATH
-PATH=$PATH:$HOME/bin/ec2/bin # Add PATH to ec2 commandline tools.
+export PATH=$PATH:$HOME/bin/ec2/bin # Add PATH to ec2 commandline tools.
 
 # grep stuff
 export GREP_OPTIONS='--color'
