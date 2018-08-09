@@ -169,8 +169,11 @@
     insteadOf = "gist:"
 
 [user]
-    email = sanyam@sanyamkhurana.com
+    email = sanyam.khurana01@gmail.com
     name = Sanyam Khurana
+
+[commit]
+  template = ~/.gitmessage
 
 [includeIf "gitdir:~/work/"]
     path = ~/work/.gitconfig
