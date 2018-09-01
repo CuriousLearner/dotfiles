@@ -3,7 +3,7 @@
 function _push(){
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
-push 
+push
 
 Usage: push
 
@@ -12,7 +12,7 @@ and copy the relevant GitHub 'compare' URL to your clipboard (!)
 
 Dependencies:
 
-  git, pbcopy/xclip 
+  git, pbcopy/xclip
 
 Any extra args to this command will be passed through to 'git push',
 e.g. for doing "push -f"
@@ -72,8 +72,8 @@ if [[ "$remote_url" =~ github.com ]]; then
   github_url="$url$repo_name/compare/$refs"
 
   copied="Compare URL copied to clipboard!"
-  which pbcopy >& /dev/null && echo "$github_url" | pbcopy && echo "$copied"
-  which xclip >& /dev/null && echo "$github_url" | xclip -selection clipboard && echo "$copied"
+  command -v pbcopy >& /dev/null && echo "$github_url" | pbcopy && echo "$copied"
+  command -v xclip >& /dev/null && echo "$github_url" | xclip -selection clipboard && echo "$copied"
 
   echo "$github_url"
   echo

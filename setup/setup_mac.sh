@@ -9,7 +9,7 @@
 echo "Running Mac setup. This would take a while. Please sit back and relax."
 
 # Check for Homebrew
-if test ! "$(which brew)"
+if test ! "$(command -v brew)"
 then
   echo "Installing Homebrew for you."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -188,8 +188,8 @@ install_oh_my_zsh () {
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         fi
         # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! "$SHELL" == $(which zsh) ]]; then
-            chsh -s "$(which zsh)"
+        if [[ ! "$SHELL" == $(command -v zsh) ]]; then
+            chsh -s "$(command -v zsh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine

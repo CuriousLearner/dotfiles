@@ -3,7 +3,7 @@
 function _gitio() {
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
-gitio 
+gitio
 http://git.io
 
 Usage: gitio <url> [slug]
@@ -42,8 +42,8 @@ if [ "$status_code" = "201" ] ; then
   echo "$short_url"
 
   copied="Short URL copied to clipboard!"
-  which pbcopy >& /dev/null && echo "$short_url" | pbcopy && echo "$copied"
-  which xclip >& /dev/null && echo "$short_url" | xclip -selection clipboard && echo "$copied"
+  command -v pbcopy >& /dev/null && echo "$short_url" | pbcopy && echo "$copied"
+  command -v xclip >& /dev/null && echo "$short_url" | xclip -selection clipboard && echo "$copied"
 fi
 }
 

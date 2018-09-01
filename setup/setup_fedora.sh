@@ -10,7 +10,7 @@ sudo dnf -y install zsh
 
 # Install everything else
 sudo dnf -y install ack
-sudo dnf -y install git git-extras hub 
+sudo dnf -y install git git-extras hub
 sudo dnf -y install htop ngrep nmap
 sudo dnf -y install autojump # A smart command to change directory (https://github.com/wting/autojump)
 pip install legit            # http://www.git-legit.org/
@@ -48,7 +48,7 @@ sudo dnf -y install pgadmin3
 sudo dnf -y install rubygems
 sudo gem install pg
 
-# PG tools 
+# PG tools
 # osgeo needs epel
 sudo dnf -y install postgis
 
@@ -121,7 +121,7 @@ sudo ln -s /opt/sublime_text/sublime_text /usr/bin/subl
 curl -LO https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
 unzip ngrok-stable-linux-amd64.zip
 rm ngrok-stable-linux-amd64.zip
-mv ngrok /bin 
+mv ngrok /bin
 
 # editorconfig for vim
 curl -LO https://github.com/editorconfig/editorconfig-vim/archive/master.zip
@@ -146,8 +146,8 @@ install_oh_my_zsh () {
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
         fi
         # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! $SHELL == $(which zsh) ]]; then
-            chsh -s "$(which zsh)"
+        if [[ ! $SHELL == $(command -v zsh) ]]; then
+            chsh -s "$(command -v zsh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine

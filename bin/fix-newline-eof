@@ -49,36 +49,36 @@ if [ $# -eq 0 ]
 then
 	awk '{print}'
 else
-	
+
 	RETVAL=0
-	
+
 	for FILE in "$@"
 	do
-		
+
 		if [ ! -e "$FILE" ]
 		then
 			echo "$SELF_NAME: $FILE: file not found" >&2
 			RETVAL=1
 			continue
 		fi
-		
+
 		if file --brief --mime-type -- "$FILE" | grep -vq -e '^text/' -e '^application/xml$'
 		then
 			echo "$SELF_NAME: $FILE: not a text file" >&2
 			RETVAL=1
 			continue
 		fi
-		
+
 		if [ "$(tail -1 "$FILE" | wc -l)" -ne 1 ]
 		then
-			
+
 			[ "$VERBOSE" -eq 0 ] || echo "$FILE"
 			[ "$DRY" -eq 1 ] || echo >> "$FILE"
-			
+
 		fi
-		
+
 	done
-	
+
 	exit $RETVAL
-	
+
 fi
