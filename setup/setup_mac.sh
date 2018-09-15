@@ -79,6 +79,8 @@ brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
 brew install elixir
 brew install gpg
 brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
+brew install latex2html
+brew install pre-commit  # https://pre-commit.com/
 
 # Native apps
 brew tap phinze/homebrew-cask
@@ -91,6 +93,7 @@ brew install gettext
 # Install utilities                                                           #
 ###############################################################################
 
+installcask gcc-arm-embedded  # for 2FA
 installcask firefox
 installcask evernote
 installcask keybase
