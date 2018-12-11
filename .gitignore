@@ -28,3 +28,4 @@ venv/
 *.ropeproject
 *.glue
 .vim/.netrwhist
+.vscode
