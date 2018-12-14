@@ -59,6 +59,9 @@ alias gurl="curl --compressed"
 alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias pycclean='find . -name \*.pyc -type f -ls -delete'
 
+# Remove unlinked packages + stale links on MacOS
+alias cleanmac="brew cleanup -s; brew prune"
+
 alias df='df -h'
 alias du='du -hs'
 
