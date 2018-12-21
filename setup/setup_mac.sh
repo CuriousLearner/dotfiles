@@ -114,6 +114,7 @@ installcask dash  # awesome offline docs
 installcask boostnote # https://boostnote.io/#download
 installcask calibre # converting ebooks in different formats
 installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
+installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
 
 # Postgres 9 Database
 brew install postgres
