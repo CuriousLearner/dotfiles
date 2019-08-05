@@ -40,10 +40,10 @@ if [ "$1" == "--force" ]; then
 fi
 
 function createSymlinks() {
-    for F in ${FILES[@]}; do
+    for F in "${FILES[@]}"; do
         # Delete files if --force was used
         if [ $FORCE == true ]; then
-            TIME= `date +%s`
+            TIME=$(date +%s)
             echoR "--> [BACKUP]: $HOME/${F}"
             mv $HOME/$F $HOME/$F.$TIME.bak
         fi
@@ -95,7 +95,7 @@ declare -a BINARIES=(
     'tweet'
 )
 
-for i in ${BINARIES[@]}; do
+for i in "${BINARIES[@]}"; do
     echo "Changing access permissions for binary script :: ${i##*/}"
     chmod +rwx $HOME/.bin/${i##*/}
 done
@@ -113,5 +113,6 @@ unset getFilesInDir
 unset createSymlinks
 unset BINARIES
 
+# shellcheck disable=SC1090
 source ~/.zshrc
 
