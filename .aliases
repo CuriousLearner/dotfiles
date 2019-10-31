@@ -6,6 +6,9 @@ alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;
 alias djsu='find . -maxdepth 2 -name 'manage.py' -exec python "{}" createsuperuser --email="admin@localhost.com" \;'
 alias djmm='find . -maxdepth 2 -name 'manage.py' -exec python "{}" makemigrations \;'
 alias djmig='find . -maxdepth 2 -name 'manage.py' -exec python "{}" migrate \;'
+alias djsh='find . -maxdepth 2 -name manage.py -exec python "{}" shell \;'
+alias djshp='find . -maxdepth 2 -name manage.py -exec python "{}" shell_plus \;'
+
 alias pepfix='autopep8 --max-line-length=120 -i'
 
 # Virtualenv
