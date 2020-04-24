@@ -1,4 +1,5 @@
 {
+    "editor.formatOnSave": true,
     "window.zoomLevel": 0,
     "terminal.integrated.shell.osx": "/bin/zsh",
     "files.encoding": "utf8",
@@ -24,6 +25,19 @@
     "workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
     "[html]": {
         "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
-    }
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    // "eslint.autoFixOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "prettier.disableLanguages": [
+        "js"
+    ],
+    "sync.gist": "62015269b9fa1216fdb9c5de2af1f679",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }
-
