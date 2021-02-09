@@ -29,7 +29,7 @@ Once you have installed basics software and libraries, you can install the dotfi
 cd ~ && git clone --recursive git@github.com:curiouslearner/dotfiles.git && cd ~/dotfiles
 # To create symbolic links in your home
 sh bootstrap.sh  ## this will create the required symlinks
-pip install -r requirements.pip  ## essential python packages needed
+pip install -r setup/requirements.pip  ## essential python packages needed
 ```
 
 ## Resources

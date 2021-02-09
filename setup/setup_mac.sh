@@ -25,12 +25,12 @@ brew upgrade
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 
-brew tap caskroom/cask
+brew tap homebrew/cask
 
 # Utility function to install cask formulas
 function installcask() {
-    if brew cask info "${@}" | grep "Not installed" > /dev/null; then
-        brew cask install "${@}"
+    if brew info --cask "${@}" | grep "Not installed" > /dev/null; then
+        brew install --cask "${@}"
     else
         echo "$* is already installed."
     fi
@@ -52,8 +52,6 @@ brew install curl --with-ssl --with-ssh
 brew install gnu-sed --with-default-names
 
 # Install more recent versions of some OS X tools
-brew tap homebrew/dupes
-brew install homebrew/dupes/grep
 brew tap josegonzalez/homebrew-php
 
 # Install everything else
@@ -82,11 +80,7 @@ brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
 brew install latex2html
 brew install pre-commit  # https://pre-commit.com/
 brew install libmemcached  # for Django Developement
-brew install terrraform
-
-# Native apps
-brew tap phinze/homebrew-cask
-brew install brew-cask
+brew install terraform
 
 # For translation stuff
 brew install gettext
@@ -131,7 +125,7 @@ brew install gdal
 brew install postgis
 
 # Fonts
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 
 installcask font-source-code-pro
 
