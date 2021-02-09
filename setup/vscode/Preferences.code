@@ -1,9 +1,10 @@
 {
     "editor.formatOnSave": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "terminal.integrated.shell.osx": "/bin/zsh",
     "files.encoding": "utf8",
-    "terminal.integrated.fontFamily": "Droid Sans Mono Awesome",
+    //"terminal.integrated.fontFamily": "Droid Sans Mono Awesome",
+    "cornflakes.linter.executablePath": "/usr/local/Caskroom/miniconda/base/bin/flake8",
     "editor.detectIndentation": false,
     "editor.renderWhitespace": "all",
     "files.insertFinalNewline": true,
@@ -32,12 +33,15 @@
     },
     // "eslint.autoFixOnSave": true,
     "eslint.alwaysShowStatus": true,
-    "prettier.disableLanguages": [
-        "js"
-    ],
+    // "prettier.disableLanguages": [
+    //     "js"
+    // ],
     "sync.gist": "62015269b9fa1216fdb9c5de2af1f679",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "git.ignoreLegacyWarning": true,
+    "aws.samcli.location": "/usr/local/bin/sam",
+    "workbench.editorAssociations": []
 }
