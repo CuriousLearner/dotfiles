@@ -38,3 +38,6 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Enable buildpack `packs` completion for docker
+. $(pack completion --shell zsh)

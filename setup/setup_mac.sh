@@ -151,6 +151,11 @@ installcask install postman
 
 # New Docker for Mac. For older version run `brew install docker`
 installcask install docker
+# dive is for inspecting docker images
+brew install dive
+brew install kubie
+brew install kind
+brew install buildpacks/tap/pack
 
 brew install diff-so-fancy
 brew link xz && brew install weechat
