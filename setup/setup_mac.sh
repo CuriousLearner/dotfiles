@@ -153,9 +153,12 @@ installcask install postman
 installcask install docker
 # dive is for inspecting docker images
 brew install dive
+# Kubernetes stuff
 brew install kubie
 brew install kind
 brew install buildpacks/tap/pack
+brew install skaffold
+brew install datawire/blackbird/telepresence2
 
 brew install diff-so-fancy
 brew link xz && brew install weechat
