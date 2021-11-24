@@ -30,7 +30,7 @@ brew tap homebrew/cask
 # Utility function to install cask formulas
 function installcask() {
     if brew info --cask "${@}" | grep "Not installed" > /dev/null; then
-        brew install --cask "${@}"
+        brew install cask "${@}"
     else
         echo "$* is already installed."
     fi
@@ -63,7 +63,7 @@ brew install autojump
 brew install legit      # http://www.git-legit.org/
 brew install Zopfli     # https://code.google.com/p/zopfli/
 brew install fortune cowsay
-brew install heroku-toolbelt
+brew tap heroku/brew && brew install heroku
 brew install node
 installcask ngrok       # https://ngrok.com/  2.x available from Cask now
 brew install sshrc      # https://github.com/Russell91/sshrc
@@ -145,12 +145,13 @@ brew install elasticsearch
 #                           Dev tools                                          #
 ################################################################################
 
-installcask install virtualbox
-installcask install vagrant
-installcask install postman
+# installcask virtualbox
+# installcask vagrant
+# installcask postman
+installcask insomnia
 
 # New Docker for Mac. For older version run `brew install docker`
-installcask install docker
+# installcask docker
 # dive is for inspecting docker images
 brew install dive
 # Kubernetes stuff
@@ -162,7 +163,7 @@ brew install datawire/blackbird/telepresence2
 
 brew install diff-so-fancy
 brew link xz && brew install weechat
-installcask install sublime-text
+installcask sublime-text
 brew install tmux
 brew install cookiecutter
 
@@ -173,11 +174,11 @@ npm i -g autoprefixer
 
 # Install custom stuff
 # Telegram
-installcask install telegram
+installcask telegram
 # TeamViewer
 installcask teamviewer
 # Slack
-installcask install slack
+installcask slack
 # LastPass CLI
 brew install lastpass-cli --with-pinentry
 # Install howdoi CLI tool
