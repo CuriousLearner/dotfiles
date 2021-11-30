@@ -25,6 +25,8 @@ source ~/.profile
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=5000
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 export PATH="/usr/local/opt/node@8/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
