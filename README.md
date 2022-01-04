@@ -1,6 +1,6 @@
 # CuriousLearner's Dotfiles
 
-[![Build Status](https://travis-ci.org/CuriousLearner/dotfiles.svg?branch=master)](https://travis-ci.org/CuriousLearner/dotfiles)
+![Build Status](https://github.com/CuriousLearner/dotfiles/actions/workflows/main.yml/badge.svg?branch=master)
 
 This is a collection of dotfiles and scripts I use for customizing my dev-setup. It contains all my configuration files. See http://dotfiles.github.io/ for more details.
 
