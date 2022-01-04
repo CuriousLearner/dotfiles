@@ -27,6 +27,8 @@ HISTSIZE=5000
 SAVEHIST=5000
 bindkey -v
 bindkey '^R' history-incremental-search-backward
+bindkey "\e[B" history-search-forward
+bindkey "\e[A" history-search-backward
 export PATH="/usr/local/opt/node@8/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
