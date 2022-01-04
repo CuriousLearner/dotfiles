@@ -1,0 +1,26 @@
+name: CI
+on: [push]
+
+jobs:
+  basic:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+                sudo apt-get install shellcheck
+          else
+                brew install shellcheck
+          fi
+        shell: bash
+      - name: Run Tests
+        run: |
+          chmod +x tests.sh
+          ./tests.sh
+        shell: bash
