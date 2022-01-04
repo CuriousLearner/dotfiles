@@ -155,6 +155,7 @@ installcask insomnia
 # dive is for inspecting docker images
 brew install dive
 # Kubernetes stuff
+brew install minikube
 brew install kubie
 brew install kind
 brew install buildpacks/tap/pack
@@ -184,6 +185,12 @@ brew install lastpass-cli --with-pinentry
 # Install howdoi CLI tool
 brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb
 brew install tor
+
+################################################################################
+#                           Custom Stuff                                       #
+################################################################################
+
+brew install spotify
 
 ################################################################################
 #                           Customize Shell                                    #
