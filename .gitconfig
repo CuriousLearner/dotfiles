@@ -177,3 +177,5 @@
 
 [includeIf "gitdir:~/work/"]
     path = ~/work/.gitconfig
+[pull]
+    rebase = false
