@@ -70,7 +70,7 @@ for d in "${dirs[@]}"; do
   [[ "$d" != "/" ]] && d="${d%/}"
   # Execute the command, grabbing all stdout and stderr.
   # shellcheck disable=SC2164
-  output="$( (cd "$d"; eval "$@") 2>&1 )"
+  output="$( (cd "$d"; "$@") 2>&1 )"
   if [[ "$output" ]]; then
     # If the command had output, display a header and that output.
     echo -e "${h1}${d}${h2}\\n$output\\n"
