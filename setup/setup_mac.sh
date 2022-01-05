@@ -187,6 +187,7 @@ installcask teamviewer
 installcask slack
 # LastPass CLI
 # brew install lastpass-cli --with-pinentry
+brew install bitwarden
 # Install howdoi CLI tool
 brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb
 brew install tor
