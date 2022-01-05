@@ -1,16 +1,17 @@
 {
     "editor.formatOnSave": true,
     "window.zoomLevel": 1,
-    "terminal.integrated.shell.osx": "/bin/zsh",
+    // "terminal.integrated.profiles.osx": "/bin/zsh",
+    // "terminal.integrated.inheritEnv": true,
     "files.encoding": "utf8",
-    //"terminal.integrated.fontFamily": "Droid Sans Mono Awesome",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
     "cornflakes.linter.executablePath": "/usr/local/Caskroom/miniconda/base/bin/flake8",
     "editor.detectIndentation": false,
     "editor.renderWhitespace": "all",
     "files.insertFinalNewline": true,
     "editor.fontFamily": "Monaco",
     // "editor.fontFamily": "Source Code Pro",
-    "editor.fontSize": 16,
+    "editor.fontSize": 14,
     "files.hotExit": "onExit",
     "editor.matchBrackets": true,
     "editor.tabSize": 4,
@@ -23,7 +24,7 @@
     "workbench.colorTheme": "Mariana Pro (Cool)",
     "latex-workshop.view.pdf.viewer": "tab",
     "explorer.confirmDragAndDrop": false,
-    "workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
+    "workbench.iconTheme": "eq-material-theme-icons-light",
     "[html]": {
         "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
     },
@@ -43,5 +44,6 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "git.ignoreLegacyWarning": true,
     "aws.samcli.location": "/usr/local/bin/sam",
-    "workbench.editorAssociations": []
+    "terminal.external.linuxExec": "iterm",
+    "terminal.external.osxExec": "iterm.app"
 }

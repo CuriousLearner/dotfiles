@@ -30,7 +30,10 @@ cd ~ && git clone --recursive git@github.com:curiouslearner/dotfiles.git && cd ~
 # To create symbolic links in your home
 sh bootstrap.sh  ## this will create the required symlinks
 pip install -r setup/requirements.pip  ## essential python packages needed
+cd ~/dotfiles/setup/vscode && setup-vs-code.sh  # this will create symlink to settings.json file & install extensions.
 ```
+
+__NOTE__: To update the list of vs-code-extensions use alias `eve` that would update the file `~/dotfiles/setup/vscode/install-extensions.sh`
 
 ## Resources
 

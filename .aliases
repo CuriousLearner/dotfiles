@@ -1,6 +1,12 @@
 # Youtube downloader
 alias youtube-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
 
+# eve - export vscode extensions
+alias eve="code --list-extensions |
+xargs -L 1 echo code --install-extension |
+sed 's/$/ --force/' |
+sed '\$!s/$/ \&/' > ~/dotfiles/setup/vscode/install-extensions.sh"
+
 # Django Stuff
 alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;'
 alias djsu='find . -maxdepth 2 -name 'manage.py' -exec python "{}" createsuperuser --email="admin@localhost.com" \;'
