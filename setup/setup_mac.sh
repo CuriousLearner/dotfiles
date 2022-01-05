@@ -76,6 +76,8 @@ brew install editorconfig
 brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
 brew install elixir
 brew install gpg
+brew install sops
+brew install age
 brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
 brew install latex2html
 brew install pre-commit  # https://pre-commit.com/
@@ -173,7 +175,10 @@ brew install node
 npm i -g postcss-cli
 npm i -g autoprefixer
 
-# Install custom stuff
+################################################################################
+#                           Custom Stuff                                       #
+################################################################################
+
 # Telegram
 installcask telegram
 # TeamViewer
@@ -181,15 +186,10 @@ installcask teamviewer
 # Slack
 installcask slack
 # LastPass CLI
-brew install lastpass-cli --with-pinentry
+# brew install lastpass-cli --with-pinentry
 # Install howdoi CLI tool
 brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb
 brew install tor
-
-################################################################################
-#                           Custom Stuff                                       #
-################################################################################
-
 brew install spotify
 
 ################################################################################
