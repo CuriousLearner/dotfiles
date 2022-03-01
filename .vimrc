@@ -20,6 +20,8 @@ set incsearch
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 
+set spell spelllang=en_us
+
 hi LineTooLong cterm=bold ctermbg=red guibg=LightYellow
 
 au FileType make set noet
