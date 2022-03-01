@@ -82,6 +82,7 @@ brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
 brew install latex2html
 brew install pre-commit  # https://pre-commit.com/
 brew install libmemcached  # for Django Developement
+brew tap hashicorp/tap
 brew install terraform
 
 # For translation stuff
