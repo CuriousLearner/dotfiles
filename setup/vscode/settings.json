@@ -1,6 +1,5 @@
 {
     "editor.formatOnSave": true,
-    "window.zoomLevel": 1,
     // "terminal.integrated.profiles.osx": "/bin/zsh",
     // "terminal.integrated.inheritEnv": true,
     "files.encoding": "utf8",
@@ -45,5 +44,10 @@
     "git.ignoreLegacyWarning": true,
     "aws.samcli.location": "/usr/local/bin/sam",
     "terminal.external.linuxExec": "iterm",
-    "terminal.external.osxExec": "iterm.app"
+    "terminal.external.osxExec": "iterm.app",
+    "window.zoomLevel": 1,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always"
 }
