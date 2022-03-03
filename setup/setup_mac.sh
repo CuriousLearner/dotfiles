@@ -92,26 +92,28 @@ brew install gettext
 # Install utilities                                                           #
 ###############################################################################
 
+brew install clipy  # Amazing extension for clipboard history
+brew install bat  # Powered cat command with syntax highlighting
 installcask gcc-arm-embedded  # for 2FA
 installcask firefox
-installcask evernote
-installcask keybase
+# installcask evernote
+# installcask keybase
 installcask android-file-transfer
 installcask google-chrome
-installcask utorrent
+# installcask utorrent
 # installcask limechat
-installcask tunnelbear
-installcask flux
-installcask dropbox
+# installcask tunnelbear
+# installcask flux
+# installcask dropbox
 installcask iterm2
 installcask numi  # http://numi.io/
 installcask skitch  # https://evernote.com/skitch/
 installcask vlc
-installcask nvalt  # for notes
-installcask dash  # awesome offline docs
+# installcask nvalt  # for notes
+# installcask dash  # awesome offline docs
 installcask boostnote # https://boostnote.io/#download
 installcask calibre # converting ebooks in different formats
-installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
+# installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
 
 # Postgres 9 Database
@@ -148,8 +150,8 @@ brew install elasticsearch
 #                           Dev tools                                          #
 ################################################################################
 
-# installcask virtualbox
-# installcask vagrant
+installcask virtualbox
+installcask vagrant
 # installcask postman
 installcask insomnia
 
