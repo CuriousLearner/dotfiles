@@ -75,6 +75,7 @@ brew install python3
 brew install editorconfig
 brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
 brew install elixir
+brew install amethyst  # Tiling manager for Mac OSX
 brew install gpg
 brew install sops
 brew install age
