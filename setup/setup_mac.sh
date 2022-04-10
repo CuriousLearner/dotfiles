@@ -36,6 +36,8 @@ function installcask() {
     fi
 }
 
+# Tap all the cask verision from homebrew
+brew tap homebrew/cask-versions
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
@@ -55,32 +57,34 @@ brew install gnu-sed --with-default-names
 brew tap josegonzalez/homebrew-php
 
 # Install everything else
+caskinstall sublime-text
+brew install visual-studio-code
 brew install openssl
 brew install ack
 brew install git git-extras hub git-ftp git-crypt
 brew install rename htop-osx tree ngrep mtr nmap
 brew install autojump
 brew install legit      # http://www.git-legit.org/
-brew install Zopfli     # https://code.google.com/p/zopfli/
+# brew install Zopfli     # https://code.google.com/p/zopfli/
 brew install fortune cowsay
 brew tap heroku/brew && brew install heroku
 brew install node
 installcask ngrok       # https://ngrok.com/  2.x available from Cask now
 brew install sshrc      # https://github.com/Russell91/sshrc
 brew install storm      # https://github.com/emre/storm
-brew install pup        # https://github.com/EricChiang/pup
+# brew install pup        # https://github.com/EricChiang/pup
 brew install httpie     # https://github.com/jakubroztocil/httpie
 brew install jq         # https://stedolan.github.io/jq/
 brew install python3
 brew install editorconfig
 brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
-brew install elixir
+# brew install elixir
 brew install amethyst  # Tiling manager for Mac OSX
 brew install gpg
 brew install sops
 brew install age
-brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
-brew install latex2html
+# brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
+# brew install latex2html
 brew install pre-commit  # https://pre-commit.com/
 brew install libmemcached  # for Django Developement
 brew tap hashicorp/tap
@@ -112,7 +116,8 @@ installcask skitch  # https://evernote.com/skitch/
 installcask vlc
 # installcask nvalt  # for notes
 # installcask dash  # awesome offline docs
-installcask boostnote # https://boostnote.io/#download
+# installcask boostnote # https://boostnote.io/#download
+brew install agenda
 installcask calibre # converting ebooks in different formats
 # installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
