@@ -249,8 +249,24 @@ ln -sf "$PWD"/zsh/themes/curiouslearner.zsh-theme "$HOME"/.oh-my-zsh/themes
 # Zsh Syntax highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 
-# Install Powerlevel9k theme
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+## Install PowerLevel10k theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+
+# Create symlinks for zshrc and p10k.zsh config
+# But backup the current one so that
+# symlinks can be created.
+mv /Users/$(whoami)/.zshrc /Users/$(whoami)/.zshrc.bak
+mv /Users/$(whoami)/.p10k.zsh /Users/$(whoami)/.p10k.zsh.bak
+ln -s /Users/$(whoami)/dotfiles/.zshrc /Users/$(whoami)/.zshrc
+ln -s /Users/$(whoami)/dotfiles/.p10k.zsh /Users/$(whoami)/.p10k.zsh
+
+# Install fonts for powerline 10k
+
+test ! -f ~/Library/Fonts/MesloLGS\ NF\ Bold\ Italic.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf > ~/Library/Fonts/MesloLGS\ NF\ Bold\ Italic.ttf
+test ! -f ~/Library/Fonts/MesloLGS\ NF\ Regular.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf > ~/Library/Fonts/MesloLGS\ NF\ Regular.ttf
+test ! -f ~/Library/Fonts/MesloLGS\ NF\ Italic.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf > ~/Library/Fonts/MesloLGS\ NF\ Italic.ttf
+test ! -f ~/Library/Fonts/MesloLGS\ NF\ Bold.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf > ~/Library/Fonts/MesloLGS\ NF\ Bold.ttf
+
 
 # Remove outdated versions from the cellar
 brew cleanup && brew cleanup cask

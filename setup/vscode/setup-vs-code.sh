@@ -7,6 +7,8 @@
 # Code for fresh install to backup and symlink settings
 # mv ~/Library/Application\ Support/Code/User/settings.json ~/dotfiles/setup/vscode/
 
-ln -s /Users/sanyam/dotfiles/setup/vscode/settings.json /Users/sanyam/Library/Application\ Support/Code/User/settings.json
+ln -s /Users/$(whoami)/dotfiles/setup/vscode/settings.json /Users/$(whoami)/Library/Application\ Support/Code/User/settings.json
 
 source install-extensions.sh
+
+exit 0
