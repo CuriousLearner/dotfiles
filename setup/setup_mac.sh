@@ -12,7 +12,7 @@ echo "Running Mac setup. This would take a while. Please sit back and relax."
 if test ! "$(command -v brew)"
 then
   echo "Installing Homebrew for you."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # Make sure we’re using the latest Homebrew
@@ -30,7 +30,7 @@ brew tap homebrew/cask
 # Utility function to install cask formulas
 function installcask() {
     if brew info --cask "${@}" | grep "Not installed" > /dev/null; then
-        brew install cask "${@}"
+        brew install --cask "${@}"
     else
         echo "$* is already installed."
     fi
@@ -248,6 +248,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
 # Remove outdated versions from the cellar
-brew cleanup && brew cask cleanup
+brew cleanup && brew cleanup cask
 
 exit 0
