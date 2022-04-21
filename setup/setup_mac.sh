@@ -255,10 +255,10 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 # Create symlinks for zshrc and p10k.zsh config
 # But backup the current one so that
 # symlinks can be created.
-mv /Users/$(whoami)/.zshrc /Users/$(whoami)/.zshrc.bak
-mv /Users/$(whoami)/.p10k.zsh /Users/$(whoami)/.p10k.zsh.bak
-ln -s /Users/$(whoami)/dotfiles/.zshrc /Users/$(whoami)/.zshrc
-ln -s /Users/$(whoami)/dotfiles/.p10k.zsh /Users/$(whoami)/.p10k.zsh
+mv "/Users/$(whoami)/.zshrc" "/Users/$(whoami)/.zshrc.bak"
+mv "/Users/$(whoami)/.p10k.zsh" "/Users/$(whoami)/.p10k.zsh.bak"
+ln -s "/Users/$(whoami)/dotfiles/.zshrc" "/Users/$(whoami)/.zshrc"
+ln -s "/Users/$(whoami)/dotfiles/.p10k.zsh" "/Users/$(whoami)/.p10k.zsh"
 
 # Install fonts for powerline 10k
 
