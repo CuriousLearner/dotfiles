@@ -12,7 +12,7 @@
     // "editor.fontFamily": "Source Code Pro",
     "editor.fontSize": 14,
     "files.hotExit": "onExit",
-    "editor.matchBrackets": true,
+    "editor.matchBrackets": "always",
     "editor.tabSize": 4,
     "editor.trimAutoWhitespace": true,
     "files.trimTrailingWhitespace": true,
@@ -46,8 +46,26 @@
     "terminal.external.linuxExec": "iterm",
     "terminal.external.osxExec": "iterm.app",
     "window.zoomLevel": 1,
+    // "[markdown]": {
+    //     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    // },
+    "typescript.updateImportsOnFileMove.enabled": "always",
     "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+        "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+        },
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+        // "editor.defaultFormatter": "mervin.markdown-formatter"
     },
-    "typescript.updateImportsOnFileMove.enabled": "always"
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
 }
