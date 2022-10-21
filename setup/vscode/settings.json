@@ -1,5 +1,5 @@
 {
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     // "terminal.integrated.profiles.osx": "/bin/zsh",
     // "terminal.integrated.inheritEnv": true,
     "files.encoding": "utf8",
@@ -17,16 +17,13 @@
     "editor.trimAutoWhitespace": true,
     "files.trimTrailingWhitespace": true,
     "editor.wordWrap": "on",
-    "editor.formatOnPaste": true,
+    "editor.formatOnPaste": false,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.snippetSuggestions": "top",
     "workbench.colorTheme": "Mariana Pro (Cool)",
     "latex-workshop.view.pdf.viewer": "tab",
     "explorer.confirmDragAndDrop": false,
     "workbench.iconTheme": "eq-material-theme-icons-light",
-    "[html]": {
-        "editor.defaultFormatter": "lonefy.vscode-JS-CSS-HTML-formatter"
-    },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
@@ -66,6 +63,11 @@
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    }
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "hadolint.hadolintPath": "/opt/homebrew/bin/hadolint",
+    "editor.stickyScroll.enabled": true
 }
