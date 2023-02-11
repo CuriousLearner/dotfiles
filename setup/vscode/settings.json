@@ -42,7 +42,7 @@
     "aws.samcli.location": "/usr/local/bin/sam",
     "terminal.external.linuxExec": "iterm",
     "terminal.external.osxExec": "iterm.app",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 2,
     // "[markdown]": {
     //     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     // },
