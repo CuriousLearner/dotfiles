@@ -13,7 +13,7 @@ alias djsu='find . -maxdepth 2 -name 'manage.py' -exec python "{}" createsuperus
 alias djmm='find . -maxdepth 2 -name 'manage.py' -exec python "{}" makemigrations \;'
 alias djmig='find . -maxdepth 2 -name 'manage.py' -exec python "{}" migrate \;'
 alias djsh='find . -maxdepth 2 -name manage.py -exec python "{}" shell \;'
-alias djshp='find . -maxdepth 2 -name manage.py -exec python "{}" shell_plus \;'
+alias djshp='find . -maxdepth 2 -name manage.py -exec python "{}" shell_plus --print-sql \;'
 
 alias pepfix='autopep8 --max-line-length=120 -i'
 
