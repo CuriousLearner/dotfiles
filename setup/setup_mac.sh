@@ -89,6 +89,9 @@ brew install pre-commit  # https://pre-commit.com/
 brew install libmemcached  # for Django Developement
 brew tap hashicorp/tap
 brew install terraform
+brew install duf  # disk-free usage
+brew install tldr  # tldr man-pages
+brew install btop  # better than htop
 
 # For translation stuff
 brew install gettext
