@@ -11,9 +11,7 @@ sed '\$!s/$/ \&/' > ~/dotfiles/setup/vscode/install-extensions.sh"
 alias djrun='find . -maxdepth 2 -name 'manage.py' -exec python "{}" runserver \;'
 alias djsu='find . -maxdepth 2 -name 'manage.py' -exec python "{}" createsuperuser --email="admin@localhost.com" \;'
 alias djmm='find . -maxdepth 2 -name 'manage.py' -exec python "{}" makemigrations \;'
-alias dcdjmm='docker-compose -f local.yml run django python manage.py makemigrations'
 alias djmig='find . -maxdepth 2 -name 'manage.py' -exec python "{}" migrate \;'
-alias dcdjmig='docker-compose -f local.yml run django python manage.py migrate'
 alias djsh='find . -maxdepth 2 -name manage.py -exec python "{}" shell \;'
 alias djshp='find . -maxdepth 2 -name manage.py -exec python "{}" shell_plus --print-sql \;'
 
@@ -78,6 +76,13 @@ alias du='du -hs'
 
 alias halt='sudo shutdown -h now'
 alias reboot='sudo reboot'
+
+# ----------------------------------------------------------------------------
+# | Docker                                                                    |
+# ----------------------------------------------------------------------------
+alias dcdjmm='docker-compose -f local.yml run django python manage.py makemigrations'
+alias dcdjmig='docker-compose -f local.yml run django python manage.py migrate'
+alias dcup='docker-compose -f local.yml up'
 
 # ------------------------------------------------------------------------------
 # | Other                                                                      |
