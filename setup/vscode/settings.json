@@ -73,5 +73,15 @@
     "editor.stickyScroll.enabled": true,
     "[scss]": {
         "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "editor.inlineSuggest.showToolbar": "always",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false
+    },
+    "workbench.editorAssociations": {
+        "*.txt": "default"
     }
 }
