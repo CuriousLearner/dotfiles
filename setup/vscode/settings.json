@@ -5,7 +5,7 @@
     "files.encoding": "utf8",
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "cornflakes.linter.executablePath": "/usr/local/Caskroom/miniconda/base/bin/flake8",
-    "editor.detectIndentation": false,
+    "editor.detectIndentation": true,
     "editor.renderWhitespace": "all",
     "files.insertFinalNewline": true,
     "editor.fontFamily": "Monaco",
@@ -35,7 +35,7 @@
     // ],
     "sync.gist": "62015269b9fa1216fdb9c5de2af1f679",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
     "git.ignoreLegacyWarning": true,
@@ -63,7 +63,7 @@
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnType": true
     },
     "[html]": {
@@ -83,5 +83,10 @@
     },
     "workbench.editorAssociations": {
         "*.txt": "default"
-    }
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "inference.delay": 0,
+    "notebook.includeCellOutputs": true,
+    "continue.enableTabAutocomplete": true,
+    "continue.telemetryEnabled": false
 }

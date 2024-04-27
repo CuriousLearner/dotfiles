@@ -69,3 +69,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+eval "$(/Users/sanyamkhurana/.local/bin/mise activate zsh)"
+eval "$(mise activate)"
+eval "$(~/.local/bin/mise activate zsh)"
