@@ -56,6 +56,9 @@ brew install gnu-sed --with-default-names
 # Install more recent versions of some OS X tools
 brew tap josegonzalez/homebrew-php
 
+# Use `assume` for cloud tasks
+brew tap common-fate/granted
+
 # Install everything else
 caskinstall sublime-text
 brew install visual-studio-code
@@ -92,6 +95,7 @@ brew install terraform
 brew install duf  # disk-free usage
 brew install tldr  # tldr man-pages
 brew install btop  # better than htop
+brew install granted  # assume cli
 
 # For translation stuff
 brew install gettext
