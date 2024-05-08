@@ -58,6 +58,7 @@ brew tap josegonzalez/homebrew-php
 
 # Use `assume` for cloud tasks
 brew tap common-fate/granted
+brew install chamber  # CLI for managing secrets through AWS SSM Parameter Store
 
 # Install everything else
 caskinstall sublime-text
@@ -75,7 +76,7 @@ brew install node
 installcask ngrok       # https://ngrok.com/  2.x available from Cask now
 brew install sshrc      # https://github.com/Russell91/sshrc
 brew install storm      # https://github.com/emre/storm
-# brew install pup        # https://github.com/EricChiang/pup
+brew install pup        # https://github.com/EricChiang/pup
 brew install httpie     # https://github.com/jakubroztocil/httpie
 brew install jq         # https://stedolan.github.io/jq/
 brew install python3
@@ -172,6 +173,9 @@ installcask insomnia
 # installcask docker
 # dive is for inspecting docker images
 brew install dive
+
+brew install orbstack  # Orbstack replacement for Docker.
+
 # Kubernetes stuff
 brew install minikube
 brew install kubie
