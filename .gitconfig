@@ -172,9 +172,11 @@
 [user]
     email = sanyam.khurana01@gmail.com
     name = Sanyam Khurana
+	signingkey = 3448C4F62756E5480FA0F378D07B36A0F0870851
 
 [commit]
   template = ~/.gitmessage
+  #	gpgsign = true
 
 [includeIf "gitdir:~/work/"]
     path = ~/work/.gitconfig
@@ -185,3 +187,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main

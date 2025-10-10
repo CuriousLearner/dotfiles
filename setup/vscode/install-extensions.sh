@@ -1,9 +1,12 @@
+code --install-extension 4ops.terraform --force &
 code --install-extension bar.python-import-helper --force &
 code --install-extension bradlc.vscode-tailwindcss --force &
 code --install-extension budparr.language-hugo-vscode --force &
 code --install-extension charliermarsh.ruff --force &
 code --install-extension christian-kohler.npm-intellisense --force &
 code --install-extension continue.continue --force &
+code --install-extension dart-code.dart-code --force &
+code --install-extension dart-code.flutter --force &
 code --install-extension dsznajder.es7-react-js-snippets --force &
 code --install-extension dzannotti.vscode-babel-coloring --force &
 code --install-extension eamodio.gitlens --force &
@@ -48,11 +51,13 @@ code --install-extension pranaygp.vscode-css-peek --force &
 code --install-extension redhat.vscode-yaml --force &
 code --install-extension rickynormandeau.mariana-pro --force &
 code --install-extension ritwickdey.liveserver --force &
+code --install-extension samuelcolvin.jinjahtml --force &
 code --install-extension tamasfe.even-better-toml --force &
 code --install-extension tatsuyanakamori.resttext --force &
 code --install-extension tht13.rst-vscode --force &
 code --install-extension tomoki1207.pdf --force &
 code --install-extension trond-snekvik.simple-rst --force &
+code --install-extension warpnet.salt-lint --force &
 code --install-extension wholroyd.jinja --force &
 code --install-extension wix.vscode-import-cost --force &
 code --install-extension yzhang.markdown-all-in-one --force

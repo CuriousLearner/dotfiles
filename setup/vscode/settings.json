@@ -90,5 +90,42 @@
     "notebook.includeCellOutputs": true,
     "continue.enableTabAutocomplete": true,
     "continue.telemetryEnabled": false,
-    "dart.flutterSdkPath": "/Users/$(whoami)/Downloads/flutter"
+    "dart.flutterSdkPath": "/Users/$(whoami)/Downloads/flutter",
+    "workbench.sideBar.location": "right",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "salt-lint.enable": true,
+    "salt-lint.run": "onType",
+    "salt-lint.executablePath": "salt-lint",
+    "update.showReleaseNotes": false,
+    "continue.showInlineTip": false,
+    "[sql]": {
+        "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+    },
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "yaml.schemas": {
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.16-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ]
+    },
+    "docker.extension.enableComposeLanguageServer": false,
+    "workbench.editor.empty.hint": "hidden",
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
 }

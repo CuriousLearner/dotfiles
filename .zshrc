@@ -45,6 +45,9 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
+# Sign commits via GPG
+export GPG_TTY=$(tty)
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
@@ -76,3 +79,4 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 eval "$(/Users/sanyamkhurana/.local/bin/mise activate zsh)"
 eval "$(mise activate)"
 eval "$(~/.local/bin/mise activate zsh)"
+if [ -f "/Users/sanyamkhurana/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/sanyamkhurana/.config/fabric/fabric-bootstrap.inc"; fi
