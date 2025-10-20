@@ -9,9 +9,11 @@ export EDITOR="vim"
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
-# Larger bash history (allow 32³ entries; default is 500)
+# Larger history (allow 32³ entries; default is 500)
+# Note: .zshrc may override HISTSIZE/SAVEHIST for zsh
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
+export SAVEHIST=$HISTSIZE
 export HISTCONTROL=ignoredups
 
 # timestamps for bash history. www.debian-administration.org/users/rossen/weblog/1
@@ -46,7 +48,8 @@ export PATH=/usr/local/mysql/bin/:$PATH
 export PATH=$PATH:$HOME/bin/ec2/bin # Add PATH to ec2 commandline tools.
 
 # grep stuff
-export GREP_OPTIONS='--color'
+# GREP_OPTIONS is deprecated - use alias instead
+alias grep='grep --color=auto'
 
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 

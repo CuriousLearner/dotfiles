@@ -23,20 +23,21 @@ source ~/.profile
 # COMPLETION_WAITING_DOTS="true"
 
 HISTFILE=~/.histfile
-HISTSIZE=5000
-SAVEHIST=5000
+# HISTSIZE and SAVEHIST are set in .exports (32768)
+# Uncomment below to override:
+# HISTSIZE=5000
+# SAVEHIST=5000
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 bindkey "\e[B" history-search-forward
 bindkey "\e[A" history-search-backward
-export PATH="/usr/local/opt/node@8/bin:$PATH"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # Enable buildpack `packs` completion for docker
-. $(pack completion --shell zsh)
+command -v pack >/dev/null && . $(pack completion --shell zsh)
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -53,9 +54,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/Users/sanyamkhurana'}
-export PATH="$HOME/"'.platformsh/bin':"$PATH"
-if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+export PATH="$HOME/.platformsh/bin:$PATH"
+if [ -f "$HOME/.platformsh/shell-config.rc" ]; then . "$HOME/.platformsh/shell-config.rc"; fi # END SNIPPET
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -76,7 +76,10 @@ unset __conda_setup
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-eval "$(/Users/sanyamkhurana/.local/bin/mise activate zsh)"
-eval "$(mise activate)"
 eval "$(~/.local/bin/mise activate zsh)"
-if [ -f "/Users/sanyamkhurana/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/sanyamkhurana/.config/fabric/fabric-bootstrap.inc"; fi
+if [ -f "$HOME/.config/fabric/fabric-bootstrap.inc" ]; then . "$HOME/.config/fabric/fabric-bootstrap.inc"; fi
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/sanyamkhurana/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

@@ -5,4 +5,4 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-if [ -f "/Users/sanyamkhurana/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/sanyamkhurana/.config/fabric/fabric-bootstrap.inc"; fi
+if [ -f "$HOME/.config/fabric/fabric-bootstrap.inc" ]; then . "$HOME/.config/fabric/fabric-bootstrap.inc"; fi

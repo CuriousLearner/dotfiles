@@ -29,7 +29,8 @@ alias sv3=sv
 alias undopush="git push -f origin HEAD^:master"
 
 alias gp='git push origin HEAD'
-alias gpf='git push origin HEAD -f'
+alias gpf='git push origin HEAD --force-with-lease'
+alias gpff='git push origin HEAD --force'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gl='git log'
@@ -69,7 +70,7 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias pycclean='find . -name \*.pyc -type f -ls -delete'
 
 # Remove unlinked packages + stale links on MacOS
-alias cleanmac="brew cleanup -s; brew prune"
+alias cleanmac="brew cleanup -s"
 
 alias df='df -h'
 alias du='du -hs'
