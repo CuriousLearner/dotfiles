@@ -48,6 +48,7 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 
 # Sign commits via GPG
 export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -83,3 +84,4 @@ fpath=(/Users/sanyamkhurana/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
