@@ -168,8 +168,8 @@
     insteadOf = "gist:"
 
 [user]
-    email = sanyam.khurana01@gmail.com
-    name = Sanyam Khurana
+	email = sanyam.khurana01@gmail.com
+	name = Sanyam Khurana
 	signingkey = 3448C4F62756E5480FA0F378D07B36A0F0870851
 
 [commit]
