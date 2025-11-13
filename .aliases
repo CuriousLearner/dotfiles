@@ -85,6 +85,58 @@ alias dcdjmm='docker-compose -f local.yml run django python manage.py makemigrat
 alias dcdjmig='docker-compose -f local.yml run django python manage.py migrate'
 alias dcup='docker-compose -f local.yml up'
 
+# ----------------------------------------------------------------------------
+# | Kubernetes - Minimal, battle-tested aliases for CKA/CKAD                 |
+# ----------------------------------------------------------------------------
+
+# Core kubectl shortcuts
+alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias ke='kubectl edit'
+alias kdel='kubectl delete'
+alias kaf='kubectl apply -f'
+alias kcf='kubectl create -f'
+
+# Get resources (most frequently used)
+alias kgp='kubectl get pods'
+alias kgpa='kubectl get pods --all-namespaces'
+alias kgd='kubectl get deployments'
+alias kgs='kubectl get svc'
+alias kgn='kubectl get nodes'
+alias kga='kubectl get all'
+alias kgaa='kubectl get all --all-namespaces'
+
+# Describe resources
+alias kdp='kubectl describe pod'
+alias kdd='kubectl describe deployment'
+alias kdn='kubectl describe node'
+
+# Logs and exec
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
+alias kex='kubectl exec -it'
+
+# Namespace management (critical for exams)
+alias kns='kubectl config set-context --current --namespace'
+alias kgns='kubectl get namespaces'
+
+# Edit resources
+alias kep='kubectl edit pod'
+alias ked='kubectl edit deployment'
+
+# Dry run for generating YAML (combine with export do below)
+alias kdr='kubectl --dry-run=client -o yaml'
+
+# Watch resources
+alias kgpw='kubectl get pods -w'
+
+# CRITICAL: Export variables for exam speed
+# Usage: k run nginx --image=nginx $do > pod.yaml
+export do='--dry-run=client -o yaml'
+export now='--force --grace-period=0'
+
+
 # ------------------------------------------------------------------------------
 # | Other                                                                      |
 # ------------------------------------------------------------------------------
