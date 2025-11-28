@@ -138,6 +138,39 @@ export now='--force --grace-period=0'
 
 
 # ------------------------------------------------------------------------------
+# | PDF Utilities                                                              |
+# ------------------------------------------------------------------------------
+
+compresspdf() {
+    if [ $# -lt 2 ]; then
+        echo "Usage: compresspdf INPUT.pdf OUTPUT.pdf [dpi]"
+        echo "Default dpi = 200 (good for scanned docs / visa uploads)"
+        return 1
+    fi
+
+    local input="$1"
+    local output="$2"
+    local dpi="${3:-200}"   # third arg optional, default 200
+
+    command gs \
+      -sDEVICE=pdfwrite \
+      -dNOPAUSE -dQUIET -dBATCH \
+      -dCompatibilityLevel=1.6 \
+      -dDetectDuplicateImages=true \
+      -dDownsampleColorImages=true \
+      -dColorImageDownsampleType=/Average \
+      -dColorImageResolution="$dpi" \
+      -dDownsampleGrayImages=true \
+      -dGrayImageDownsampleType=/Average \
+      -dGrayImageResolution="$dpi" \
+      -dDownsampleMonoImages=true \
+      -dMonoImageDownsampleType=/Average \
+      -dMonoImageResolution=300 \
+      -sOutputFile="$output" \
+      "$input"
+}
+
+# ------------------------------------------------------------------------------
 # | Other                                                                      |
 # ------------------------------------------------------------------------------
 
