@@ -11,7 +11,7 @@ export SHELLCHECK_OPTS="-e SC2086 -e SC2012"
 for f in $(find . -type f -not -iwholename '*.git*' | sort -u); do
     if file "$f" | grep --quiet shell; then
         {
-            shellcheck "$f" && echo "[OK]: sucessfully linted $f"
+            shellcheck "$f" && echo "[OK]: successfully linted $f"
         } || {
             # add to errors
             ERRORS+=("$f")

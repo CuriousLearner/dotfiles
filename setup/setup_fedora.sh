@@ -17,8 +17,8 @@ sudo dnf -y install zopfli   # Data compression software (https://github.com/goo
 sudo dnf -y install cowsay
 # pup not available for Linux (Fedora)
 sudo dnf -y install sshrc    # https://github.com/Russell91/sshrc
-pip install stormssh         # Linux alternative for storm https://github.com/emre/storm
-pip install --user howdoi
+pip3 install stormssh         # Linux alternative for storm https://github.com/emre/storm
+pip3 install --user howdoi
 sudo dnf -y install httpie   # https://github.com/jakubroztocil/httpie
 sudo dnf -y install jq       # https://stedolan.github.io/jq/
 sudo dnf -y install elixir
@@ -67,7 +67,7 @@ sudo dnf -y install vagrant
 sudo dnf -y install python-postman
 sudo dnf -y install weechat
 sudo dnf -y install tmux
-pip install --user cookiecutter
+pip3 install --user cookiecutter
 
 #Frontend stuff
 sudo dnf -y install npm

@@ -2,7 +2,7 @@
 
 ![Build Status](https://github.com/CuriousLearner/dotfiles/actions/workflows/main.yml/badge.svg?branch=master)
 
-This is a collection of dotfiles and scripts I use for customizing my dev-setup. It contains all my configuration files. See http://dotfiles.github.io/ for more details.
+This is a collection of dotfiles and scripts I use for customizing my dev-setup. It contains all my configuration files. See https://dotfiles.github.io/ for more details.
 
 OS related setup scripts can be found in `setup` folder.
 
@@ -29,12 +29,6 @@ cd ~/dotfiles
 sh setup/setup_mac.sh
 ```
 
-Or via curl:
-
-```shell
-curl -L http://git.io/curiouslearner-setup-mac | sh
-```
-
 ### 3. Set macOS defaults (optional)
 
 ```shell
@@ -52,7 +46,7 @@ sh bootstrap.sh
 ### 5. Install Python packages
 
 ```shell
-pip install -r setup/requirements.pip
+pip3 install -r setup/requirements.pip
 ```
 
 ### 6. Setup VS Code (optional)
@@ -69,7 +63,7 @@ This creates a symlink to `settings.json` and installs extensions.
 
 I actively watch the following repositories and add the best changes to this repository:
 
-- [GitHub ❤ ~/](http://dotfiles.github.io/)
+- [GitHub ❤ ~/](https://dotfiles.github.io/)
 - [Saurabh Kumar's dotfiles](https://github.com/theskumar/dotfiles)
 - [Nick S. Plekhanov’s dotfiles](https://github.com/nicksp/dotfiles)
 

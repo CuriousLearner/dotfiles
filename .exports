@@ -6,7 +6,7 @@ export ANSIBLE_NOCOWS=1
 # Make vim the default editor
 export EDITOR="vim"
 
-# Don’t clear the screen after quitting a manual page
+# Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
 # Larger history (allow 32³ entries; default is 500)
@@ -40,16 +40,12 @@ export LC_ALL=
 
 export PYTHONHASHSEED=random
 
-export PATH=~/bin:~/dotfiles/bin:$PATH
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=/usr/local/mysql/bin/:$PATH
-export PATH=$PATH:$HOME/bin/ec2/bin # Add PATH to ec2 commandline tools.
+# PATH configuration (consolidated)
+export PATH="$HOME/.bin:$HOME/bin:$HOME/dotfiles/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # grep stuff
 # GREP_OPTIONS is deprecated - use alias instead
 alias grep='grep --color=auto'
-
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-
-# Adds binary executables to system path for quick usage
-export PATH=$HOME/.bin:$PATH
