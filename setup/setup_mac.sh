@@ -8,6 +8,10 @@
 
 echo "Running Mac setup. This would take a while. Please sit back and relax."
 
+# Ask for sudo password upfront and keep it alive
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 # Check for Homebrew
 if test ! "$(command -v brew)"
 then
@@ -130,13 +134,14 @@ installcask calibre # converting ebooks in different formats
 # installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
 
-# Postgres 9 Database
-brew install postgres
-installcask pgadmin3
-# ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-# launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-psql postgres -c 'CREATE EXTENSION "adminpack";'
-sudo gem install pg
+# Postgres Database
+brew install postgresql@14
+installcask pgadmin4
+brew services start postgresql@14
+# Wait for postgres to start before running psql
+sleep 3
+psql postgres -c 'CREATE EXTENSION IF NOT EXISTS "adminpack";' 2>/dev/null || true
+gem install pg
 
 # PG tools needed for every other project:
 brew tap osgeo/osgeo4mac
@@ -148,8 +153,8 @@ brew tap homebrew/cask-fonts
 
 installcask font-source-code-pro
 
-sudo easy_install pip
-sudo pip install -r requirements.pip
+# Python packages (pip is included with Python 3 from brew)
+pip3 install -r requirements.pip
 
 ################################################################################
 #                       Data Stores                                            #
@@ -221,12 +226,10 @@ install_oh_my_zsh () {
     # Test to see if zshell is installed.  If it is:
     if [ -f /bin/zsh ] || [ -f /usr/bin/zsh ]; then
         # Install Oh My Zsh if it isn't already present
-        if [[ ! -d $HOME/oh-my-zsh/ ]]; then
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        fi
-        # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! "$SHELL" == $(command -v zsh) ]]; then
-            chsh -s "$(command -v zsh)"
+        if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
+            # Use RUNZSH=no to prevent oh-my-zsh from launching a new shell
+            # Use CHSH=no to skip changing shell (we'll do it at the end)
+            RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine
@@ -234,17 +237,18 @@ install_oh_my_zsh () {
         # If the platform is Linux, try an apt-get to install zsh and then recurse
         if [[ $platform == 'Linux' ]]; then
             if [[ -f /etc/redhat-release ]]; then
-                sudo yum install zsh
+                sudo yum install -y zsh
             fi
             if [[ -f /etc/debian_version ]]; then
-                sudo apt-get install zsh
+                sudo apt-get install -y zsh
             fi
-        # If the platform is OS X, tell the user to install zsh :)
+        # If the platform is OS X, install zsh via brew and continue
         elif [[ $platform == 'Darwin' ]]; then
-            echo "We'll install zsh, then re-run this script!"
+            echo "Installing zsh via Homebrew..."
             brew install zsh
-            exit
         fi
+        # Recurse to install oh-my-zsh now that zsh is installed
+        install_oh_my_zsh
     fi
 }
 
@@ -280,6 +284,20 @@ test ! -f ~/Library/Fonts/MesloLGS\ NF\ Bold.ttf && curl https://github.com/romk
 
 
 # Remove outdated versions from the cellar
-brew cleanup && brew cleanup cask
+brew cleanup
+
+# Change default shell to zsh at the very end
+if [[ ! "$SHELL" == $(command -v zsh) ]]; then
+    echo "Changing default shell to zsh..."
+    chsh -s "$(command -v zsh)"
+fi
+
+echo ""
+echo "=========================================="
+echo "Setup complete!"
+echo "=========================================="
+echo ""
+echo "Restart your terminal (or run: exec zsh) to use zsh."
+echo ""
 
 exit 0
