@@ -15,25 +15,55 @@ OS related setup scripts can be found in `setup` folder.
 
 ## Setup
 
-If you are using Mac OSX, this repo includes a script to install dependencies in this [script](setup/setup_mac.sh).
-
-    curl -L http://git.io/curiouslearner-setup-mac | sh
-
-This [script](setup/osx_defaults.sh) will help you add some defaults to your mac.
-
-### Installing dotfiles
-
-Once you have installed basics software and libraries, you can install the dotfiles, by cloning this repo into `~/dotfiles` and symlinking the files inside it to your home directory `~`. Symlinking helps keep all your dotfiles maintainable inside a git repo, while being functional at the same time.
+### 1. Clone the repository
 
 ```shell
-cd ~ && git clone --recursive git@github.com:curiouslearner/dotfiles.git && cd ~/dotfiles
-# To create symbolic links in your home
-sh bootstrap.sh  ## this will create the required symlinks
-pip install -r setup/requirements.pip  ## essential python packages needed
-cd ~/dotfiles/setup/vscode && setup-vs-code.sh  # this will create symlink to settings.json file & install extensions.
+cd ~
+git clone --recursive https://github.com/CuriousLearner/dotfiles.git
+cd ~/dotfiles
 ```
 
-__NOTE__: To update the list of vs-code-extensions use alias `eve` that would update the file `~/dotfiles/setup/vscode/install-extensions.sh`
+### 2. Install Mac dependencies (macOS only)
+
+```shell
+sh setup/setup_mac.sh
+```
+
+Or via curl:
+
+```shell
+curl -L http://git.io/curiouslearner-setup-mac | sh
+```
+
+### 3. Set macOS defaults (optional)
+
+```shell
+sh setup/osx_defaults.sh
+```
+
+### 4. Create symlinks
+
+This creates symbolic links from your home directory to the dotfiles, keeping everything maintainable in git:
+
+```shell
+sh bootstrap.sh
+```
+
+### 5. Install Python packages
+
+```shell
+pip install -r setup/requirements.pip
+```
+
+### 6. Setup VS Code (optional)
+
+```shell
+cd ~/dotfiles/setup/vscode && sh setup-vs-code.sh
+```
+
+This creates a symlink to `settings.json` and installs extensions.
+
+**Tip:** Use the alias `eve` to update the VS Code extensions list in `~/dotfiles/setup/vscode/install-extensions.sh`
 
 ## Resources
 
