@@ -114,7 +114,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable Notification Center and remove the menu bar icon
 # Note: launchctl unload is deprecated, using bootout instead (may require SIP disabled)
-launchctl bootout gui/$(id -u) /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null || true
+launchctl bootout "gui/$(id -u)" /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null || true
 
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -665,16 +665,17 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 # Photos                                                                      #
 ###############################################################################
 
- # Prevent Photos from opening automatically when devices are plugged in
- defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
 
-# Allow installing user scripts via GitHub Gist or Userscripts.org
-defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
+# Allow installing user scripts via GitHub Gist
+# Note: userscripts.org is defunct, removed from sources
+defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/"
+defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/"
 
 # Disable the all too sensitive backswipe
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false

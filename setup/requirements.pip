@@ -1,11 +1,9 @@
 ipython
 ipdb
-dnsyo
 xerox
 fabric
 cookiecutter
-virtualenv
 ghp-import
 html2text
-requests[security]
+requests
 ansible

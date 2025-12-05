@@ -42,7 +42,7 @@ sudo dnf -y install vlc
 # Postgres Database
 sudo dnf -y install postgresql-server
 sudo dnf -y install postgresql
-sudo dnf -y install pgadmin3
+sudo dnf -y install pgadmin4
 sudo dnf -y install rubygems
 sudo gem install pg
 
@@ -51,7 +51,7 @@ sudo gem install pg
 sudo dnf -y install postgis
 
 ################################################################################
-#                           Datat Stores                                       #
+#                           Data Stores                                        #
 ################################################################################
 
 sudo dnf -y install mysql
@@ -78,7 +78,7 @@ npm i -g autoprefixer
 #Telegram
 sudo dnf -y copr enable rommon/telegram
 sudo dnf -y install telegram-desktop
-sudo dnf copr disable rommon/telegram
+sudo dnf -y copr disable rommon/telegram
 
 # Slack needs to be unpacked manually due to version name in download url
 
@@ -101,16 +101,17 @@ rm heroku.tar.gz
 mkdir -p ~/bin/
 curl https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy > ~/bin/diff-so-fancy
 
-# LastPass
+# LastPass (deprecated - consider using Bitwarden instead)
 curl -O https://lastpass.com/lplinux.tar.bz2
+mkdir -p lplinux
 tar xjvf lplinux.tar.bz2 -C lplinux
 ./lplinux/install_lastpass.sh
-rm lplinux.tar.bz2
+rm -rf lplinux.tar.bz2 lplinux
 
 # Sublime Text 3
 curl -LO https://download.sublimetext.com/sublime_text_3_build_3143_x64.tar.bz2
 tar xvjf sublime_text_3_build_3143_x64.tar.bz2
-sudo cp -rf sublime_text_3/subime_text.desktop /usr/share/applications/sublime_text.desktop
+sudo cp -rf sublime_text_3/sublime_text.desktop /usr/share/applications/sublime_text.desktop
 echo "You might need to change the icon by pasting Icon=/opt/sublime_text/Icon/128x128/sublime-text.png"
 sudo mv sublime_text_3 /opt/sublime_text
 sudo ln -s /opt/sublime_text/sublime_text /usr/bin/subl

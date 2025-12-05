@@ -15,11 +15,19 @@ url = None
 
 
 def ssh_to_web_url(remote_url):
-    repo = remote_url.split(":")[1].split('.git')[0]
-    if 'gogs@git.essentiasoftserv.com:' in remote_url:
-        url = 'https://git.essentiasoftserv.com/%s/src/%s/' % (repo, branch)
-    if 'github.com:' in remote_url:
-        url = 'https://github.com/%s/tree/%s' % (repo, branch)
+    """Convert SSH git URL to web URL for common providers."""
+    url = None
+    # Handle git@host:user/repo.git format
+    if ':' in remote_url:
+        host_part = remote_url.split('@')[1].split(':')[0] if '@' in remote_url else ''
+        repo = remote_url.split(':')[1].split('.git')[0]
+
+        if 'github.com' in host_part:
+            url = 'https://github.com/%s/tree/%s' % (repo, branch)
+        elif 'gitlab.com' in host_part:
+            url = 'https://gitlab.com/%s/-/tree/%s' % (repo, branch)
+        elif 'bitbucket.org' in host_part:
+            url = 'https://bitbucket.org/%s/src/%s' % (repo, branch)
     return url
 
 
@@ -28,6 +36,10 @@ if '@' in remote_url:
 
 if remote_url.startswith('http') and remote_url.endswith('.git'):
     url = remote_url.split('.git')[0]
+
+# Handle HTTPS URLs without .git suffix
+if remote_url.startswith('http') and not url:
+    url = remote_url
 
 if url:
     webbrowser.open_new_tab(url)

@@ -1,15 +1,15 @@
 # list/describe ec2 instances in all the regions
 function ec2-list-all(){
-  for region in `aws ec2 describe-regions --output text | cut -f3`
+  for region in $(aws ec2 describe-regions --output text | cut -f3)
   do
 	   echo -e "\nListing Instances in region:'$region'..."
 	   echo -e "https://console.aws.amazon.com/ec2/v2/home?region=$region"
-	   aws ec2 describe-instances --region $region | jq '.Reservations[] | ( .Instances[] | {state: .State.Name, name: .KeyName, type: .InstanceType, key: .KeyName})'
+	   aws ec2 describe-instances --region "$region" | jq '.Reservations[] | ( .Instances[] | {state: .State.Name, name: .KeyName, type: .InstanceType, key: .KeyName})'
   done
 }
 
 function svg-to-base64() {
-  echo "background: transparent url('data:image/svg+xml;base64,"$(openssl base64 < $@)"') no-repeat center center;"
+  echo "background: transparent url('data:image/svg+xml;base64,$(openssl base64 < "$@")') no-repeat center center;"
 }
 
 function dj() {
@@ -32,7 +32,7 @@ function chpwd() {
 # ------------------------------------------------------------------------------
 
 openssl-to-pem () {
-	openssl pkcs12 -in $1 -out $1.pem -nodes -clcerts
+	openssl pkcs12 -in "$1" -out "$1.pem" -nodes -clcerts
 }
 
 # ------------------------------------------------------------------------------
@@ -85,8 +85,8 @@ supertouch() {
 
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 function targz() {
-  local tmpFile="${@%/}.tar"
-  tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+  local tmpFile="${*%/}.tar"
+  tar -cvf "${tmpFile}" --exclude=".DS_Store" "$@" || return 1
 
   size=$(
 	stat -f"%z" "${tmpFile}" 2> /dev/null; # OS X `stat`
@@ -166,12 +166,12 @@ function fixcrlf(){
 
 # Create new directories and enter the first one
 function md() {
-  mkdir -pv "$@" && cd "$1"
+  mkdir -pv "$@" && cd "$1" || return
 }
 
 # Copy w/ progress
 cp_p () {
-  rsync -WavP --human-readable --progress $1 $2
+  rsync -WavP --human-readable --progress "$1" "$2"
 }
 
 # ------------------------------------------------------------------------------
@@ -210,7 +210,7 @@ function phpserver() {
 # | Git                                                                        |
 # ------------------------------------------------------------------------------
 
-# function to normalize a crupt git repo
+# function to normalize a corrupt git repo
 function git_normalize_eol(){
   echo "* text=auto" >>.gitattributes
   rm .git/index     # Remove the index to force git to
@@ -222,12 +222,12 @@ function git_normalize_eol(){
 }
 
 function gitignore() {
-	curl -s https://www.gitignore.io/api/$@;
+	curl -s "https://www.gitignore.io/api/$*"
 }
 
 
 # take this repo and copy it to somewhere else minus the .git stuff.
 function gitexport(){
   mkdir -p "$1"
-  git archive master | tar -x -C "$1"
+  git archive HEAD | tar -x -C "$1"
 }

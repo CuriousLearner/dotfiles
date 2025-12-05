@@ -16,8 +16,8 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    [ -r ~/.osx ] && source ~/.osx
 fi
 
-# Check for startup SPLASH script
-if hash splash 2>/dev/null; then
+# Check for startup SPLASH script (skip if P10k instant prompt is active)
+if hash splash 2>/dev/null && [[ -z "$POWERLEVEL9K_INSTANT_PROMPT" ]]; then
     splash
 fi
 

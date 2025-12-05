@@ -56,7 +56,7 @@ function createSymlinks() {
 
         if [ $? -eq 1 ]; then
             echo
-            echoR "--> [ERROR]: You have already have a file named ${F} in your home folder."
+            echoR "--> [ERROR]: You already have a file named ${F} in your home folder."
             echoR "    Please backup of your old files."
             echoR "    Using \"--force\" will allow you to overwrite your existing files."
             echo

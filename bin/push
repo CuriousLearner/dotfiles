@@ -23,13 +23,12 @@ HELP
 return; fi
 
 # Colors
+local color_error color_reset
 color_error="$(tput sgr 0 1)$(tput setaf 1)"
-local color_error
 color_reset="$(tput sgr0)"
-local color_reset
 
 # TODO DRY this b/w pull and push
-branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/') || exit $?
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || exit $?
 default_remote="origin"
 remote=$(git config "branch.${branch}.remote" || echo "$default_remote")
 remote_branch=$( (git config "branch.${branch}.merge" || echo "refs/heads/$branch") | awk -F '/' '{ print $3 }' )
@@ -38,7 +37,7 @@ remote_branch=$( (git config "branch.${branch}.merge" || echo "refs/heads/$branc
 push=$(git push --set-upstream "$*" "$remote" "$remote_branch" 2>&1)
 exit_code=$?
 
-if [ $exit_code != 0 ]; then
+if [ "$exit_code" != 0 ]; then
   echo -e "${color_error}Ouch, push failed!${color_reset} code=$exit_code, output=$push"
   exit $exit_code
 elif echo "$push" | grep "Everything up-to-date" >/dev/null; then
@@ -49,7 +48,8 @@ fi
 # Parse relevant commit refs and let user know what we did
 # 1st-time push to new branch gets special treatment
 if echo "$push" | grep "\\[new branch\\]" >/dev/null; then
-  refs="master...$branch"
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo 'main')
+  refs="$default_branch...$branch"
   echo "Pushed new branch '$branch' remotely"
 else
   refs=$(echo "$push" | awk '{ print $3}' | sed 's/\.\./\.\.\./')

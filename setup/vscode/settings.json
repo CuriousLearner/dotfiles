@@ -125,4 +125,6 @@
     },
     "gitlens.ai.model": "vscode",
     "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    // Note: yaml.schemas for Continue extension removed - it contained version-specific path
+    // The extension will auto-configure this when installed
 }

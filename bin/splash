@@ -6,15 +6,16 @@
 function _splash() {
 
 # check for fortune command.
-if hash fortune 2>/dev/null; then
+if command -v fortune &>/dev/null; then
   text=$(fortune -s)
 else
-  text="Install fortune (apt-get install fortune) and see the magic. (!)"
+  text="Install fortune (brew install fortune) and see the magic. (!)"
 fi
 
 # check for cowsay command.
-if hash cowsay 2>/dev/null; then
-    if hash cowsay -f starwar 2>/dev/null; then
+if command -v cowsay &>/dev/null; then
+    # Check if starwar cowfile exists
+    if cowsay -l 2>/dev/null | grep -q starwar; then
         cowsay -f starwar "$text"
     else
         cowsay "$text"

@@ -11,7 +11,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # trap ctrl-c and call disable_proxy()
 function disable_proxy() {
-    sudo networksetup -setsocksfirewallproxystate $INTERFACE off
+    sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
     tput setaf 64 #green
     echo "SOCKS proxy disabled."
     tput sgr0 # color reset
@@ -19,8 +19,8 @@ function disable_proxy() {
 trap disable_proxy INT
 
 # Let's roll
-sudo networksetup -setsocksfirewallproxy $INTERFACE 127.0.0.1 9050 off
-sudo networksetup -setsocksfirewallproxystate $INTERFACE on
+sudo networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 9050 off
+sudo networksetup -setsocksfirewallproxystate "$INTERFACE" on
 
 tput setaf 64 # green
 echo "SOCKS proxy 127.0.0.1:9050 enabled."

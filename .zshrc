@@ -46,11 +46,14 @@ command -v pack >/dev/null && . "$(pack completion --shell zsh)"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+# Terraform completion - auto-detect path for Intel/Apple Silicon Macs
+if command -v terraform &>/dev/null; then
+  complete -o nospace -C "$(which terraform)" terraform
+fi
 
 # Sign commits via GPG
 export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null
+gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1 || true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
@@ -79,7 +82,7 @@ unset __conda_setup
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-eval "$(~/.local/bin/mise activate zsh)"
+[ -x ~/.local/bin/mise ] && eval "$(~/.local/bin/mise activate zsh)"
 if [ -f "$HOME/.config/fabric/fabric-bootstrap.inc" ]; then . "$HOME/.config/fabric/fabric-bootstrap.inc"; fi
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=($HOME/.docker/completions $fpath)

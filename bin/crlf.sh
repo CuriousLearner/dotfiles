@@ -15,7 +15,8 @@ function _crlf_file() {
         dos2unix "$1"
       else
         # Fallback: use sed if dos2unix is not installed
-        sed -i'' -e 's/\r$//' "$1"
+        # Use temp file for cross-platform compatibility (BSD vs GNU sed)
+        sed 's/\r$//' "$1" > "$1.tmp" && mv "$1.tmp" "$1"
       fi
     fi
   fi
@@ -24,12 +25,12 @@ function _crlf_file() {
 # Single file
 if [ "$1" != "" ] && [ "$1" != "--force" ]; then
   [ "$2" == "--force" ] && force=1 || force=0
-  _crlf_file "$1" $force
+  _crlf_file "$1" "$force"
   exit 0
 fi
 
 # All files
 [ "$1" == "--force" ] && force=1 || force=0
 for file in $(find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*" -print0 | xargs -0 file | grep ASCII | cut -d: -f1); do
-  _crlf_file "$file" $force
+  _crlf_file "$file" "$force"
 done

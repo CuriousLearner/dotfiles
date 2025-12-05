@@ -21,6 +21,7 @@ fi
 
 ln -sf "$SETTINGS_SOURCE" "$VSCODE_USER_DIR/settings.json"
 
-source install-extensions.sh
+# shellcheck source=/dev/null
+source "$(dirname "$0")/install-extensions.sh"
 
 exit 0

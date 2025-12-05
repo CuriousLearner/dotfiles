@@ -143,7 +143,7 @@ brew install postgis
 installcask font-source-code-pro
 
 # Python packages (pip is included with Python 3 from brew)
-pip3 install -r requirements.pip
+pip3 install -r "$(dirname "$0")/requirements.pip"
 
 ################################################################################
 #                       Data Stores                                            #

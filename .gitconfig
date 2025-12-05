@@ -13,7 +13,7 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
-    p = !"git pull; git submodule foreach git pull origin master"
+    p = !"git pull; git submodule foreach git pull origin HEAD"
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -60,12 +60,13 @@
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
 
-    # Merge GitHub pull request on top of the `master` branch
+    # Merge GitHub pull request on top of the default branch
     mpr = "!f() { \
+        default_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo 'main'); \
         if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
             git fetch origin refs/pull/$1/head:pr/$1 && \
-            git rebase master pr/$1 && \
-            git checkout master && \
+            git rebase $default_branch pr/$1 && \
+            git checkout $default_branch && \
             git merge pr/$1 && \
             git branch -D pr/$1 && \
             git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
