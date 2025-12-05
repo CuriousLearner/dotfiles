@@ -9,7 +9,7 @@ fi
 ZSH=$HOME/.oh-my-zsh
 # Theme is sourced directly from ~/powerlevel10k below
 ZSH_THEME=""
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # Customizations goes below
 source ~/.profile
@@ -34,8 +34,7 @@ bindkey "\e[B" history-search-forward
 bindkey "\e[A" history-search-backward
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# RVM PATH is already set in .profile, no need to duplicate here
 
 # Enable buildpack `packs` completion for docker
 command -v pack >/dev/null && . "$(pack completion --shell zsh)"
