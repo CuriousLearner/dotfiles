@@ -29,8 +29,6 @@ brew upgrade
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 
-brew tap homebrew/cask
-
 # Utility function to install cask formulas
 function installcask() {
     if brew info --cask "${@}" | grep "Not installed" > /dev/null; then
@@ -40,9 +38,6 @@ function installcask() {
     fi
 }
 
-# Tap all the cask verision from homebrew
-brew tap homebrew/cask-versions
-
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
 
@@ -51,26 +46,23 @@ brew install bash
 brew install zsh zsh-completions
 brew install shellcheck
 
-# Install wget with IRI support
-brew install wget --with-iri
-brew install curl --with-ssl --with-ssh
-# Install GNU `sed`, overwriting the built-in `sed`.
-brew install gnu-sed --with-default-names
-
-# Install more recent versions of some OS X tools
-brew tap josegonzalez/homebrew-php
+# Install wget and curl
+brew install wget
+brew install curl
+# Install GNU `sed`
+brew install gnu-sed
 
 # Use `assume` for cloud tasks
 brew tap common-fate/granted
 brew install chamber  # CLI for managing secrets through AWS SSM Parameter Store
 
 # Install everything else
-caskinstall sublime-text
-brew install visual-studio-code
+installcask sublime-text
+installcask visual-studio-code
 brew install openssl
 brew install ack
 brew install git git-extras hub git-ftp git-crypt
-brew install rename htop-osx tree ngrep mtr nmap
+brew install rename htop tree ngrep mtr nmap
 brew install autojump
 brew install legit      # http://www.git-legit.org/
 # brew install Zopfli     # https://code.google.com/p/zopfli/
@@ -149,8 +141,6 @@ brew install gdal
 brew install postgis
 
 # Fonts
-brew tap homebrew/cask-fonts
-
 installcask font-source-code-pro
 
 # Python packages (pip is included with Python 3 from brew)
@@ -161,7 +151,8 @@ pip3 install -r requirements.pip
 ################################################################################
 
 brew install mysql
-brew install mongo
+brew tap mongodb/brew
+brew install mongodb-community
 brew install redis
 brew install elasticsearch
 
@@ -191,12 +182,10 @@ brew install datawire/blackbird/telepresence2
 
 brew install diff-so-fancy
 brew link xz && brew install weechat
-installcask sublime-text
 brew install tmux
 brew install cookiecutter
 
 # Some frontend stuff
-brew install node
 npm i -g postcss-cli
 npm i -g autoprefixer
 
@@ -214,7 +203,7 @@ installcask slack
 # brew install lastpass-cli --with-pinentry
 brew install bitwarden
 # Install howdoi CLI tool
-brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb
+pip3 install howdoi
 brew install tor
 brew install spotify
 
@@ -258,29 +247,37 @@ install_oh_my_zsh
 # Zsh                                                                         #
 ###############################################################################
 
-set -P
 # Install Zsh settings
 ln -sf "$PWD"/zsh/themes/curiouslearner.zsh-theme "$HOME"/.oh-my-zsh/themes
-# Zsh Syntax highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 
-## Install PowerLevel10k theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+# Zsh Syntax highlighting
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
+
+# Install PowerLevel10k theme
+if [[ ! -d "$HOME/powerlevel10k" ]]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k"
+fi
 
 # Create symlinks for zshrc and p10k.zsh config
-# But backup the current one so that
-# symlinks can be created.
-mv "/Users/$(whoami)/.zshrc" "/Users/$(whoami)/.zshrc.bak"
-mv "/Users/$(whoami)/.p10k.zsh" "/Users/$(whoami)/.p10k.zsh.bak"
-ln -s "/Users/$(whoami)/dotfiles/.zshrc" "/Users/$(whoami)/.zshrc"
-ln -s "/Users/$(whoami)/dotfiles/.p10k.zsh" "/Users/$(whoami)/.p10k.zsh"
+# Backup existing files if they exist and are not symlinks
+[[ -f "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]] && mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
+[[ -f "$HOME/.p10k.zsh" && ! -L "$HOME/.p10k.zsh" ]] && mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bak"
+ln -sf "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
+ln -sf "$HOME/dotfiles/.p10k.zsh" "$HOME/.p10k.zsh"
 
-# Install fonts for powerline 10k
-
-test ! -f ~/Library/Fonts/MesloLGS\ NF\ Bold\ Italic.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf > ~/Library/Fonts/MesloLGS\ NF\ Bold\ Italic.ttf
-test ! -f ~/Library/Fonts/MesloLGS\ NF\ Regular.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf > ~/Library/Fonts/MesloLGS\ NF\ Regular.ttf
-test ! -f ~/Library/Fonts/MesloLGS\ NF\ Italic.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf > ~/Library/Fonts/MesloLGS\ NF\ Italic.ttf
-test ! -f ~/Library/Fonts/MesloLGS\ NF\ Bold.ttf && curl https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf > ~/Library/Fonts/MesloLGS\ NF\ Bold.ttf
+# Install fonts for PowerLevel10k
+mkdir -p "$HOME/Library/Fonts"
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Bold Italic.ttf" --create-dirs \
+    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Regular.ttf" \
+    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Italic.ttf" \
+    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+curl -fLo "$HOME/Library/Fonts/MesloLGS NF Bold.ttf" \
+    "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
 
 
 # Remove outdated versions from the cellar
