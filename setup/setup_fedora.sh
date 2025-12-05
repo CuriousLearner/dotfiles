@@ -10,11 +10,9 @@ sudo dnf -y install zsh
 
 # Install everything else
 sudo dnf -y install ack
-sudo dnf -y install git git-extras hub
+sudo dnf -y install git git-extras gh
 sudo dnf -y install htop ngrep nmap
 sudo dnf -y install autojump # A smart command to change directory (https://github.com/wting/autojump)
-pip install legit            # http://www.git-legit.org/
-legit install		     # Enables the extra git commands
 sudo dnf -y install zopfli   # Data compression software (https://github.com/google/zopfli)
 sudo dnf -y install cowsay
 # pup not available for Linux (Fedora)
@@ -142,12 +140,10 @@ install_oh_my_zsh () {
     # Test to see if zshell is installed.  If it is:
     if [ -f /bin/zsh ] || [ -f /usr/bin/zsh ]; then
         # Install Oh My Zsh if it isn't already present
-        if [[ ! -d "$HOME/oh-my-zsh/" ]]; then
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-        fi
-        # Set the default shell to zsh if it isn't currently set to zsh
-        if [[ ! $SHELL == $(command -v zsh) ]]; then
-            chsh -s "$(command -v zsh)"
+        if [[ ! -d "$HOME/.oh-my-zsh/" ]]; then
+            # Use RUNZSH=no to prevent oh-my-zsh from launching a new shell
+            # Use CHSH=no to skip changing shell (we'll do it at the end)
+            RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine
@@ -155,17 +151,18 @@ install_oh_my_zsh () {
         # If the platform is Linux, try an apt-get to install zsh and then recurse
         if [[ $platform == 'Linux' ]]; then
             if [[ -f /etc/redhat-release ]]; then
-                sudo yum install zsh
+                sudo yum install -y zsh
             fi
             if [[ -f /etc/debian_version ]]; then
-                sudo apt-get install zsh
+                sudo apt-get install -y zsh
             fi
-        # If the platform is OS X, tell the user to install zsh :)
+        # If the platform is OS X, install zsh via brew and continue
         elif [[ $platform == 'Darwin' ]]; then
-            echo "We'll install zsh, then re-run this script!"
+            echo "Installing zsh via Homebrew..."
             brew install zsh
-            exit
         fi
+        # Recurse to install oh-my-zsh now that zsh is installed
+        install_oh_my_zsh
     fi
 }
 
@@ -175,13 +172,28 @@ install_oh_my_zsh
 # Zsh                                                                         #
 ###############################################################################
 
-set -P
 # Install Zsh settings
 ln -sf "$PWD/zsh/themes/curiouslearner.zsh-theme" "$HOME/.oh-my-zsh/themes"
-# Zsh Syntax highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
-# Install Powerlevel9k theme
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+# Zsh Syntax highlighting
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
+
+# Install PowerLevel10k theme (powerlevel9k is unmaintained)
+if [[ ! -d "$HOME/powerlevel10k" ]]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k"
+fi
+
+# Change default shell to zsh at the very end
+if [[ ! "$SHELL" == $(command -v zsh) ]]; then
+    echo "Changing default shell to zsh..."
+    chsh -s "$(command -v zsh)"
+fi
+
+echo ""
+echo "Setup complete! Restart your terminal to use zsh."
+echo ""
 
 exit 0

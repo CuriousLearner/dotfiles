@@ -90,7 +90,8 @@
     "notebook.includeCellOutputs": true,
     "continue.enableTabAutocomplete": true,
     "continue.telemetryEnabled": false,
-    "dart.flutterSdkPath": "/Users/$(whoami)/Downloads/flutter",
+    // Note: Update this path to your actual flutter SDK location
+    "dart.flutterSdkPath": "~/Downloads/flutter",
     "workbench.sideBar.location": "right",
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"

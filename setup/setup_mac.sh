@@ -61,10 +61,9 @@ installcask sublime-text
 installcask visual-studio-code
 brew install openssl
 brew install ack
-brew install git git-extras hub git-ftp git-crypt
+brew install git git-extras gh git-ftp git-crypt
 brew install rename htop tree ngrep mtr nmap
 brew install autojump
-brew install legit      # http://www.git-legit.org/
 # brew install Zopfli     # https://code.google.com/p/zopfli/
 brew install fortune cowsay
 brew tap heroku/brew && brew install heroku

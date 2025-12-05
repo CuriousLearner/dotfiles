@@ -1,5 +1,5 @@
-# Youtube downloader
-alias youtube-mp3='youtube-dl -x --audio-format mp3 --audio-quality 0'
+# Youtube downloader (yt-dlp is the maintained fork of youtube-dl)
+alias youtube-mp3='yt-dlp -x --audio-format mp3 --audio-quality 0'
 
 # eve - export vscode extensions
 alias eve="code --list-extensions |
@@ -53,7 +53,7 @@ alias whois="whois -h whois-servers.net"
 
 # IP addresses
 alias ip="curl ipinfo.io/ip"
-alias localip='python -c "import socket; print(socket.gethostbyname(socket.gethostname()));"'
+alias localip='ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1'
 
 # Copy my public key to my clipboard
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -134,7 +134,7 @@ alias kgpw='kubectl get pods -w'
 # CRITICAL: Export variables for exam speed
 # Usage: k run nginx --image=nginx $do > pod.yaml
 export do='--dry-run=client -o yaml'
-export now='--force --grace-period=0'
+export kforce='--force --grace-period=0'
 
 
 # ------------------------------------------------------------------------------

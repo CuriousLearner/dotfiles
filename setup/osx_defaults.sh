@@ -103,16 +103,18 @@ defaults write com.apple.helpviewer DevMode -bool true
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Restart automatically if the computer freezes
-sudo systemsetup -setrestartfreeze on
+# Note: systemsetup is deprecated in macOS Monterey+, using pmset instead
+sudo pmset -a autorestart 1
 
 # Never go into computer sleep mode
-sudo systemsetup -setcomputersleep Off > /dev/null
+sudo pmset -a sleep 0
 
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+# Note: launchctl unload is deprecated, using bootout instead (may require SIP disabled)
+launchctl bootout gui/$(id -u) /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null || true
 
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -130,8 +132,8 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-# Disable local Time Machine snapshots
-sudo tmutil disablelocal
+# Disable local Time Machine snapshots (removed in macOS High Sierra+)
+# sudo tmutil disablelocal  # deprecated - local snapshots managed automatically now
 
 # Disable hibernation (speeds up entering sleep mode)
 sudo pmset -a hibernatemode 0
@@ -593,8 +595,8 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-# Disable local Time Machine backups
-hash tmutil &> /dev/null && sudo tmutil disablelocal
+# Disable local Time Machine backups (deprecated in High Sierra+)
+# hash tmutil &> /dev/null && sudo tmutil disablelocal
 
 ###############################################################################
 # Activity Monitor                                                            #
@@ -750,8 +752,8 @@ defaults write com.twitter.twitter-mac ShowFullNames -bool true
 # Hide the app in the background if it’s not the front-most window
 defaults write com.twitter.twitter-mac HideInBackground -bool true
 
-# disable local time machine backups http://classicyuppie.com/what-crap-is-this-os-xs-mobilebackups/
-tmutil disablelocal
+# disable local time machine backups (deprecated in High Sierra+)
+# tmutil disablelocal
 
 ###############################################################################
 # Kill affected applications                                                  #

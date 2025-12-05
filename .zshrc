@@ -37,7 +37,7 @@ export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # Enable buildpack `packs` completion for docker
-command -v pack >/dev/null && . $(pack completion --shell zsh)
+command -v pack >/dev/null && . "$(pack completion --shell zsh)"
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
