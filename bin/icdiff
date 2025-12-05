@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """ icdiff.py
 
@@ -496,8 +496,8 @@ if __name__ == "__main__":
         headers = None, None
 
     head = int(options.head)
-    lines_a = open(a, "U").readlines()
-    lines_b = open(b, "U").readlines()
+    lines_a = open(a).readlines()
+    lines_b = open(b).readlines()
 
     if head != 0:
         lines_a = lines_a[:head]

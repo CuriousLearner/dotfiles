@@ -105,11 +105,7 @@
         "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
     },
     "github.copilot.nextEditSuggestions.enabled": true,
-    "yaml.schemas": {
-        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.24-darwin-arm64/config-yaml-schema.json": [
-            ".continue/**/*.yaml"
-        ]
-    },
+    // Note: yaml.schemas removed - it contained version-specific extension path that breaks on updates
     "docker.extension.enableComposeLanguageServer": false,
     "workbench.editor.empty.hint": "hidden",
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",

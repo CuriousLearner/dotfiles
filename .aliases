@@ -19,8 +19,8 @@ alias pepfix='autopep8 --max-line-length=120 -i'
 
 # Virtualenv
 alias sv='if [[ ! -d "venv" && ! -L "venv" ]] ; then; virtualenv -p $(command -v python3) venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
-alias sv2='if [[ ! -d "venv" && ! -L "venv" ]] ; then; virtualenv -p $(command -v python2) venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
 alias sv3=sv
+# Note: sv2 removed - Python 2 reached end of life in 2020
 
 # ------------------------------------------------------------------------------
 # | Git Commands                                                               |

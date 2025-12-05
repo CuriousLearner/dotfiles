@@ -6,6 +6,15 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ] ; then
     exit 1
 fi
 
-MD5=$(echo -n "$1" | md5 | sed 's/ \+- *$//')
-echo "http://gravatar.com/avatar/${MD5}.jpg?s=512"
+# Cross-platform md5: macOS uses 'md5', Linux uses 'md5sum'
+if command -v md5 &> /dev/null; then
+    MD5=$(echo -n "$1" | md5)
+elif command -v md5sum &> /dev/null; then
+    MD5=$(echo -n "$1" | md5sum | cut -d' ' -f1)
+else
+    echo "Error: Neither md5 nor md5sum found"
+    exit 1
+fi
+
+echo "https://gravatar.com/avatar/${MD5}.jpg?s=512"
 unset MD5

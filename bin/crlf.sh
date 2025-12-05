@@ -8,14 +8,24 @@
 force=
 
 function _crlf_file() {
-  grep -q $'\x0D' "$1" && echo "$1" && [ "$2" ] && dos2unix "$1"
+  if grep -q $'\x0D' "$1"; then
+    echo "$1"
+    if [ "$2" ]; then
+      if command -v dos2unix &> /dev/null; then
+        dos2unix "$1"
+      else
+        # Fallback: use sed if dos2unix is not installed
+        sed -i'' -e 's/\r$//' "$1"
+      fi
+    fi
+  fi
 }
 
 # Single file
 if [ "$1" != "" ] && [ "$1" != "--force" ]; then
   [ "$2" == "--force" ] && force=1 || force=0
   _crlf_file "$1" $force
-  return
+  exit 0
 fi
 
 # All files
