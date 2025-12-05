@@ -6,7 +6,6 @@ fabric
 cookiecutter
 virtualenv
 ghp-import
-piprot
 html2text
 requests[security]
-ansible==2.3.2.0
+ansible

@@ -7,7 +7,8 @@ fi
 
 
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Theme is sourced directly from ~/powerlevel10k below
+ZSH_THEME=""
 source $ZSH/oh-my-zsh.sh
 
 # Customizations goes below
@@ -38,7 +39,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Enable buildpack `packs` completion for docker
 command -v pack >/dev/null && . "$(pack completion --shell zsh)"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# Load Powerlevel10k theme
+[[ -f ~/powerlevel10k/powerlevel10k.zsh-theme ]] && source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

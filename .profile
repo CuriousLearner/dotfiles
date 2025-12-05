@@ -5,15 +5,15 @@ for file in ~/.{exports,aliases,functions,extra}; do
 done
 unset file
 
-# Detect and load OS specific settigs
+# Detect and load OS specific settings
 platform='unknown'
-unamestr=`uname`
+unamestr=$(uname)
 if [[ "$unamestr" == 'Linux' ]]; then
-   source ~/.linux
+   [ -r ~/.linux ] && source ~/.linux
 elif [[ "$unamestr" == 'FreeBSD' ]]; then
-   source ~/.freebsd
+   [ -r ~/.freebsd ] && source ~/.freebsd
 elif [[ "$unamestr" == 'Darwin' ]]; then
-   source ~/.osx
+   [ -r ~/.osx ] && source ~/.osx
 fi
 
 # Check for startup SPLASH script
@@ -31,4 +31,4 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-export PATH="$PATH:/Users/$(whoami)/Downloads/flutter/bin"
+export PATH="$PATH:$HOME/Downloads/flutter/bin"

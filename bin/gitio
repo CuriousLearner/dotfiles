@@ -1,50 +1,27 @@
 #!/bin/bash
 
+# NOTE: git.io was deprecated by GitHub in 2022 and no longer works.
+# This script is kept for reference but will not function.
+# Consider using alternatives like:
+#   - GitHub's own short URLs (github.com/user/repo)
+#   - bit.ly, tinyurl.com, or other URL shorteners
+
 function _gitio() {
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
-gitio
-http://git.io
+gitio (DEPRECATED)
 
-Usage: gitio <url> [slug]
+NOTE: git.io was shut down by GitHub in 2022. This script no longer works.
 
-Shorten github url and copies it to clipboard.
+Consider using alternative URL shorteners like bit.ly or tinyurl.
 
-  url  (Required) Any github url
-
-  slug (Optional) The shortname that you want to use. If not provided randomly generated shortname is returned.
-
-Dependencies
-
-  curl, pbcopy/xclip
-
-Copyright (c) 2013 "theskumar" Saurabh Kumar
-Licensed under the MIT license.
+Original usage was: gitio <url> [slug]
 HELP
 return; fi
 
-if [ ! "$1" ]; then
-  echo 'You must specify one or more parameter to run.'
-  return 1
-fi
-
-if [ -z "$2" ] ; then
-  t=$(curl -s -i http://git.io/ -F "url=${1}" 2> /dev/null)
-else
-  t=$(curl -s -i http://git.io/ -F "url=${1}" -F "code=${2}" 2> /dev/null)
-fi
-
-echo "$t" | grep 'Status'
-status_code=$(echo "$t" | grep 'Status' | cut -d' ' -f 2)
-local status_code
-if [ "$status_code" = "201" ] ; then
-  short_url=$(echo "$t" | grep 'Location' | cut -d' ' -f 2)
-  echo "$short_url"
-
-  copied="Short URL copied to clipboard!"
-  command -v pbcopy >& /dev/null && echo "$short_url" | pbcopy && echo "$copied"
-  command -v xclip >& /dev/null && echo "$short_url" | xclip -selection clipboard && echo "$copied"
-fi
+echo "Error: git.io service was deprecated by GitHub in 2022."
+echo "This script no longer works. Consider using bit.ly or tinyurl.com instead."
+return 1
 }
 
 # By putting the above code inside a function, if this file is sourced (which

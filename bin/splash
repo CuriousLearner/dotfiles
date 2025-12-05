@@ -20,7 +20,7 @@ if hash cowsay 2>/dev/null; then
         cowsay "$text"
     fi
 else
-    echo "Install fortune and coway to turn me into speak wizard. (!)"
+    echo "Install fortune and cowsay to turn me into speak wizard. (!)"
 fi
 }
 

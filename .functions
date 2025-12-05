@@ -17,7 +17,7 @@ function dj() {
 	# e.g. dj migrate
 	#      dj runserver
 	#      dj collectstatic --noinput
-	find . -maxdepth 2 -name 'manage.py' -exec python "{}" "$@" \;
+	find . -maxdepth 2 -name 'manage.py' -exec python3 "{}" "$@" \;
 }
 
 function chpwd() {
@@ -56,7 +56,7 @@ datauri() {
 					"$mimeType" \
 					"$(openssl base64 -in "$1" | tr -d "\n")"
 	else
-		print_error "'$1' is not a file."
+		echo "Error: '$1' is not a file." >&2
 	fi
 }
 
@@ -143,10 +143,17 @@ function l () {
 # Syntax-highlight JSON strings or files
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
 function json() {
+	local output
 	if [ -t 0 ]; then # argument
-		python3 -mjson.tool <<< "$*" | pygmentize -l javascript
+		output=$(python3 -mjson.tool <<< "$*")
 	else # pipe
-		python3 -mjson.tool | pygmentize -l javascript
+		output=$(python3 -mjson.tool)
+	fi
+	# Use pygmentize if available, otherwise just print
+	if command -v pygmentize &> /dev/null; then
+		echo "$output" | pygmentize -l javascript
+	else
+		echo "$output"
 	fi
 }
 
