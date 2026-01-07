@@ -1,3 +1,6 @@
+# Sign commits via GPG - must be before P10k instant prompt for pinentry to work
+export GPG_TTY=$(tty)
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -50,10 +53,6 @@ autoload -U +X bashcompinit && bashcompinit
 if command -v terraform &>/dev/null; then
   complete -o nospace -C "$(which terraform)" terraform
 fi
-
-# Sign commits via GPG
-export GPG_TTY=$(tty)
-gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1 || true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
