@@ -1,6 +1,10 @@
 #
 # Contains scripts applicable to Mac OSX
 #
+
+# Local IP address
+alias localip='ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1'
+
 # Lock screen
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 

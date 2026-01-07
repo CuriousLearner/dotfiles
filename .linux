@@ -1,8 +1,11 @@
 #
-# Contains scripts applicable to postfix only
+# Contains scripts applicable to Linux only
 #
 
 # ---[ aliases ]---------------------------------------------------------
+
+# Local IP address
+alias localip="ip route get 1 2>/dev/null | awk '{print \$7}' | head -1"
 
 # Simulate pbcopy and pbpaste for copying to and from the pasteboard/clipboard
 #

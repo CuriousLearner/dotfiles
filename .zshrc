@@ -77,7 +77,10 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+# PostgreSQL - dynamically find installed version
+for pg in /opt/homebrew/opt/postgresql@*/bin; do
+  [ -d "$pg" ] && export PATH="$pg:$PATH" && break
+done
 [ -x ~/.local/bin/mise ] && eval "$(~/.local/bin/mise activate zsh)"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.

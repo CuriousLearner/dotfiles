@@ -14,7 +14,7 @@ export MANPAGER="less -X"
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export SAVEHIST=$HISTSIZE
-export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoredups:erasedups
 
 # timestamps for bash history. www.debian-administration.org/users/rossen/weblog/1
 # saved for later analysis

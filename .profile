@@ -6,7 +6,6 @@ done
 unset file
 
 # Detect and load OS specific settings
-platform='unknown'
 unamestr=$(uname)
 if [[ "$unamestr" == 'Linux' ]]; then
    [ -r ~/.linux ] && source ~/.linux

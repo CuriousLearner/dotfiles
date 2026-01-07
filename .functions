@@ -9,7 +9,7 @@ function ec2-list-all(){
 }
 
 function svg-to-base64() {
-  echo "background: transparent url('data:image/svg+xml;base64,$(openssl base64 < "$@")') no-repeat center center;"
+  echo "background: transparent url('data:image/svg+xml;base64,$(openssl base64 < "$1")') no-repeat center center;"
 }
 
 function dj() {
@@ -20,12 +20,15 @@ function dj() {
 	find . -maxdepth 2 -name 'manage.py' -exec python3 "{}" "$@" \;
 }
 
-function chpwd() {
-	emulate -L zsh
-	if [[ -e venv/bin/activate ]]; then
-	  sv
-	fi
-}
+# Auto-activate virtualenv on directory change (zsh only)
+if [[ -n "$ZSH_VERSION" ]]; then
+  function chpwd() {
+    emulate -L zsh
+    if [[ -e venv/bin/activate ]]; then
+      sv
+    fi
+  }
+fi
 
 # ------------------------------------------------------------------------------
 # | Openssl                                                                     |
