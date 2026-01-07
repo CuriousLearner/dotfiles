@@ -31,4 +31,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
-export PATH="$PATH:$HOME/Downloads/flutter/bin"
+# Fabric AI bootstrap
+if [ -f "$HOME/.config/fabric/fabric-bootstrap.inc" ]; then . "$HOME/.config/fabric/fabric-bootstrap.inc"; fi

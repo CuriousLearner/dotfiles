@@ -81,9 +81,9 @@ alias reboot='sudo reboot'
 # ----------------------------------------------------------------------------
 # | Docker                                                                    |
 # ----------------------------------------------------------------------------
-alias dcdjmm='docker-compose -f local.yml run django python3 manage.py makemigrations'
-alias dcdjmig='docker-compose -f local.yml run django python3 manage.py migrate'
-alias dcup='docker-compose -f local.yml up'
+alias dcdjmm='docker compose -f local.yml run django python3 manage.py makemigrations'
+alias dcdjmig='docker compose -f local.yml run django python3 manage.py migrate'
+alias dcup='docker compose -f local.yml up'
 
 # ----------------------------------------------------------------------------
 # | Kubernetes - Minimal, battle-tested aliases for CKA/CKAD                 |

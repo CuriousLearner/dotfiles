@@ -77,12 +77,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 [ -x ~/.local/bin/mise ] && eval "$(~/.local/bin/mise activate zsh)"
-if [ -f "$HOME/.config/fabric/fabric-bootstrap.inc" ]; then . "$HOME/.config/fabric/fabric-bootstrap.inc"; fi
+
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
