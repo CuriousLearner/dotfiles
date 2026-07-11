@@ -125,6 +125,33 @@
     },
     "gitlens.ai.model": "vscode",
     "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "yaml.schemas": {
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.28-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.29-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.30-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.31-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.32-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.33-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-1.3.38-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///Users/sanyamkhurana/.vscode/extensions/continue.continue-2.1.0-darwin-arm64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ]
+    },
+    "claudeCode.preferredLocation": "panel",
     // Note: yaml.schemas for Continue extension removed - it contained version-specific path
     // The extension will auto-configure this when installed
 }

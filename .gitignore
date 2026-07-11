@@ -248,3 +248,6 @@ __marimo__/
 .streamlit/secrets.toml
 
 .claude/
+
+# Private Claude config (cloned manually, see setup/claude-config.sh)
+/claude-config/

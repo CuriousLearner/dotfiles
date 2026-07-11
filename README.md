@@ -59,6 +59,17 @@ This creates a symlink to `settings.json` and installs extensions.
 
 **Tip:** Use the alias `eve` to update the VS Code extensions list in `~/dotfiles/setup/vscode/install-extensions.sh`
 
+### 7. Link private Claude config (optional)
+
+```shell
+git clone <your-private-claude-config-repo> claude-config   # not tracked here, clone it yourself
+sh setup/claude-config.sh
+```
+
+Symlinks skills, `CLAUDE.md`, `settings.json`, and `mcp.json` from that repo into `~/.claude/`.
+It's intentionally not a git submodule, so this public repo never references its name or URL —
+the script just checks whether `claude-config/` exists and skips quietly if it doesn't.
+
 ## Resources
 
 I actively watch the following repositories and add the best changes to this repository:

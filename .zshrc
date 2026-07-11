@@ -89,3 +89,6 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
+# kubectl completion
+source <(kubectl completion zsh)
+
