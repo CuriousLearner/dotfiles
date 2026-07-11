@@ -17,6 +17,15 @@ if test ! "$(command -v brew)"
 then
   echo "Installing Homebrew for you."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # A fresh install doesn't update this script's own PATH (Apple Silicon uses
+  # /opt/homebrew, Intel uses /usr/local) -- without this, every brew call
+  # below fails with "command not found" on a first-time machine.
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
 fi
 
 # Make sure we’re using the latest Homebrew
@@ -25,9 +34,8 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
-# Install GNU core utilities (those that come with OS X are outdated)
-brew install coreutils
-echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
+# gum powers the interactive group picker below
+brew install gum
 
 # Utility function to install cask formulas
 function installcask() {
@@ -38,230 +46,272 @@ function installcask() {
     fi
 }
 
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew install findutils
-
-# Install Bash 4
-brew install bash
-brew install zsh zsh-completions
-brew install shellcheck
-
-# Install wget and curl
-brew install wget
-brew install curl
-# Install GNU `sed`
-# brew install gnu-sed
-
-# Use `assume` for cloud tasks
-brew tap common-fate/granted
-brew install chamber  # CLI for managing secrets through AWS SSM Parameter Store
-
-# Install everything else
-installcask sublime-text
-installcask visual-studio-code
-brew install openssl
-brew install ack
-brew install git git-extras gh git-ftp git-crypt
-brew install rename htop tree ngrep mtr nmap
-brew install autojump
-# brew install Zopfli     # https://code.google.com/p/zopfli/
-brew install fortune cowsay
-# brew tap heroku/brew && brew install heroku
-# brew install node
-installcask ngrok       # https://ngrok.com/  2.x available from Cask now
-# brew install sshrc      # https://github.com/Russell91/sshrc
-brew install storm      # https://github.com/emre/storm
-# brew install pup        # https://github.com/EricChiang/pup
-brew install httpie     # https://github.com/jakubroztocil/httpie
-brew install jq         # https://stedolan.github.io/jq/
-brew install python3
-brew install editorconfig
-brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
-# brew install elixir
-installcask amethyst  # Tiling manager for Mac OSX (cask, not formula)
-brew install gpg
-brew install sops
-brew install age
-# brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
-# brew install latex2html
-brew install pre-commit  # https://pre-commit.com/
-brew install libmemcached  # for Django Developement
-brew tap hashicorp/tap
-brew install terraform
-brew install duf  # disk-free usage
-brew install tldr  # tldr man-pages
-brew install btop  # better than htop
-# brew install granted
-
-# For translation stuff
-brew install gettext
-
-################################################################################
-#                           Cloud & Infra                                     #
-################################################################################
-
-brew install awscli
-brew install aws-vault
-brew install awsume
-brew install aws-cdk
-brew tap aws/tap && brew install copilot-cli
-brew install azure-cli
-brew install doppler
-brew install infracost
-brew install terragrunt
-brew install cloudflared
-brew install flyctl
-brew install supabase
-brew install ansible
-brew install circleci
-
-################################################################################
-#                           Languages & Runtimes                              #
-################################################################################
-
-brew install nvm  # Node version management, replaces brew's node formula
-brew install rust
-brew install ruby@3.0
-brew install openjdk@17
-brew install uv
-brew install pdm
-brew install pip-tools
-brew install virtualenv
-brew install yarn
-
-################################################################################
-#                           Everyday CLI                                      #
-################################################################################
-
-brew install just
-brew install bb-cli  # Bitbucket CLI, used by the bb-inline-review skill
-brew install hub
-brew install git-lfs
-brew install hadolint
-brew install imagemagick
-brew install pandoc
-brew install scc
-brew install yt-dlp
-brew install rclone
-brew install hugo
-
 ###############################################################################
-# Install utilities                                                           #
+# Core (always installed on every machine)                                   #
 ###############################################################################
 
-installcask clipy  # Clipboard history, default hotkey cmd+shift+v
-brew install bat  # Powered cat command with syntax highlighting
-installcask gcc-arm-embedded  # for 2FA
-installcask firefox
-installcask claude
-installcask claude-code
-# installcask evernote
-# installcask keybase
-installcask android-file-transfer
-installcask google-chrome
-# installcask utorrent
-# installcask limechat
-installcask tunnelbear
-# installcask flux
-# installcask dropbox
-installcask iterm2
-installcask numi  # http://numi.io/
-installcask skitch  # https://evernote.com/skitch/
-installcask vlc
-# installcask nvalt  # for notes
-# installcask dash  # awesome offline docs
-# installcask boostnote # https://boostnote.io/#download
-installcask agenda  # cask, not formula
-installcask calibre # converting ebooks in different formats
-# installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
-installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
+install_core() {
+    # Install GNU core utilities (those that come with OS X are outdated)
+    brew install coreutils
+    echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 
-# Postgres Database
-brew install postgresql@14
-installcask pgadmin4
-brew services start postgresql@14
-# Wait for postgres to start before running psql
-sleep 3
-psql postgres -c 'CREATE EXTENSION IF NOT EXISTS "adminpack";' 2>/dev/null || true
-gem install pg
+    # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+    brew install findutils
 
-# PG tools needed for every other project:
-brew tap osgeo/osgeo4mac
-brew install gdal
-brew install postgis
+    # Install Bash 4
+    brew install bash
+    brew install zsh zsh-completions
+    brew install shellcheck
 
-# Fonts
-installcask font-source-code-pro
+    # Install wget and curl
+    brew install wget
+    brew install curl
+    # Install GNU `sed`
+    # brew install gnu-sed
 
-# Python packages (pip is included with Python 3 from brew)
-pip3 install -r "$(dirname "$0")/requirements.pip"
+    # Use `assume` for cloud tasks
+    brew tap common-fate/granted
+    brew install chamber  # CLI for managing secrets through AWS SSM Parameter Store
 
-################################################################################
-#                       Data Stores                                            #
-################################################################################
+    # Install everything else
+    installcask sublime-text
+    installcask visual-studio-code
+    brew install openssl
+    brew install ack
+    brew install git git-extras gh git-ftp git-crypt
+    brew install rename htop tree ngrep mtr nmap
+    brew install autojump
+    # brew install Zopfli     # https://code.google.com/p/zopfli/
+    brew install fortune cowsay
+    # brew tap heroku/brew && brew install heroku
+    # brew install node
+    installcask ngrok       # https://ngrok.com/  2.x available from Cask now
+    # brew install sshrc      # https://github.com/Russell91/sshrc
+    brew install storm      # https://github.com/emre/storm
+    # brew install pup        # https://github.com/EricChiang/pup
+    brew install httpie     # https://github.com/jakubroztocil/httpie
+    brew install jq         # https://stedolan.github.io/jq/
+    brew install python3
+    brew install editorconfig
+    brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
+    # brew install elixir
+    installcask amethyst  # Tiling manager for Mac OSX (cask, not formula)
+    brew install gpg
+    brew install sops
+    brew install age
+    # brew install hg         # Mercurial for FOSS projects (mainly Mozilla)
+    # brew install latex2html
+    brew install pre-commit  # https://pre-commit.com/
+    brew install libmemcached  # for Django Developement
+    brew tap hashicorp/tap
+    brew install terraform
+    brew install duf  # disk-free usage
+    brew install tldr  # tldr man-pages
+    brew install btop  # better than htop
+    # brew install granted
 
-brew install mysql
-# brew tap mongodb/brew
-# brew install mongodb-community
-# brew install mongosh
-brew install redis
-# brew install elasticsearch
+    # For translation stuff
+    brew install gettext
 
-################################################################################
-#                           Dev tools                                          #
-################################################################################
+    # Python packages (pip is included with Python 3 from brew)
+    pip3 install -r "$(dirname "$0")/requirements.pip"
+}
 
-# installcask virtualbox
-# installcask vagrant
-# installcask postman
-installcask bruno
-installcask insomnia
+###############################################################################
+# Optional groups                                                            #
+###############################################################################
 
-# New Docker for Mac. For older version run `brew install docker`
-# installcask docker
-# dive is for inspecting docker images
-brew install dive
+install_cloud() {
+    brew install awscli
+    brew install aws-vault
+    brew install awsume
+    brew install aws-cdk
+    brew tap aws/tap && brew install copilot-cli
+    brew install azure-cli
+    brew install doppler
+    brew install infracost
+    brew install terragrunt
+    brew install cloudflared
+    brew install flyctl
+    brew install supabase
+    brew install ansible
+    brew install circleci
+}
 
-brew install orbstack  # Orbstack replacement for Docker.
+install_languages() {
+    brew install nvm  # Node version management, replaces brew's node formula
+    brew install rust
+    brew install ruby@3.0
+    brew install openjdk@17
+    brew install uv
+    brew install pdm
+    brew install pip-tools
+    brew install virtualenv
+    brew install yarn
+}
 
-# Kubernetes stuff
-brew install minikube
-brew install kubie
-brew install kind
-# brew install buildpacks/tap/pack
-brew install skaffold
-# brew install datawire/blackbird/telepresence2
-brew install k9s
-brew install kubebuilder
-brew install tilt
+install_cli_extras() {
+    brew install just
+    brew install bb-cli  # Bitbucket CLI, used by the bb-inline-review skill
+    brew install hub
+    brew install git-lfs
+    brew install hadolint
+    brew install imagemagick
+    brew install pandoc
+    brew install scc
+    brew install yt-dlp
+    brew install rclone
+    brew install hugo
+}
 
-brew install diff-so-fancy
-brew link xz && brew install weechat
-brew install tmux
-brew install cookiecutter
+install_databases() {
+    # Postgres Database
+    brew install postgresql@14
+    installcask pgadmin4
+    brew services start postgresql@14
+    # Wait for postgres to start before running psql
+    sleep 3
+    psql postgres -c 'CREATE EXTENSION IF NOT EXISTS "adminpack";' 2>/dev/null || true
+    gem install pg
 
-# Some frontend stuff
-npm i -g postcss-cli
-npm i -g autoprefixer
+    # PG tools needed for every other project:
+    brew tap osgeo/osgeo4mac
+    brew install gdal
+    brew install postgis
 
-################################################################################
-#                           Custom Stuff                                       #
-################################################################################
+    brew install mysql
+    # brew tap mongodb/brew
+    # brew install mongodb-community
+    # brew install mongosh
+    brew install redis
+    # brew install elasticsearch
+}
 
-# Telegram
-installcask telegram
-# TeamViewer
-installcask teamviewer
-# Slack
-installcask slack
-# LastPass CLI
-# brew install lastpass-cli --with-pinentry
-installcask 1password
-installcask bitwarden
-# Install howdoi CLI tool
-pip3 install howdoi
-brew install tor
-installcask spotify
+install_dev_tools() {
+    # installcask virtualbox
+    # installcask vagrant
+    # installcask postman
+    installcask bruno
+    installcask insomnia
+
+    # New Docker for Mac. For older version run `brew install docker`
+    # installcask docker
+    # dive is for inspecting docker images
+    brew install dive
+
+    brew install orbstack  # Orbstack replacement for Docker.
+
+    # Kubernetes stuff
+    brew install minikube
+    brew install kubie
+    brew install kind
+    # brew install buildpacks/tap/pack
+    brew install skaffold
+    # brew install datawire/blackbird/telepresence2
+    brew install k9s
+    brew install kubebuilder
+    brew install tilt
+
+    brew install diff-so-fancy
+    brew link xz && brew install weechat
+    brew install tmux
+    brew install cookiecutter
+
+    # Some frontend stuff
+    npm i -g postcss-cli
+    npm i -g autoprefixer
+}
+
+install_personal_apps() {
+    installcask clipy  # Clipboard history, default hotkey cmd+shift+v
+    brew install bat  # Powered cat command with syntax highlighting
+    installcask gcc-arm-embedded  # for 2FA
+    installcask firefox
+    installcask claude
+    installcask claude-code
+    # installcask evernote
+    # installcask keybase
+    installcask android-file-transfer
+    installcask google-chrome
+    # installcask utorrent
+    # installcask limechat
+    installcask tunnelbear
+    # installcask flux
+    # installcask dropbox
+    installcask iterm2
+    installcask numi  # http://numi.io/
+    installcask skitch  # https://evernote.com/skitch/
+    installcask vlc
+    # installcask nvalt  # for notes
+    # installcask dash  # awesome offline docs
+    # installcask boostnote # https://boostnote.io/#download
+    installcask agenda  # cask, not formula
+    installcask calibre # converting ebooks in different formats
+    # installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
+    installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
+
+    # Fonts
+    installcask font-source-code-pro
+
+    # Telegram
+    installcask telegram
+    # TeamViewer
+    installcask teamviewer
+    # Slack
+    installcask slack
+    # LastPass CLI
+    # brew install lastpass-cli --with-pinentry
+    installcask 1password
+    installcask bitwarden
+    # Install howdoi CLI tool
+    pip3 install howdoi
+    brew install tor
+    installcask spotify
+}
+
+###############################################################################
+# Group selection                                                            #
+###############################################################################
+#
+# Core always installs. Everything else is picked interactively, so a given
+# machine only gets what it actually needs. Set SETUP_MAC_ALL=1 to skip the
+# prompt and install every group (useful for CI or a from-scratch clone).
+
+GROUP_LABELS=(
+    "Cloud & Infra (AWS/Azure/CI)"
+    "Languages & Runtimes (nvm/rust/ruby/uv)"
+    "Everyday CLI extras (just/bb-cli/hugo/...)"
+    "Databases (postgres/mysql/redis)"
+    "Dev tools (containers, Kubernetes, tmux)"
+    "Personal apps & utilities (browsers, chat, casks)"
+)
+GROUP_FUNCS=(
+    install_cloud
+    install_languages
+    install_cli_extras
+    install_databases
+    install_dev_tools
+    install_personal_apps
+)
+
+install_core
+
+if [ "$SETUP_MAC_ALL" = "1" ] || ! command -v gum >/dev/null 2>&1; then
+    [ "$SETUP_MAC_ALL" != "1" ] && echo "gum unavailable, installing every group."
+    selected_labels=$(printf '%s\n' "${GROUP_LABELS[@]}")
+else
+    selected_labels=$(printf '%s\n' "${GROUP_LABELS[@]}" | gum choose --no-limit \
+        --header "Optional groups to install (space to toggle, enter to confirm):")
+fi
+
+while IFS= read -r label; do
+    [ -z "$label" ] && continue
+    for i in "${!GROUP_LABELS[@]}"; do
+        if [ "${GROUP_LABELS[$i]}" = "$label" ]; then
+            "${GROUP_FUNCS[$i]}"
+        fi
+    done
+done <<< "$selected_labels"
 
 ################################################################################
 #                           Customize Shell                                    #
