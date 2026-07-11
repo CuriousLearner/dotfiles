@@ -50,7 +50,7 @@ brew install shellcheck
 brew install wget
 brew install curl
 # Install GNU `sed`
-brew install gnu-sed
+# brew install gnu-sed
 
 # Use `assume` for cloud tasks
 brew tap common-fate/granted
@@ -66,19 +66,19 @@ brew install rename htop tree ngrep mtr nmap
 brew install autojump
 # brew install Zopfli     # https://code.google.com/p/zopfli/
 brew install fortune cowsay
-brew tap heroku/brew && brew install heroku
-brew install node
+# brew tap heroku/brew && brew install heroku
+# brew install node
 installcask ngrok       # https://ngrok.com/  2.x available from Cask now
-brew install sshrc      # https://github.com/Russell91/sshrc
+# brew install sshrc      # https://github.com/Russell91/sshrc
 brew install storm      # https://github.com/emre/storm
-brew install pup        # https://github.com/EricChiang/pup
+# brew install pup        # https://github.com/EricChiang/pup
 brew install httpie     # https://github.com/jakubroztocil/httpie
 brew install jq         # https://stedolan.github.io/jq/
 brew install python3
 brew install editorconfig
 brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
 # brew install elixir
-brew install amethyst  # Tiling manager for Mac OSX
+installcask amethyst  # Tiling manager for Mac OSX (cask, not formula)
 brew install gpg
 brew install sops
 brew install age
@@ -91,26 +91,77 @@ brew install terraform
 brew install duf  # disk-free usage
 brew install tldr  # tldr man-pages
 brew install btop  # better than htop
-brew install granted  # assume cli
+# brew install granted
 
 # For translation stuff
 brew install gettext
+
+################################################################################
+#                           Cloud & Infra                                     #
+################################################################################
+
+brew install awscli
+brew install aws-vault
+brew install awsume
+brew install aws-cdk
+brew tap aws/tap && brew install copilot-cli
+brew install azure-cli
+brew install doppler
+brew install infracost
+brew install terragrunt
+brew install cloudflared
+brew install flyctl
+brew install supabase
+brew install ansible
+brew install circleci
+
+################################################################################
+#                           Languages & Runtimes                              #
+################################################################################
+
+brew install nvm  # Node version management, replaces brew's node formula
+brew install rust
+brew install ruby@3.0
+brew install openjdk@17
+brew install uv
+brew install pdm
+brew install pip-tools
+brew install virtualenv
+brew install yarn
+
+################################################################################
+#                           Everyday CLI                                      #
+################################################################################
+
+brew install just
+brew install bb-cli  # Bitbucket CLI, used by the bb-inline-review skill
+brew install hub
+brew install git-lfs
+brew install hadolint
+brew install imagemagick
+brew install pandoc
+brew install scc
+brew install yt-dlp
+brew install rclone
+brew install hugo
 
 ###############################################################################
 # Install utilities                                                           #
 ###############################################################################
 
-brew install clipy  # Amazing extension for clipboard history
+installcask clipy  # Clipboard history, default hotkey cmd+shift+v
 brew install bat  # Powered cat command with syntax highlighting
 installcask gcc-arm-embedded  # for 2FA
 installcask firefox
+installcask claude
+installcask claude-code
 # installcask evernote
 # installcask keybase
 installcask android-file-transfer
 installcask google-chrome
 # installcask utorrent
 # installcask limechat
-# installcask tunnelbear
+installcask tunnelbear
 # installcask flux
 # installcask dropbox
 installcask iterm2
@@ -120,7 +171,7 @@ installcask vlc
 # installcask nvalt  # for notes
 # installcask dash  # awesome offline docs
 # installcask boostnote # https://boostnote.io/#download
-brew install agenda
+installcask agenda  # cask, not formula
 installcask calibre # converting ebooks in different formats
 # installcask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
 installcask mounty  # For mounting external NTFS disk in rw mode on MacOS
@@ -150,18 +201,20 @@ pip3 install -r "$(dirname "$0")/requirements.pip"
 ################################################################################
 
 brew install mysql
-brew tap mongodb/brew
-brew install mongodb-community
+# brew tap mongodb/brew
+# brew install mongodb-community
+# brew install mongosh
 brew install redis
-brew install elasticsearch
+# brew install elasticsearch
 
 ################################################################################
 #                           Dev tools                                          #
 ################################################################################
 
-installcask virtualbox
-installcask vagrant
+# installcask virtualbox
+# installcask vagrant
 # installcask postman
+installcask bruno
 installcask insomnia
 
 # New Docker for Mac. For older version run `brew install docker`
@@ -175,9 +228,12 @@ brew install orbstack  # Orbstack replacement for Docker.
 brew install minikube
 brew install kubie
 brew install kind
-brew install buildpacks/tap/pack
+# brew install buildpacks/tap/pack
 brew install skaffold
-brew install datawire/blackbird/telepresence2
+# brew install datawire/blackbird/telepresence2
+brew install k9s
+brew install kubebuilder
+brew install tilt
 
 brew install diff-so-fancy
 brew link xz && brew install weechat
@@ -200,11 +256,12 @@ installcask teamviewer
 installcask slack
 # LastPass CLI
 # brew install lastpass-cli --with-pinentry
-brew install bitwarden
+installcask 1password
+installcask bitwarden
 # Install howdoi CLI tool
 pip3 install howdoi
 brew install tor
-brew install spotify
+installcask spotify
 
 ################################################################################
 #                           Customize Shell                                    #
