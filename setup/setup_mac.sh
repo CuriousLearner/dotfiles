@@ -74,8 +74,9 @@ install_core() {
     brew install chamber  # CLI for managing secrets through AWS SSM Parameter Store
 
     # Install everything else
-    installcask sublime-text
-    installcask visual-studio-code
+    # installcask sublime-text
+    # installcask visual-studio-code
+    installcask zed
     brew install openssl
     brew install ack
     brew install git git-extras gh git-ftp git-crypt
