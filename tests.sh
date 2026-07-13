@@ -5,7 +5,9 @@ set -o pipefail
 
 ERRORS=()
 
-export SHELLCHECK_OPTS="-e SC2086 -e SC2012"
+# SC2317/SC2329: setup_mac.sh dispatches group functions indirectly via
+# "${GROUP_FUNCS[$i]}", which shellcheck can't trace (false "unreachable"/"never invoked").
+export SHELLCHECK_OPTS="-e SC2086 -e SC2012 -e SC2317 -e SC2329"
 
 # find all executables and run `shellcheck`
 for f in $(find . -type f -not -iwholename '*.git*' | sort -u); do
