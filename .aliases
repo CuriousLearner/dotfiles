@@ -7,20 +7,12 @@ xargs -L 1 echo code --install-extension |
 sed 's/$/ --force/' |
 sed '\$!s/$/ \&/' > ~/dotfiles/setup/vscode/install-extensions.sh"
 
-# Django Stuff
-alias djrun='find . -maxdepth 2 -name "manage.py" -exec python3 "{}" runserver \;'
-alias djsu='find . -maxdepth 2 -name "manage.py" -exec python3 "{}" createsuperuser --email="admin@localhost.com" \;'
-alias djmm='find . -maxdepth 2 -name "manage.py" -exec python3 "{}" makemigrations \;'
-alias djmig='find . -maxdepth 2 -name "manage.py" -exec python3 "{}" migrate \;'
-alias djsh='find . -maxdepth 2 -name manage.py -exec python3 "{}" shell \;'
-alias djshp='find . -maxdepth 2 -name manage.py -exec python3 "{}" shell_plus --print-sql \;'
+# Django Stuff: use the dj() function in .functions, e.g. `dj runserver`, `dj migrate`.
 
 alias pepfix='autopep8 --max-line-length=120 -i'
 
 # Virtualenv
 alias sv='if [[ ! -d "venv" && ! -L "venv" ]]; then virtualenv -p "$(command -v python3)" venv; touch requirements.txt; fi; source venv/bin/activate; export PS1="(${${PWD##*/}:0:5}…/venv)$_OLD_VIRTUAL_PS1"'
-alias sv3=sv
-# Note: sv2 removed - Python 2 reached end of life in 2020
 
 # ------------------------------------------------------------------------------
 # | Git Commands                                                               |
