@@ -1,0 +1,18 @@
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+# Yazi keymap. Symlinked to ~/.config/yazi/keymap.toml.
+# Adapted from theskumar's dotfiles. No plugin dependencies.
+
+[mgr]
+prepend_keymap = [
+  # Open the selection in Zed
+  { on = ["o", "z"], run = 'shell "zed \"$@\"" --orphan', desc = "Open in Zed" },
+  { on = "<C-o>",    run = 'shell "zed \"$@\"" --orphan', desc = "Open in Zed" },
+
+  # Copy path / filename / dirname to the clipboard (macOS pbcopy)
+  { on = ["c", "p"], run = 'shell --confirm "echo -n \"$1\" | pbcopy"', desc = "Copy full path" },
+  { on = ["c", "n"], run = 'shell --confirm "basename \"$1\" | tr -d \\n | pbcopy"', desc = "Copy filename" },
+  { on = ["c", "d"], run = 'shell --confirm "dirname \"$1\" | tr -d \\n | pbcopy"', desc = "Copy dirname" },
+
+  # Drop into a shell in the current directory
+  { on = "<C-s>", run = 'shell "$SHELL" --block', desc = "Shell here" },
+]
