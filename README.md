@@ -76,6 +76,35 @@ Symlinks skills, `CLAUDE.md`, `settings.json`, and `mcp.json` from that repo int
 It's intentionally not a git submodule, so this public repo never references its name or URL —
 the script just checks whether `claude-config/` exists and skips quietly if it doesn't.
 
+## Updating
+
+On a machine that is already set up, pull the latest and re-stow:
+
+```shell
+cd ~/dotfiles && git pull && bash install.sh
+```
+
+`stow` is idempotent, so re-running `install.sh` just refreshes the symlinks.
+
+### One-time migration from the old `bootstrap.sh` layout
+
+If a machine was set up before the move to [GNU stow](https://www.gnu.org/software/stow/) (when dotfiles were symlinked straight from the repo root), those old symlinks now point at files that have moved into package directories, so they are broken. Clean up the stale links once, then stow:
+
+```shell
+cd ~/dotfiles && git pull
+
+# Remove the now-broken symlinks the old bootstrap created (broken links that
+# still point into this repo), then let stow recreate them in the new layout.
+for l in ~/.[!.]* ~/.config/*/*; do
+    [ -L "$l" ] && [ ! -e "$l" ] && readlink "$l" | grep -q /dotfiles/ && rm "$l"
+done
+
+brew install stow   # if not already installed
+bash install.sh
+```
+
+After this one-time cleanup, future updates are just the `git pull && bash install.sh` above.
+
 ## Resources
 
 I actively watch the following repositories and add the best changes to this repository:
