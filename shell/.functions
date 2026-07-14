@@ -245,3 +245,11 @@ function gitexport(){
   mkdir -p "$1"
   git archive HEAD | tar -x -C "$1"
 }
+
+# Clone a repo, cd into it, and open it in Zed.
+# Source: https://github.com/theskumar/dotfiles (uses `s .`; adapted to `zed .`).
+function clone() {
+  local url="$1" reponame
+  reponame=$(basename "$url" .git)
+  git clone "$url" "$reponame" && cd "$reponame" && zed .
+}
