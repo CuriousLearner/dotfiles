@@ -99,7 +99,7 @@ install_core() {
     brew install editorconfig
     brew install ssh-copy-id  # http://linux.die.net/man/1/ssh-copy-id
     # brew install elixir
-    installcask amethyst  # Tiling manager for Mac OSX (cask, not formula)
+    brew install barutsrb/tap/omniwm  # OmniWM tiling window manager (Niri/Hyprland-inspired)
     brew install gpg
     brew install sops
     brew install age
