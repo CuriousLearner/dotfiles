@@ -1,0 +1,10 @@
+# Ghostty configuration.
+#
+# Font is set to MesloLGS NF (the Powerlevel10k / Nerd Font) so the prompt's
+# powerline separators, icons, and emoji render correctly. Without this,
+# Ghostty's default font lacks those glyphs and p10k shows tofu boxes.
+font-family = MesloLGS NF
+font-size = 14
+
+# Keep the window chrome minimal.
+macos-titlebar-style = tabs

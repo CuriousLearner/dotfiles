@@ -79,6 +79,8 @@ for pg in /opt/homebrew/opt/postgresql@*/bin; do
   [ -d "$pg" ] && export PATH="$pg:$PATH" && break
 done
 command -v mise >/dev/null && eval "$(mise activate zsh)"
+# zoxide: smarter cd (`z <dir>`) and the directory database yazi's `z` jump uses.
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 
 # kubectl completion
 source <(kubectl completion zsh)

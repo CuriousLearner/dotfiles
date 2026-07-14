@@ -171,6 +171,7 @@ install_cli_extras() {
     brew install fd          # fuzzy file search inside yazi
     brew install sevenzip    # archive extraction/preview
     brew install chafa       # image preview fallback for non-graphics terminals
+    brew install zoxide      # smart cd; powers yazi's `z` jump (init in .zshrc)
 }
 
 install_databases() {
@@ -248,6 +249,7 @@ install_personal_apps() {
     # installcask flux
     # installcask dropbox
     installcask iterm2
+    installcask ghostty  # GPU-accelerated terminal; config symlinked via setup/ghostty/setup-ghostty.sh
     installcask numi  # http://numi.io/
     installcask skitch  # https://evernote.com/skitch/
     installcask vlc
