@@ -8,3 +8,13 @@ font-size = 14
 
 # Keep the window chrome minimal.
 macos-titlebar-style = tabs
+
+# Shell integration: new tabs/splits inherit the current directory (OSC 7),
+# prompt marks for jump-to-prompt, and sudo support. Auto-detects zsh.
+shell-integration = detect
+
+# Translucent, blurred window. background-opacity < 1 is what makes the blur
+# visible; alpha-blending keeps text crisp over the translucent background.
+background-opacity = 0.92
+background-blur-radius = 20
+alpha-blending = linear-corrected
