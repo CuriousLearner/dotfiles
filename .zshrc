@@ -1,6 +1,15 @@
 # Sign commits via GPG - must be before P10k instant prompt for pinentry to work
 export GPG_TTY=$(tty)
 
+# Shell greeting: CuriousLearner banner + a random affirmation. This MUST stay
+# ABOVE the p10k instant prompt block below; any console output after that block
+# trips p10k's "console output during initialization" warning. The -t 1 guard
+# means we only greet a real terminal, not piped or `zsh -c` invocations.
+if [[ -o interactive && -t 1 ]]; then
+  [[ -r ~/.extra ]] && { source ~/.extra; print; }   # banner, then a blank line
+  [[ -x ~/dotfiles/bin/splash ]] && ~/dotfiles/bin/splash
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.

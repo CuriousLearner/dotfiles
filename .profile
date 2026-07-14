@@ -1,6 +1,7 @@
-# Load ~/.extra, ~/.exports, ~/.aliases and ~/.functions
-# ~/.extra can be used for settings you don’t want to commit
-for file in ~/.{exports,aliases,functions,extra}; do
+# Load ~/.exports, ~/.aliases and ~/.functions
+# (~/.extra holds the shell greeting; it's sourced from ~/.zshrc above the p10k
+#  instant prompt block, so it must NOT be re-sourced here.)
+for file in ~/.{exports,aliases,functions}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
@@ -13,11 +14,6 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
    [ -r ~/.freebsd ] && source ~/.freebsd
 elif [[ "$unamestr" == 'Darwin' ]]; then
    [ -r ~/.osx ] && source ~/.osx
-fi
-
-# Check for startup SPLASH script (skip if P10k instant prompt is active)
-if hash splash 2>/dev/null && [[ -z "$POWERLEVEL9K_INSTANT_PROMPT" ]]; then
-    splash
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"

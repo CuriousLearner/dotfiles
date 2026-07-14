@@ -1,13 +1,16 @@
 
-# Echo custom 'CuriousLearner' signature on shell
-echo -e " .d8888b.                   d8b                            888
-d88P  Y88b                  Y8P                            888
-888    888                                                 888
-888        888  888 888d888 888  .d88b.  888  888 .d8888b  888      .d88b.   8888b.  888d888 88888b.   .d88b.  888d888
-888        888  888 888P\"   888 d88\"\"88b 888  888 88K      888     d8P  Y8b     \"88b 888P\"   888 \"88b d8P  Y8b 888P\"
-888    888 888  888 888     888 888  888 888  888 \"Y8888b. 888     88888888 .d888888 888     888  888 88888888 888
-Y88b  d88P Y88b 888 888     888 Y88..88P Y88b 888      X88 888     Y8b.     888  888 888     888  888 Y8b.     888
- \"Y8888P\"   \"Y88888 888     888  \"Y88P\"   \"Y88888  88888P' 88888888 \"Y8888  \"Y888888 888     888  888  \"Y8888  888
-
-                                                                                                                             "
-
+# CuriousLearner signature on interactive shell start.
+# The banner is 62 columns wide, so it only renders when the terminal is at
+# least that wide; narrower terminals (and split panes) get a compact one-liner.
+_cl_cols=${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}
+if [ "$_cl_cols" -ge 62 ]; then
+  cat <<'CLSIG'
+  _____         _               __
+ / ___/_ ______(_)__  __ _____ / /  ___ ___ ________  ___ ____
+/ /__/ // / __/ / _ \/ // (_-</ /__/ -_) _ `/ __/ _ \/ -_) __/
+\___/\_,_/_/ /_/\___/\_,_/___/____/\__/\_,_/_/ /_//_/\__/_/
+CLSIG
+else
+  printf '\033[36m❯ CuriousLearner\033[0m\n'
+fi
+unset _cl_cols
