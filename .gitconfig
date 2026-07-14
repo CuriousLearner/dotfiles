@@ -73,6 +73,11 @@
         fi \
     }; f"
 
+    # Create a fixup commit against a target (default HEAD); autosquash reorders it on rebase
+    fixup = !sh -c 'git commit --fixup=${1:-HEAD}' -
+    # Pretty branch list, most recent first, with subject, relative date, and author
+    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+
 [apply]
 
     # Detect whitespace errors when applying a patch
@@ -179,6 +184,18 @@
 
 [includeIf "gitdir:~/work/"]
     path = ~/work/.gitconfig
+[rebase]
+    autosquash = true
+    autostash = true
+[grep]
+    lineNumber = true
+[log]
+    date = relative
+    mailmap = true
+[blame]
+    date = relative
+    blankboundary = true
+    showroot = true
 [pull]
     rebase = false
 [filter "lfs"]
