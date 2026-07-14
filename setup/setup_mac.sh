@@ -165,6 +165,12 @@ install_cli_extras() {
     brew install yt-dlp
     brew install rclone
     brew install hugo
+    # yazi TUI file manager + its preview/search helpers
+    # (imagemagick/ffmpeg/poppler/jq are already installed above/in core)
+    brew install yazi
+    brew install fd          # fuzzy file search inside yazi
+    brew install sevenzip    # archive extraction/preview
+    brew install chafa       # image preview fallback for non-graphics terminals
 }
 
 install_databases() {

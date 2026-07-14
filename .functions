@@ -172,6 +172,17 @@ function md() {
   mkdir -pv "$@" && cd "$1" || return
 }
 
+# Open yazi and cd to wherever you navigated when you quit.
+# Source: https://github.com/theskumar/dotfiles (bin/../shell/.functions)
+function y() {
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+  yazi "$@" --cwd-file="$tmp"
+  cwd="$(command cat -- "$tmp")"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+
 # Copy w/ progress
 cp_p () {
   rsync -WavP --human-readable --progress "$1" "$2"
