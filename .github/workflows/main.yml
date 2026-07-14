@@ -14,9 +14,9 @@ jobs:
       - name: Install
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
-                sudo apt-get install shellcheck
+                sudo apt-get install -y shellcheck stow zsh
           else
-                brew install shellcheck
+                brew install shellcheck stow
           fi
         shell: bash
       - name: Run Tests
