@@ -39,6 +39,10 @@ bindkey -v
 bindkey '^R' history-incremental-search-backward
 bindkey "\e[B" history-search-forward
 bindkey "\e[A" history-search-backward
+# Accept one word of an autosuggestion with Option-Right (Ctrl-Right is eaten by
+# macOS Mission Control). Bind both the xterm and Esc+ Option sequences.
+bindkey '^[[1;3C' forward-word   # Option-Right
+bindkey '^[f'     forward-word   # Option-Right when Option key = "Esc+"
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
 # Enable buildpack `packs` completion for docker
