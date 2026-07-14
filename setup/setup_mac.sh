@@ -356,9 +356,6 @@ install_oh_my_zsh
 # Zsh                                                                         #
 ###############################################################################
 
-# Install Zsh settings
-ln -sf "$PWD"/zsh/themes/curiouslearner.zsh-theme "$HOME"/.oh-my-zsh/themes
-
 # Zsh Syntax highlighting
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
