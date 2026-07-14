@@ -44,8 +44,6 @@ export PYTHONHASHSEED=random
 # PATH configuration (consolidated)
 export PATH="$HOME/.bin:$HOME/bin:$HOME/dotfiles/bin:$PATH"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="/usr/local/mysql/bin:$PATH"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # grep stuff
 # GREP_OPTIONS is deprecated - use alias instead

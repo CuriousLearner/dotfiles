@@ -39,8 +39,6 @@ bindkey "\e[B" history-search-forward
 bindkey "\e[A" history-search-backward
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
-# RVM PATH is already set in .profile, no need to duplicate here
-
 # Enable buildpack `packs` completion for docker
 command -v pack >/dev/null && . "$(pack completion --shell zsh)"
 
