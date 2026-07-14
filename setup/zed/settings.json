@@ -42,6 +42,10 @@
     "dock": "left"
   },
   "base_keymap": "VSCode",
+  "terminal": {
+    "font_family": "MesloLGS NF",
+    "font_fallbacks": ["Apple Color Emoji"]
+  },
   "ui_font_size": 16,
   "buffer_font_size": 15,
   "theme": {
