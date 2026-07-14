@@ -80,6 +80,8 @@ install_core() {
     brew install openssl
     brew install ack
     brew install git git-extras gh git-ftp git-crypt
+    brew install icdiff  # side-by-side colored diff, ships the `git-icdiff` wrapper
+    brew install git-archive-all  # git archive including submodules
     brew install rename htop tree ngrep mtr nmap
     brew install autojump
     # brew install Zopfli     # https://code.google.com/p/zopfli/
