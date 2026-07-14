@@ -62,6 +62,7 @@ install_core() {
     brew install bash
     brew install zsh zsh-completions
     brew install shellcheck
+    brew install stow  # symlink farm manager used by install.sh
 
     # Install wget and curl
     brew install wget
@@ -249,7 +250,7 @@ install_personal_apps() {
     # installcask flux
     # installcask dropbox
     installcask iterm2
-    installcask ghostty  # GPU-accelerated terminal; config symlinked via setup/ghostty/setup-ghostty.sh
+    installcask ghostty  # GPU-accelerated terminal; config stowed via install.sh
     installcask numi  # http://numi.io/
     installcask skitch  # https://evernote.com/skitch/
     installcask vlc
@@ -335,7 +336,8 @@ install_oh_my_zsh () {
         if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
             # Use RUNZSH=no to prevent oh-my-zsh from launching a new shell
             # Use CHSH=no to skip changing shell (we'll do it at the end)
-            RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+            # KEEP_ZSHRC=yes so it doesn't create a ~/.zshrc that conflicts with stow.
+            RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         fi
     else
         # If zsh isn't installed, get the platform of the current machine
@@ -378,12 +380,8 @@ if [[ ! -d "$HOME/powerlevel10k" ]]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/powerlevel10k"
 fi
 
-# Create symlinks for zshrc and p10k.zsh config
-# Backup existing files if they exist and are not symlinks
-[[ -f "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]] && mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
-[[ -f "$HOME/.p10k.zsh" && ! -L "$HOME/.p10k.zsh" ]] && mv "$HOME/.p10k.zsh" "$HOME/.p10k.zsh.bak"
-ln -sf "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
-ln -sf "$HOME/dotfiles/.p10k.zsh" "$HOME/.p10k.zsh"
+# Dotfile symlinks (including .zshrc and .p10k.zsh) are created separately by
+# install.sh with GNU stow. See the README.
 
 # Install fonts for PowerLevel10k
 mkdir -p "$HOME/Library/Fonts"

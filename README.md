@@ -39,11 +39,13 @@ bash setup/osx_defaults.sh
 
 ### 4. Create symlinks
 
-This creates symbolic links from your home directory to the dotfiles, keeping everything maintainable in git:
+This uses [GNU stow](https://www.gnu.org/software/stow/) to symlink every dotfile package (shell, zsh, git, editors, terminal, etc.) from your home directory into this repo, keeping everything maintainable in git:
 
 ```shell
-bash bootstrap.sh
+bash install.sh
 ```
+
+Each top-level directory is a stow "package" whose contents mirror where they land under `$HOME` (e.g. `zsh/.zshrc` → `~/.zshrc`, `ghostty/.config/ghostty/config` → `~/.config/ghostty/config`).
 
 ### 5. Install Python packages
 
@@ -51,15 +53,15 @@ bash bootstrap.sh
 pip3 install -r setup/requirements.pip
 ```
 
-### 6. Set up editors and terminal (optional)
+### 6. Set up VS Code (optional)
+
+Zed, Ghostty, and yazi configs are already symlinked by `install.sh` (step 4). VS Code is separate because it also installs extensions and lives in a non-standard path:
 
 ```shell
-bash setup/zed/setup-zed.sh          # symlink Zed settings
-bash setup/ghostty/setup-ghostty.sh  # symlink Ghostty config
 cd ~/dotfiles/setup/vscode && bash setup-vs-code.sh   # VS Code settings + extensions
 ```
 
-Zed is the primary editor; VS Code stays configured for the projects that need it. Each script symlinks the relevant config, and the VS Code one also installs extensions.
+Zed is the primary editor; VS Code stays configured for the projects that need it.
 
 **Tip:** Use the alias `eve` to regenerate the VS Code extensions list in `~/dotfiles/setup/vscode/install-extensions.sh`
 
