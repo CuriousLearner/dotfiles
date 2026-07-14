@@ -1,25 +1,13 @@
 #!/bin/bash
 # Source: https://github.com/CuriousLearner/dotfiles
 
-# Colors
-function echoY() {
-    prompt="$1"
-    echo -e -n "\033[32m$prompt"
-    echo -e -n '\033[0m'
-    echo ''
+# Colored echo: echoc <ansi-color-code> <text>. 32=green, 31=red, 34=blue.
+function echoc() {
+    printf '\033[%sm%s\033[0m\n' "$1" "$2"
 }
-function echoR() {
-    prompt="$1"
-    echo -e -n "\033[31m$prompt"
-    echo -e -n '\033[0m'
-    echo ''
-}
-function echoB() {
-    prompt="$1"
-    echo -e -n "\033[34m$prompt"
-    echo -e -n '\033[0m'
-    echo ''
-}
+function echoY() { echoc 32 "$1"; }
+function echoR() { echoc 31 "$1"; }
+function echoB() { echoc 34 "$1"; }
 
 # Get file list
 function getFilesInDir() {
@@ -75,32 +63,9 @@ if [ ! -d "$HOME/.bin" ]; then
   mkdir "$HOME/.bin"
 fi
 
-# Symlink binaries
+# Symlink binaries and make them executable
 ln -sf "$PWD/bin/"* "$HOME/.bin/"
-
-declare -a BINARIES=(
-    'batcharge.py'
-    'crlf.sh'
-    'eachdir'
-    'fix-newline-eof'
-    'git-archive-all'
-    'git-flake8'
-    'git-icdiff'
-    'git-open'
-    'gitio'
-    'gravatar'
-    'hr'
-    'icdiff'
-    'push'
-    'splash'
-    'tags'
-    'tweet'
-)
-
-for i in "${BINARIES[@]}"; do
-    echo "Changing access permissions for binary script :: ${i##*/}"
-    chmod +x "$HOME/.bin/${i##*/}"
-done
+chmod +x "$HOME/.bin/"*
 
 echo "Binaries installed"
 
@@ -108,12 +73,12 @@ echo
 echoB "--> [DONE]"
 echo
 
+unset echoc
 unset echoY
 unset echoR
 unset echoB
 unset getFilesInDir
 unset createSymlinks
-unset BINARIES
 
 # shellcheck disable=SC1090
 source ~/.zshrc
