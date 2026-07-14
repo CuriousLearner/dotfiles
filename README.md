@@ -8,9 +8,11 @@ OS related setup scripts can be found in `setup` folder.
 
 ## Features
 
-* Sane defaults for Mac
-* Zsh
-* Git
+* Sane defaults for macOS
+* Zsh with Powerlevel10k, autosuggestions, and syntax highlighting
+* Fast shell startup and a curated CLI toolset (mise, yazi, zoxide, fzf)
+* Editor and terminal configs: Zed, Ghostty, VS Code
+* Git config and aliases
 * vim
 
 ## Setup
@@ -26,13 +28,13 @@ cd ~/dotfiles
 ### 2. Install Mac dependencies (macOS only)
 
 ```shell
-sh setup/setup_mac.sh
+bash setup/setup_mac.sh
 ```
 
 ### 3. Set macOS defaults (optional)
 
 ```shell
-sh setup/osx_defaults.sh
+bash setup/osx_defaults.sh
 ```
 
 ### 4. Create symlinks
@@ -40,7 +42,7 @@ sh setup/osx_defaults.sh
 This creates symbolic links from your home directory to the dotfiles, keeping everything maintainable in git:
 
 ```shell
-sh bootstrap.sh
+bash bootstrap.sh
 ```
 
 ### 5. Install Python packages
@@ -49,21 +51,23 @@ sh bootstrap.sh
 pip3 install -r setup/requirements.pip
 ```
 
-### 6. Setup VS Code (optional)
+### 6. Set up editors and terminal (optional)
 
 ```shell
-cd ~/dotfiles/setup/vscode && sh setup-vs-code.sh
+bash setup/zed/setup-zed.sh          # symlink Zed settings
+bash setup/ghostty/setup-ghostty.sh  # symlink Ghostty config
+cd ~/dotfiles/setup/vscode && bash setup-vs-code.sh   # VS Code settings + extensions
 ```
 
-This creates a symlink to `settings.json` and installs extensions.
+Zed is the primary editor; VS Code stays configured for the projects that need it. Each script symlinks the relevant config, and the VS Code one also installs extensions.
 
-**Tip:** Use the alias `eve` to update the VS Code extensions list in `~/dotfiles/setup/vscode/install-extensions.sh`
+**Tip:** Use the alias `eve` to regenerate the VS Code extensions list in `~/dotfiles/setup/vscode/install-extensions.sh`
 
 ### 7. Link private Claude config (optional)
 
 ```shell
 git clone <your-private-claude-config-repo> claude-config   # not tracked here, clone it yourself
-sh setup/claude-config.sh
+bash setup/claude-config.sh
 ```
 
 Symlinks skills, `CLAUDE.md`, `settings.json`, and `mcp.json` from that repo into `~/.claude/`.
