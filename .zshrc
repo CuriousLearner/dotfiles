@@ -12,6 +12,8 @@ fi
 ZSH=$HOME/.oh-my-zsh
 # Theme is sourced directly from ~/powerlevel10k below
 ZSH_THEME=""
+# zsh-syntax-highlighting must be last in this list (it wraps the ZLE widgets).
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 # Add Docker CLI completions to fpath before oh-my-zsh runs compinit.
 fpath=($HOME/.docker/completions $fpath)
 source "$ZSH/oh-my-zsh.sh"
