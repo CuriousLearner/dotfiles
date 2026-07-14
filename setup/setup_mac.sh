@@ -140,7 +140,7 @@ install_cloud() {
 }
 
 install_languages() {
-    brew install nvm  # Node version management, replaces brew's node formula
+    brew install mise  # Polyglot runtime manager (node/python/etc.), replaces nvm
     brew install rust
     brew install ruby@3.0
     brew install openjdk@17
@@ -280,7 +280,7 @@ install_personal_apps() {
 
 GROUP_LABELS=(
     "Cloud & Infra (AWS/Azure/CI)"
-    "Languages & Runtimes (nvm/rust/ruby/uv)"
+    "Languages & Runtimes (mise/rust/ruby/uv)"
     "Everyday CLI extras (just/bb-cli/hugo/...)"
     "Databases (postgres/mysql/redis)"
     "Dev tools (containers, Kubernetes, tmux)"
