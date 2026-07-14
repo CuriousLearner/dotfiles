@@ -1,0 +1,69 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#   "pymupdf4llm",
+#   "markitdown[pdf]",
+# ]
+# ///
+
+import json
+import sys
+from pathlib import Path
+
+def main():
+    args = sys.argv[1:]
+    fmt = "md"
+
+    if args and args[0] == "--json":
+        fmt = "json"
+        args = args[1:]
+
+    if not args:
+        print("Usage: tomd [--json] <file-or-url> [output]")
+        sys.exit(1)
+
+    source = args[0]
+    out = args[1] if len(args) > 1 else None
+
+    if not out:
+        if source.startswith("http"):
+            slug = source.rstrip("/").rsplit("/", 1)[-1].split("?")[0]
+            base = slug.rsplit(".", 1)[0] if "." in slug else slug
+            out = f"{base}.{fmt}" if base else f"output.{fmt}"
+        else:
+            out = str(Path(source).with_suffix(f".{fmt}"))
+
+    ext = source.rsplit(".", 1)[-1].lower() if "." in source else ""
+    is_local_pdf = ext == "pdf" and not source.startswith("http")
+
+    if is_local_pdf:
+        import io
+        import pymupdf4llm
+
+        buf = io.StringIO()
+        old_stdout = sys.stdout
+        sys.stdout = buf
+        if fmt == "json":
+            data = pymupdf4llm.to_markdown(source, page_chunks=True)
+            sys.stdout = old_stdout
+            Path(out).write_text(json.dumps(data, indent=2, ensure_ascii=False))
+        else:
+            md = pymupdf4llm.to_markdown(source)
+            sys.stdout = old_stdout
+            Path(out).write_text(md)
+    else:
+        from markitdown import MarkItDown
+
+        result = MarkItDown().convert(source)
+        content = result.text_content
+
+        if fmt == "json":
+            Path(out).write_text(json.dumps({"content": content}, indent=2, ensure_ascii=False))
+        else:
+            Path(out).write_text(content)
+
+    print(f"Saved to {out}")
+
+if __name__ == "__main__":
+    main()
