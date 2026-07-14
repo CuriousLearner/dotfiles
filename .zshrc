@@ -43,6 +43,24 @@ bindkey "\e[A" history-search-backward
 # macOS Mission Control). Bind both the xterm and Esc+ Option sequences.
 bindkey '^[[1;3C' forward-word   # Option-Right
 bindkey '^[f'     forward-word   # Option-Right when Option key = "Esc+"
+# Ctrl-x Ctrl-e: edit the current command line in $EDITOR, run it on save.
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+# Typing consecutive dots expands to parent dirs (e.g. .... -> ../../).
+rationalize-dot() {
+  if [[ $LBUFFER = *... ]]; then
+    LBUFFER="${LBUFFER%.}/../"
+  elif [[ $LBUFFER = */. ]]; then
+    LBUFFER="$LBUFFER./"
+  else
+    LBUFFER="$LBUFFER."
+  fi
+}
+zle -N rationalize-dot
+bindkey . rationalize-dot
+# Shift-Tab cycles completion candidates backward.
+bindkey '^[[Z' reverse-menu-complete
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 
 # Enable buildpack `packs` completion for docker
