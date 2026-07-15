@@ -4,5 +4,6 @@
 *.bak
 
 # Private Claude config: cloned manually, see setup/claude-config.sh
-claude-config/
+claude-config-*/
 .claude/
+.superpowers/
