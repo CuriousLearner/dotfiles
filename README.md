@@ -67,14 +67,22 @@ Zed is the primary editor; VS Code stays configured for the projects that need i
 
 ### 7. Link private Claude config (optional)
 
+Clone the shared common config plus whichever private overlay repos this machine
+is entitled to, into this dotfiles dir, then run setup:
+
 ```shell
-git clone <your-private-claude-config-repo> claude-config   # not tracked here, clone it yourself
+git clone <claude-config-common repo>  claude-config-common    # shared, non-sensitive core
+git clone <a claude-config-* overlay>  claude-config-personal  # per-context private overlay
 bash setup/claude-config.sh
 ```
 
-Symlinks skills, `CLAUDE.md`, `settings.json`, and `mcp.json` from that repo into `~/.claude/`.
-It's intentionally not a git submodule, so this public repo never references its name or URL —
-the script just checks whether `claude-config/` exists and skips quietly if it doesn't.
+Setup assembles `~/.claude` from `claude-config-common` plus every `claude-config-*`
+overlay cloned next to it (auto-discovered, no list to edit): it symlinks skills,
+`CLAUDE.md`, `settings.json`, and `mcp.json`, and merges each overlay's plugins and
+settings. A machine activates exactly the overlays it cloned, so a locked-down machine
+that clones only common never sees an overlay's material. Not tracked here and not a
+submodule, so this public repo never references a private URL; the script skips quietly
+if `claude-config-common/` isn't cloned.
 
 ## Updating
 
