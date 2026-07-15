@@ -254,3 +254,8 @@ __marimo__/
 
 # Claude Code writes local settings that should never be committed
 **/.claude/settings.local.json
+
+# Superpowers skill work artifacts (brainstorming specs, writing-plans plans).
+# Local by default, never auto-committed. In a personal project you can
+# `git add -f docs/superpowers/...` if you want the design tracked.
+docs/superpowers/
