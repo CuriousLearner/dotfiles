@@ -249,9 +249,6 @@ __marimo__/
 
 .claude/
 
-# Private Claude config (cloned manually, see setup/claude-config.sh)
-/claude-config/
-
 # Claude Code writes local settings that should never be committed
 **/.claude/settings.local.json
 
