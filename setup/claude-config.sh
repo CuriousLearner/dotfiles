@@ -32,31 +32,11 @@ done
 
 "$COMMON/link.sh" "$COMMON" "${present_overlays[@]}"
 
-# Plugin registry: MERGE common + each present overlay's fragment, then expand
-# the $HOME placeholder. Overlays ship their own marketplaces/plugins so a
-# machine is self-contained from its clones alone (the locked-down machine
-# never clones an overlay, so never sees its plugins). Seeded as one-time
-# copies (not symlinks) because Claude Code rewrites these via
-# write-temp-then-rename. Re-snapshot with common/sync-plugin-registry.sh.
-mkdir -p "$HOME/.claude/plugins"
-seed_registry() {  # seed_registry <filename> <jq-merge-expr>
-    local f="$1" merge="$2" target="$HOME/.claude/plugins/$1"
-    [ -e "$target" ] && return 0   # one-time seed; Claude owns the live file
-    local repo; local -a srcs=()
-    for repo in "$COMMON" "${present_overlays[@]}"; do
-        [ -f "$repo/plugins/$f" ] && srcs+=("$repo/plugins/$f")
-    done
-    [ "${#srcs[@]}" -gt 0 ] || return 0
-    if command -v jq >/dev/null 2>&1; then
-        jq -s "$merge" "${srcs[@]}" | sed "s#[$]HOME#$HOME#g" > "$target"
-    else
-        [ "${#srcs[@]}" -eq 1 ] || echo "--> [WARN]: jq missing; overlay plugins not merged into $f" >&2
-        sed "s#[$]HOME#$HOME#g" "${srcs[0]}" > "$target"
-    fi
-    echo "--> [SEED]: $target (merged ${#srcs[@]} source(s), expanded \$HOME, one-time)"
-}
-seed_registry installed_plugins.json '{version: (map(.version) | last // 2), plugins: (map(.plugins) | add)}'
-seed_registry known_marketplaces.json 'add'
+# Plugins are installed (not seeded) at the end of this script: seeding the
+# registry JSON is only bookkeeping and can fool `claude plugin install` into
+# skipping a fetch, so the CLI install below is the single source of truth. The
+# repo's known_marketplaces.json fragments still declare the marketplace sources
+# that step reads; common/sync-plugin-registry.sh keeps those fragments current.
 
 # Overlay settings (an overlay's enabledPlugins for its own plugins, or any
 # private machine-local setting) deep-merge into ~/.claude/settings.local.json:
@@ -78,4 +58,28 @@ if [ "${#overlay_settings[@]}" -gt 0 ]; then
     else
         echo "--> [WARN]: jq missing; skipped overlay settings.local.json merge" >&2
     fi
+fi
+
+# Finally, install what's declared. The registry seed above is only bookkeeping;
+# Claude Code still has to fetch each marketplace + plugin for it to load. Add
+# every marketplace declared in common + overlay fragments, then install every
+# enabled plugin from the assembled settings. `add`/`install` are idempotent
+# no-ops when already present; </dev/null keeps them non-interactive. Skipped if
+# the claude CLI is absent (e.g. a locked-down machine).
+if command -v claude >/dev/null 2>&1; then
+    for repo in "$COMMON" "${present_overlays[@]}"; do
+        [ -f "$repo/plugins/known_marketplaces.json" ] || continue
+        jq -r '.[].source.repo // empty' "$repo/plugins/known_marketplaces.json" 2>/dev/null
+    done | sort -u | while IFS= read -r src; do
+        [ -n "$src" ] && claude plugin marketplace add "$src" </dev/null >/dev/null 2>&1 || true
+    done
+    settings_files=("$HOME/.claude/settings.json")
+    [ -f "$local_settings" ] && settings_files+=("$local_settings")
+    jq -rs 'map(.enabledPlugins // {}) | add | to_entries[] | select(.value) | .key' \
+        "${settings_files[@]}" 2>/dev/null | sort -u | while IFS= read -r plug; do
+        [ -n "$plug" ] && claude plugin install "$plug" </dev/null >/dev/null 2>&1 || true
+    done
+    echo "--> [PLUGINS]: added declared marketplaces and installed enabled plugins"
+else
+    echo "--> [SKIP]: claude CLI not on PATH; declared plugins not installed"
 fi

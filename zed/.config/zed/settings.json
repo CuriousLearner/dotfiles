@@ -9,12 +9,14 @@
 {
   "agent_servers": {
     "claude-acp": {
-      "default_config_options": {
-        "mode": "bypassPermissions",
-        "model": "default",
-        "effort": "medium"
-      },
-      "type": "registry"
+      "type": "registry",
+      // Reuse the already-authenticated Homebrew Claude Code CLI instead of the
+      // adapter's un-authed vendored copy (registry auth is decoupled from the
+      // system CLI). Absolute path required — Zed does not $PATH-resolve this,
+      // so it's /opt/homebrew/bin on Apple Silicon; adjust on other machines.
+      "env": {
+        "CLAUDE_CODE_EXECUTABLE": "/opt/homebrew/bin/claude"
+      }
     }
   },
   "edit_predictions": {

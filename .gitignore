@@ -3,6 +3,9 @@
 .DS_Store
 *.bak
 
+# Zed writes its prompt-library LMDB into the stowed config dir at runtime.
+zed/.config/zed/prompts/
+
 # Private Claude config: cloned manually, see setup/claude-config.sh
 claude-config-*/
 .claude/

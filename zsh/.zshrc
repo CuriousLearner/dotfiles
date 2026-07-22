@@ -112,3 +112,6 @@ command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 # kubectl completion
 source <(kubectl completion zsh)
 
+# Machine-local secrets / private env (~/.private -> dotfiles/.private, gitignored).
+[[ -r ~/.private/env.zsh ]] && source ~/.private/env.zsh
+

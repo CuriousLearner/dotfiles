@@ -205,3 +205,17 @@
 	required = true
 [init]
 	defaultBranch = main
+
+# Use the GitHub CLI as the credential helper for github.com / gist.github.com.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+# Machine-local overrides (untracked; absent on machines that don't need them).
+# Used e.g. to disable commit signing on machines without the signing key.
+# Loaded last so it wins over anything set above.
+[include]
+	path = ~/.gitconfig.local
