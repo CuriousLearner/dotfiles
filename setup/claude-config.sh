@@ -71,13 +71,15 @@ if command -v claude >/dev/null 2>&1; then
         [ -f "$repo/plugins/known_marketplaces.json" ] || continue
         jq -r '.[].source.repo // empty' "$repo/plugins/known_marketplaces.json" 2>/dev/null
     done | sort -u | while IFS= read -r src; do
-        [ -n "$src" ] && claude plugin marketplace add "$src" </dev/null >/dev/null 2>&1 || true
+        [ -n "$src" ] || continue
+        claude plugin marketplace add "$src" </dev/null >/dev/null 2>&1 || true
     done
     settings_files=("$HOME/.claude/settings.json")
     [ -f "$local_settings" ] && settings_files+=("$local_settings")
     jq -rs 'map(.enabledPlugins // {}) | add | to_entries[] | select(.value) | .key' \
         "${settings_files[@]}" 2>/dev/null | sort -u | while IFS= read -r plug; do
-        [ -n "$plug" ] && claude plugin install "$plug" </dev/null >/dev/null 2>&1 || true
+        [ -n "$plug" ] || continue
+        claude plugin install "$plug" </dev/null >/dev/null 2>&1 || true
     done
     echo "--> [PLUGINS]: added declared marketplaces and installed enabled plugins"
 else
