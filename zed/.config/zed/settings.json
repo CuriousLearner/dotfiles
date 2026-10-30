@@ -9,6 +9,17 @@
 {
   "agent_servers": {
     "claude-acp": {
+      "favorite_config_option_values": {
+        "effort": [
+          "high"
+        ]
+      },
+      "default_config_options": {
+        "fast": false,
+        "mode": "bypassPermissions",
+        "effort": "high",
+        "model": "claude-opus-5-5"
+      },
       "type": "registry",
       // Reuse the already-authenticated Homebrew Claude Code CLI instead of the
       // adapter's un-authed vendored copy (registry auth is decoupled from the
